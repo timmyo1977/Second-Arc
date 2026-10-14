@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispatches — Timothy J. O'Brien</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #F4EFE6;
+    --parchment-warm: #EFE7D7;
+    --cream: #FAF6EE;
+    --ink: #1F1A14;
+    --ink-soft: #4A4036;
+    --ink-faded: #8A7E6F;
+    --sienna: #A0522D;
+    --sienna-deep: #7A3E22;
+    --gold: #B8954A;
+    --gold-light: #D4B57A;
+    --rule: #C9BEA8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'EB Garamond', serif;
+    font-size: 19px;
+    line-height: 1.7;
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(184,149,74,0.06), transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(160,82,45,0.05), transparent 55%);
+  }
+
+  /* ─── PAPER GRAIN ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.6 0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    z-index: 1;
+  }
+
+  main, header, nav, footer { position: relative; z-index: 2; }
+
+  /* ─── NAV ─── */
+  nav {
+    padding: 28px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-home {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    color: var(--ink);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-home:hover { color: var(--sienna); }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--sienna); }
+
+  /* ─── MASTHEAD ─── */
+  .masthead {
+    text-align: center;
+    padding: 80px 40px 60px;
+    border-bottom: 3px double var(--ink);
+    margin: 0 56px;
+  }
+  .masthead-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-faded);
+    letter-spacing: 0.04em;
+    margin-bottom: 14px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(72px, 11vw, 156px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 22px;
+  }
+  .masthead-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 22px;
+  }
+  .masthead-sub {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0 auto 24px;
+  }
+  .masthead-meta {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+  }
+  .masthead-meta span { display: flex; align-items: center; gap: 10px; }
+  .masthead-meta .dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  /* ─── EDITOR'S NOTE ─── */
+  .editors-note {
+    max-width: 700px;
+    margin: 70px auto 90px;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .editors-eyebrow {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--sienna);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .editors-note p {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .editors-note p + p { margin-top: 18px; }
+  .editors-sig {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ink);
+    margin-top: 22px;
+  }
+
+  /* ─── FEATURED DISPATCH ─── */
+  .featured-wrap {
+    max-width: 1280px;
+    margin: 0 auto 110px;
+    padding: 0 56px;
+  }
+  .featured-banner {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 32px;
+  }
+  .featured-banner .line {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .featured-banner .label {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .featured {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .featured-image {
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #6b5847 0%, #3d2f25 60%, #1f1a14 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(31,26,20,0.25);
+  }
+  .featured-image::after {
+    content: 'PHOTOGRAPH FORTHCOMING';
+    position: absolute;
+    bottom: 24px; left: 24px;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: rgba(244,239,230,0.5);
+  }
+  .featured-image::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 70% 30%, rgba(212,181,122,0.18), transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(160,82,45,0.15), transparent 60%);
+  }
+  .featured-content { padding-top: 18px; }
+  .featured-meta {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--ink-faded);
+    margin-bottom: 22px;
+  }
+  .featured-meta .pipe {
+    color: var(--gold);
+    margin: 0 12px;
+  }
+  .featured-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .featured-deck {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .featured-excerpt {
+    font-size: 19px;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+  .featured-excerpt p + p { margin-top: 16px; }
+  .featured-excerpt::first-letter,
+  .featured-excerpt p:first-child::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    float: left;
+    line-height: 0.85;
+    margin: 6px 10px 0 0;
+    color: var(--sienna);
+  }
+  .featured-link {
+    display: inline-block;
+    margin-top: 32px;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--sienna);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 3px;
+    transition: color 0.3s;
+  }
+  .featured-link:hover { color: var(--sienna-deep); }
+
+  /* ─── ARCHIVE HEADER ─── */
+  .archive-header {
+    max-width: 1280px;
+    margin: 0 auto 50px;
+    padding: 0 56px;
+    text-align: center;
+  }
+  .archive-eyebrow {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--sienna);
+    margin-bottom: 14px;
+  }
+  .archive-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 56px);
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .archive-sub {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ink-faded);
+  }
+
+  /* ─── ARCHIVE LIST ─── */
+  .archive {
+    max-width: 980px;
+    margin: 0 auto 120px;
+    padding: 0 56px;
+  }
+  .entry {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    gap: 40px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+    transition: padding 0.3s;
+  }
+  .entry:hover { padding-left: 12px; }
+  .entry:last-child { border-bottom: 0; }
+  .entry-date {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding-top: 6px;
+  }
+  .entry-date .day {
+    display: block;
+    font-size: 13px;
+    color: var(--ink);
+    margin-top: 4px;
+  }
+  .entry-body { }
+  .entry-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .entry-title a {
+    color: inherit;
+    text-decoration: none;
+    background-image: linear-gradient(var(--gold), var(--gold));
+    background-size: 0 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s;
+  }
+  .entry:hover .entry-title a { background-size: 100% 1px; }
+  .entry-deck {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .entry-cat {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    padding-top: 10px;
+    text-align: right;
+  }
+
+  /* ─── CATEGORIES STRIP ─── */
+  .categories {
+    max-width: 1280px;
+    margin: 0 auto 100px;
+    padding: 60px 56px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    text-align: center;
+  }
+  .cat {
+    cursor: default;
+  }
+  .cat-name {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: var(--sienna);
+    margin-bottom: 8px;
+  }
+  .cat-count {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 3px double var(--ink);
+    margin: 0 56px;
+    padding: 50px 0 60px;
+    text-align: center;
+  }
+  .footer-mark {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 14px;
+    letter-spacing: 0.32em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-faded);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav, .masthead, footer { margin: 0 24px; padding-left: 24px; padding-right: 24px; }
+    .featured-wrap, .archive, .archive-header, .categories { padding-left: 24px; padding-right: 24px; }
+    .featured { grid-template-columns: 1fr; gap: 36px; }
+    .entry { grid-template-columns: 1fr; gap: 8px; }
+    .entry-cat { text-align: left; padding-top: 4px; }
+    .categories { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+    .nav-links { gap: 18px; }
+    .nav-links a { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-home">Dispatches from the Road</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="two-wheels.html">Two Wheels</a></li>
+    <li><a href="#archive">Archive</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
+
+<header class="masthead">
+  <div class="masthead-eyebrow">Vol. I &nbsp;·&nbsp; A Journal in Progress</div>
+  <h1 class="masthead-title">Dispatches</h1>
+  <div class="masthead-rule"></div>
+  <p class="masthead-sub">Field notes from a long career, a slow retirement, and the road between Chautauqua and wherever comes next.</p>
+  <div class="masthead-meta">
+    <span><span class="dot"></span>Jamestown, NY</span>
+    <span><span class="dot"></span>Est. 2025</span>
+    <span><span class="dot"></span>Issued Irregularly</span>
+  </div>
+</header>
+
+<section class="editors-note">
+  <div class="editors-eyebrow">From the Editor</div>
+  <p>For thirty years I made my living looking carefully at small things — corneas, retinas, the thin film that separates seeing from not-seeing. I am beginning to think the habit of looking carefully is the only thing worth taking into retirement.</p>
+  <p>These dispatches are short. A photograph and a paragraph. A note from a ride. A case I cannot stop thinking about. A house I am leaving, and a place I have not yet found.</p>
+  <div class="editors-sig">— T.J.O'B.</div>
+</section>
+
+<section class="featured-wrap">
+  <div class="featured-banner">
+    <div class="line"></div>
+    <div class="label">The Latest Dispatch</div>
+    <div class="line"></div>
+  </div>
+
+  <article class="featured">
+    <div class="featured-image"></div>
+    <div class="featured-content">
+      <div class="featured-meta">
+        №&nbsp;001 <span class="pipe">·</span> Practice <span class="pipe">·</span> April 2026
+      </div>
+      <h2 class="featured-title">The Last Cataract</h2>
+      <p class="featured-deck">There will be a final surgery — a final eye, a final lens — and I will not know it is the last one until afterward.</p>
+      <div class="featured-excerpt">
+        <p>The schedule for January 2027 is already taking shape on the screen in the front office. Somewhere in that grid of fifteen-minute blocks is a name I have not met yet, attached to an eye I have not yet examined. That patient will be my last.</p>
+        <p>I have done somewhere north of fifteen thousand cataract surgeries. I can no longer remember the first one with any clarity — only that I was terrified, and that the resident behind me was kinder than I deserved...</p>
+      </div>
+      <a href="#" class="featured-link">Continue reading →</a>
+    </div>
+  </article>
+</section>
+
+<div class="archive-header" id="archive">
+  <div class="archive-eyebrow">The Archive</div>
+  <h2 class="archive-title">Earlier Dispatches</h2>
+  <p class="archive-sub">A running ledger of small things, kept honestly.</p>
+</div>
+
+<section class="archive">
+
+  <article class="entry">
+    <div class="entry-date">April 2026<span class="day">№ 001</span></div>
+    <div class="entry-body">
+      <h3 class="entry-title"><a href="#">The Last Cataract</a></h3>
+      <p class="entry-deck">Counting down a career, fifteen minutes at a time.</p>
+    </div>
+    <div class="entry-cat">Practice</div>
+  </article>
+
+  <article class="entry">
+    <div class="entry-date">March 2026<span class="day">№ 002</span></div>
+    <div class="entry-body">
+      <h3 class="entry-title"><a href="#">A House on the Lake, Considered</a></h3>
+      <p class="entry-deck">On the strange arithmetic of letting a place go after thirty years.</p>
+    </div>
+    <div class="entry-cat">Chautauqua</div>
+  </article>
+
+  <article class="entry">
+    <div class="entry-date">February 2026<span class="day">№ 003</span></div>
+    <div class="entry-body">
+      <h3 class="entry-title"><a href="#">Greenville, in Three Visits</a></h3>
+      <p class="entry-deck">What you can learn about a city from one good breakfast and a bad afternoon.</p>
+    </div>
+    <div class="entry-cat">The Move</div>
+  </article>
+
+  <article class="entry">
+    <div class="entry-date">January 2026<span class="day">№ 004</span></div>
+    <div class="entry-body">
+      <h3 class="entry-title"><a href="#">The Climb at Sherman</a></h3>
+      <p class="entry-deck">Cadence, cold, and the small mercy of a 36-tooth cog.</p>
+    </div>
+    <div class="entry-cat">Two Wheels</div>
+  </article>
+
+  <article class="entry">
+    <div class="entry-date">December 2025<span class="day">№ 005</span></div>
+    <div class="entry-body">
+      <h3 class="entry-title"><a href="#">A Patient I Cannot Forget</a></h3>
+      <p class="entry-deck">She arrived with a CHRPE no one had bothered to look twice at.</p>
+    </div>
+    <div class="entry-cat">Practice</div>
+  </article>
+
+  <article class="entry">
+    <div class="entry-date">November 2025<span class="day">№ 006</span></div>
+    <div class="entry-body">
+      <h3 class="entry-title"><a href="#">On Selling the Practice</a></h3>
+      <p class="entry-deck">What private equity bought, and what it didn't.</p>
+    </div>
+    <div class="entry-cat">Practice</div>
+  </article>
+
+  <article class="entry">
+    <div class="entry-date">October 2025<span class="day">№ 007</span></div>
+    <div class="entry-body">
+      <h3 class="entry-title"><a href="#">Avignon, Returned To</a></h3>
+      <p class="entry-deck">A second visit is never a second visit.</p>
+    </div>
+    <div class="entry-cat">Travel</div>
+  </article>
+
+</section>
+
+<section class="categories">
+  <div class="cat">
+    <div class="cat-name">Practice</div>
+    <div class="cat-count">Three Entries</div>
+  </div>
+  <div class="cat">
+    <div class="cat-name">Travel</div>
+    <div class="cat-count">One Entry</div>
+  </div>
+  <div class="cat">
+    <div class="cat-name">Two Wheels</div>
+    <div class="cat-count">One Entry</div>
+  </div>
+  <div class="cat">
+    <div class="cat-name">The Move</div>
+    <div class="cat-count">Two Entries</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-mark">T·J·O'B</div>
+  <div class="footer-line">Dispatches from the Road &nbsp;·&nbsp; Jamestown, New York</div>
+</footer>
+
+</body>
+</html>

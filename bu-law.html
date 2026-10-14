@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boston University School of Law — Kaitlin's Graduation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+      --bu-red:     #cc0000;
+      --bu-dark:    #6b0000;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(16px, 1.2vw + 12px, 27px);
+      line-height: 1.75;
+    }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      background: var(--warm-dark);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .masthead::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      width: 60%;
+      margin: 0.6rem auto 0;
+      opacity: 0.4;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(3.2rem, 8vw, 5.6rem);
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .site-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: 2rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--parchment);
+      border-bottom: 2px solid var(--rule);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    nav a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 92vh;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      gap: 5rem;
+      align-items: center;
+    }
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1.2rem; }
+    }
+    .hero-photo-wrap { position: relative; }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -10px -10px 10px 10px;
+      border: 2px solid var(--bu-red);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+    .hero-photo-wrap img {
+      width: 100%;
+      display: block;
+      box-shadow: 6px 6px 32px rgba(0,0,0,0.25);
+      position: relative;
+    }
+    .caption-tag {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--stone);
+      margin-top: 0.9rem;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+    .hero-eyebrow {
+      font-size: 1.3rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 0.6rem;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.15;
+      color: var(--warm-dark);
+      margin-bottom: 1.4rem;
+    }
+    .hero-headline em { color: var(--bu-red); font-style: italic; }
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--bu-red);
+      margin-bottom: 1.4rem;
+    }
+    .hero-text p {
+      font-size: 1.5rem;
+      line-height: 1.7;
+      margin-bottom: 1.1rem;
+      color: #2a2018;
+    }
+
+    /* ── HISTORY ── */
+    .history {
+      padding: 5rem 2rem 6rem;
+      background: var(--parchment);
+      border-top: 1px solid var(--rule);
+    }
+    .history-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 1.3rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--stone);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 4.5vw, 4rem);
+      color: var(--warm-dark);
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+    .section-title em { color: var(--bu-red); font-style: italic; }
+    .center-rule {
+      width: 80px;
+      height: 2px;
+      background: var(--bu-red);
+      margin: 0 auto 2.5rem;
+    }
+    .history-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem 4rem;
+      margin-bottom: 3.5rem;
+    }
+    @media (max-width: 800px) {
+      nav { display: none; }
+      .history-grid { grid-template-columns: 1fr; }
+    }
+    .history-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: var(--bu-red);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .history-block p { font-size: 1.4rem; line-height: 1.6; color: #2a2018; }
+    .essay p {
+      font-size: 1.5rem;
+      line-height: 1.7;
+      margin-bottom: 1.3rem;
+      color: #2a2018;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .pull-quote {
+      border-left: 4px solid var(--bu-red);
+      padding: 1rem 2rem;
+      margin: 2.5rem auto;
+      max-width: 820px;
+      background: var(--cream);
+    }
+    .pull-quote p {
+      font-style: italic;
+      font-size: 1.7rem;
+      line-height: 1.5;
+      color: var(--warm-dark);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--warm-dark);
+      color: var(--rule);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 1.3rem;
+      border-top: 3px solid var(--bu-red);
+      letter-spacing: 0.08em;
+    }
+    footer span { color: var(--gold-light); font-style: italic; }
+
+    /* ── SCROLL FADE ── */
+    .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="site-title">Dispatches from the Road</div>
+    <div class="site-subtitle">Notes from a life well traveled &nbsp;&middot;&nbsp; Tim O'Brien</div>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="empire-state-ride.html">Empire State Ride</a>
+    <a href="palais-des-papes.html">Avignon</a>
+    <a href="marriott-ranch.html">Marriott Ranch</a>
+    <a href="bu-law.html">BU Law</a>
+    <a href="kaitlin.html">Kaitlin Today</a>
+  </nav>
+
+  <!-- HERO -->
+  <section style="background: var(--cream);">
+    <div class="hero">
+      <div class="hero-photo-wrap fade-in">
+        <img src="images/bu-law-img-01.jpg" alt="Tim O'Brien with Kaitlin Elizabeth O'Brien at her Boston University School of Law graduation" />
+        <p class="caption-tag">Boston University School of Law &nbsp;&middot;&nbsp; Commencement 2018 &nbsp;&middot;&nbsp; 765 Commonwealth Avenue</p>
+      </div>
+      <div class="hero-text fade-in">
+        <p class="hero-eyebrow">Boston &nbsp;&middot;&nbsp; Massachusetts &nbsp;&middot;&nbsp; A Proud Father</p>
+        <h1 class="hero-headline">Kaitlin Elizabeth <em>O'Brien, J.D.</em></h1>
+        <div class="divider"></div>
+        <p>There are moments that stop you in your tracks — not because anything dramatic happens, but because something quietly enormous has. Standing outside Marsh Chapel on Commonwealth Avenue, watching your daughter in the crimson and purple regalia of a Boston University juris doctor, is one of those moments.</p>
+        <p>Kaitlin Elizabeth O'Brien earned her law degree from Boston University School of Law in May 2018. Three years of relentless work, of cases parsed and arguments honed and sleepless nights spent turning legal theory into something usable — and here she was, grinning in doctoral robes on a perfect spring morning, ready to go do it for real.</p>
+        <p>A father doesn't often get to see his child fully become themselves. This was one of those rare days.</p>
+        <p style="margin-top: 1.4rem; font-size: 1.4rem;"><a href="kaitlin.html" style="color: var(--bu-red); text-decoration: none; border-bottom: 1px solid var(--bu-red); font-style: italic; letter-spacing: 0.04em;">Seven years on &mdash; where she is now &rarr;</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="history" id="history">
+    <div class="history-inner">
+      <p class="section-label">Place &amp; Institution</p>
+      <h2 class="section-title">Boston University &amp; <em>The Law</em></h2>
+      <div class="center-rule"></div>
+      <div class="history-grid">
+        <div class="history-block fade-in">
+          <h3>Boston University School of Law</h3>
+          <p>Founded in 1872, BU Law is one of the oldest law schools in the country and was among the first to admit women and Black students on an equal basis — a distinction it has carried proudly ever since. Its alumni include Supreme Court justices, senators, and generations of public defenders, corporate counselors, and advocates who went on to shape American law. The school sits at the heart of the Charles River campus, a few minutes' walk from Fenway Park.</p>
+        </div>
+        <div class="history-block fade-in">
+          <h3>The Juris Doctor</h3>
+          <p>The J.D. is a professional doctorate — three demanding years of contracts, torts, constitutional law, civil procedure, and a hundred other disciplines that teach you not just what the law says but how to think about what it means. BU Law's program is known for its clinical offerings, placing students in real courtrooms and real cases from the earliest years of study. By the time you walk at commencement, you have already lawyered.</p>
+        </div>
+        <div class="history-block fade-in">
+          <h3>The Regalia</h3>
+          <p>The doctoral hood and gown carry a precise language of their own. The crimson and red of BU Law's regalia — the hood's velvet trim, the chevrons on the sleeve — follow conventions established in 1895 by an American intercollegiate commission and haven't changed substantially since. When you see someone in doctoral robes, you are seeing centuries of academic tradition made cloth, an institution saying: this person has done the work.</p>
+        </div>
+        <div class="history-block fade-in">
+          <h3>Marsh Chapel &amp; Commonwealth Avenue</h3>
+          <p>BU's main campus runs along a remarkable stretch of Commonwealth Avenue in Boston's Fenway neighborhood — three-quarters of a mile of university buildings, punctuated by Marsh Chapel, whose Norman tower anchors the spiritual and ceremonial life of the university. Commencement on the plaza and steps of Marsh Chapel, with the Charles River a block to the south and the city rising to the north, is one of the more beautiful graduation settings in New England.</p>
+        </div>
+        <div class="history-block fade-in">
+          <h3>Boston</h3>
+          <p>Boston is, among many other things, an education city — home to more universities per square mile than almost anywhere on earth. Harvard, MIT, Northeastern, Tufts, Emerson, and BU exist in an ecosystem of overlapping ambitions that has given the city its particular intellectual character. For a law student, there is no better place: federal courts, state courts, major firms, public interest organizations, and the full machinery of the American legal system are all within walking distance or a short T ride.</p>
+        </div>
+        <div class="history-block fade-in">
+          <h3>What Comes Next</h3>
+          <p>The degree is the beginning, not the end. A J.D. from BU Law opens doors — to practice, to policy, to academia, to the thousand careers that require someone who can read a statute, spot an argument, and think clearly under pressure. Kaitlin walked out of that commencement with a credential, a network, and three years of intellectual combat in her bones. What she does with it is the rest of the story.</p>
+        </div>
+      </div>
+      <div class="essay">
+        <div class="pull-quote">
+          <p>"The law is reason, free from passion." &mdash; Aristotle. The best lawyers know that reason and passion are not, in fact, mutually exclusive.</p>
+        </div>
+        <p>There is something particular about watching someone you love do a hard thing well. Law school is not a gentle process — it is designed to be uncomfortable, to stretch the way you think until your old cognitive habits no longer fit. The Socratic classroom, the endless case briefs, the moot court arguments that teach you to defend a position you may not believe while anticipating every counterargument — all of it is designed to produce someone who does not flinch at complexity.</p>
+        <p>Kaitlin O'Brien is not someone who flinches at complexity. The photograph outside Marsh Chapel captures a moment of arrival, but it doesn't show the three years of getting there — the early mornings in the library, the study groups that ran past midnight, the first brief and the twentieth, the clients seen in clinics, the professors who pushed and the ones who helped. It shows the product of all of that, grinning in crimson, on a spring morning in Boston.</p>
+        <p>A father's job, in the best version of the story, is to be present at these moments — not as the protagonist, but as a witness. To show up, to pay attention, to understand what is being achieved even when you cannot fully understand how it was done. To be proud in a way that doesn't need to announce itself loudly because it is already completely obvious.</p>
+        <p>Boston University's motto is <em>Learning, Virtue, Piety.</em> On this particular May morning, the first of those had been thoroughly demonstrated. The other two, in their own time and way, would follow.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien &nbsp;&middot;&nbsp; All photographs &amp; text &copy; Tim O'Brien</p>
+    <p style="margin-top:0.5rem; opacity:0.6;">Built with intention &nbsp;&middot;&nbsp; Boston, Massachusetts</p>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>

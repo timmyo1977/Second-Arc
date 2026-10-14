@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arizona &middot; Ride &amp; Golf Month &middot; Dispatches from the Road</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:#1a1410; --warm-dark:#2c2318; --parchment:#f5f0e8; --cream:#faf7f2;
+      --gold:#b8963e; --gold-light:#d4b06a; --stone:#9e9080; --rule:#c9b99a;
+      --lacquer-hi:#f58a34; --lacquer:#e0631c; --lacquer-lo:#a83a0b;
+      --c-golf:#2f5d3e; --c-ride:#a2461f; --c-travel:#2e4e6e; --c-event:#7a5a12; --c-easy:#5c554e;
+    }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    body { background:var(--cream); color:var(--ink); font-family:'EB Garamond',Georgia,serif; font-size:clamp(16px,1.2vw + 12px,27px); line-height:1.75; }
+    .hero { background:radial-gradient(ellipse at 50% 0%, #3a2a1c 0%, var(--warm-dark) 60%, #1e170f 100%); color:var(--cream); text-align:center; padding:4.5rem 16px 4rem; border-bottom:3px solid var(--lacquer); }
+    .hero .label { font-family:'Cinzel Decorative',serif; font-size:13px; letter-spacing:.3em; color:var(--gold-light); }
+    .hero h1 { font-family:'Playfair Display',serif; font-weight:400; font-size:clamp(40px,6vw,76px); line-height:1.1; margin-top:.6rem; }
+    .hero h1 em { color:var(--lacquer-hi); }
+    .hero .rule { width:90px; height:2px; background:var(--lacquer); margin:1.6rem auto; }
+    .hero .sub { font-style:italic; color:var(--rule); max-width:760px; margin:0 auto; font-size:clamp(18px,1.4vw + 10px,26px); }
+    .wrap { max-width:1240px; margin:0 auto; padding:3.5rem 16px 2rem; }
+    .legend { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:2.2rem; }
+    .legend span { font-family:'Cinzel Decorative',serif; font-size:12px; letter-spacing:.14em; color:#fff; padding:6px 14px; border-radius:999px; }
+    .dows { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:12px; font-family:'Cinzel Decorative',serif; font-size:12px; letter-spacing:.2em; color:var(--stone); padding:0 4px 8px; }
+    .cal { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:12px; }
+    .day { background:var(--parchment); border:1px solid var(--rule); border-top:4px solid var(--kc); border-radius:8px; padding:12px 12px 14px; min-height:170px; }
+    .day-top { display:flex; align-items:center; justify-content:space-between; gap:6px; }
+    .num { font-family:'Playfair Display',serif; font-size:28px; line-height:1; }
+    .dow { display:none; }
+    .tag { font-family:'Cinzel Decorative',serif; font-size:10px; letter-spacing:.1em; color:#fff; background:var(--kc); padding:3px 8px; border-radius:999px; }
+    .day h3 { font-family:'Playfair Display',serif; font-weight:600; font-size:17px; line-height:1.25; margin-top:10px; }
+    .day p { font-size:15px; line-height:1.4; color:#5a5047; margin-top:4px; }
+    .k-golf { --kc:var(--c-golf); } .k-ride,.k-gravel { --kc:var(--c-ride); } .k-travel { --kc:var(--c-travel); }
+    .k-event { --kc:var(--c-event); background:#f6eed6; } .k-easy { --kc:var(--c-easy); }
+    .k-blank { background:transparent; border:1px dashed var(--rule); } .k-blank .num { color:var(--stone); }
+    .notes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; border-top:1px solid var(--rule); margin-top:3rem; padding-top:2rem; }
+    .notes h2 { font-family:'Playfair Display',serif; font-weight:600; font-size:clamp(20px,1.2vw + 12px,28px); color:var(--lacquer-lo); }
+    .notes p { font-size:clamp(16px,.6vw + 12px,20px); line-height:1.6; margin-top:.4rem; }
+    .back-home { text-align:center; padding:3rem 1rem; }
+    .back-home a { font-size:1.2rem; letter-spacing:.1em; text-transform:uppercase; color:var(--warm-dark); text-decoration:none; border-bottom:1px solid var(--gold); margin:0 1rem; display:inline-block; margin-bottom:.6rem; }
+    footer { background:var(--warm-dark); color:var(--stone); text-align:center; padding:2.5rem 1rem; font-size:1.1rem; border-top:2px solid var(--gold); }
+    footer span { color:var(--gold-light); }
+    @media (max-width:900px) {
+      .dows { display:none; }
+      .cal { grid-template-columns:1fr; gap:10px; }
+      .day { min-height:0; }
+      .dow { display:inline; font-family:'Cinzel Decorative',serif; font-size:12px; letter-spacing:.14em; color:var(--stone); margin-right:auto; margin-left:10px; }
+      .k-blank { display:none; }
+      .notes { grid-template-columns:1fr; gap:20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <p class="label">February 2027 &middot; North Scottsdale, Arizona</p>
+    <h1>Ride &amp; <em>Golf</em> Month</h1>
+    <div class="rule"></div>
+    <p class="sub">Ten rounds, ten rides, Patagonia gravel with Lyndon &mdash; and a wedding in Philadelphia at the end of it.</p>
+  </header>
+
+  <main class="wrap">
+    <div class="legend">
+      <span style="background:var(--c-golf)">Golf</span>
+      <span style="background:var(--c-ride)">Ride &middot; Gravel</span>
+      <span style="background:var(--c-travel)">Travel</span>
+      <span style="background:var(--c-event)">Event</span>
+      <span style="background:var(--c-easy)">Easy / Off</span>
+    </div>
+    <div class="dows" aria-hidden="true"><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div>
+    <section class="cal" aria-label="February 2027 calendar">
+      <article class="day k-ride">
+        <div class="day-top"><span class="num">1</span><span class="dow">Mon</span><span class="tag">Ride</span></div>
+        <h3>Pemberton Trail</h3>
+        <p>McDowell Mountain Park · 15.3 mi shakeout loop</p>
+      </article>
+      <article class="day k-golf">
+        <div class="day-top"><span class="num">2</span><span class="dow">Tue</span><span class="tag">Golf</span></div>
+        <h3>We-Ko-Pa Saguaro</h3>
+        <p>Fort McDowell · ~20 min</p>
+      </article>
+      <article class="day k-ride">
+        <div class="day-top"><span class="num">3</span><span class="dow">Wed</span><span class="tag">Ride</span></div>
+        <h3>Brown&#x27;s Ranch</h3>
+        <p>20–25 mi on the smoother main loops</p>
+      </article>
+      <article class="day k-golf">
+        <div class="day-top"><span class="num">4</span><span class="dow">Thu</span><span class="tag">Golf</span></div>
+        <h3>Troon North Monument</h3>
+        <p>Classic north Scottsdale desert round</p>
+      </article>
+      <article class="day k-ride">
+        <div class="day-top"><span class="num">5</span><span class="dow">Fri</span><span class="tag">Ride</span></div>
+        <h3>Competitive Track</h3>
+        <p>McDowell · Sport + Long loops</p>
+      </article>
+      <article class="day k-golf">
+        <div class="day-top"><span class="num">6</span><span class="dow">Sat</span><span class="tag">Golf</span></div>
+        <h3>SunRidge Canyon</h3>
+        <p>Fountain Hills · ~20 min</p>
+      </article>
+      <article class="day k-easy">
+        <div class="day-top"><span class="num">7</span><span class="dow">Sun</span><span class="tag">Easy</span></div>
+        <h3>Road spin or off</h3>
+        <p>Fountain Hills loop, 20–30 mi</p>
+      </article>
+      <article class="day k-golf">
+        <div class="day-top"><span class="num">8</span><span class="dow">Mon</span><span class="tag">Golf</span></div>
+        <h3>Eagle Mountain</h3>
+        <p>Fountain Hills · Phoenix Open week begins</p>
+      </article>
+      <article class="day k-ride">
+        <div class="day-top"><span class="num">9</span><span class="dow">Tue</span><span class="tag">Ride</span></div>
+        <h3>Brown&#x27;s Ranch</h3>
+        <p>25–30 mi · add new loops</p>
+      </article>
+      <article class="day k-golf">
+        <div class="day-top"><span class="num">10</span><span class="dow">Wed</span><span class="tag">Golf</span></div>
+        <h3>We-Ko-Pa Cholla</h3>
+        <p>Fort McDowell · away from Open traffic</p>
+      </article>
+      <article class="day k-event">
+        <div class="day-top"><span class="num">11</span><span class="dow">Thu</span><span class="tag">Event</span></div>
+        <h3>WM Phoenix Open</h3>
+        <p>Round 1 at TPC Scottsdale · lightest crowds · take the shuttle</p>
+      </article>
+      <article class="day k-ride">
+        <div class="day-top"><span class="num">12</span><span class="dow">Fri</span><span class="tag">Ride</span></div>
+        <h3>McDowell long day</h3>
+        <p>Pemberton + Long loop · ~25 mi</p>
+      </article>
+      <article class="day k-golf">
+        <div class="day-top"><span class="num">13</span><span class="dow">Sat</span><span class="tag">Golf</span></div>
+        <h3>SunRidge or Desert Canyon</h3>
+        <p>Fountain Hills · book early</p>
+      </article>
+      <article class="day k-easy">
+        <div class="day-top"><span class="num">14</span><span class="dow">Sun</span><span class="tag">Easy</span></div>
+        <h3>Road spin or off</h3>
+        <p>Open final round on TV</p>
+      </article>
+      <article class="day k-ride">
+        <div class="day-top"><span class="num">15</span><span class="dow">Mon</span><span class="tag">Ride</span></div>
+        <h3>Tech loop</h3>
+        <p>McDowell · rent a full-suspension MTB · Presidents&#x27; Day</p>
+      </article>
+      <article class="day k-golf">
+        <div class="day-top"><span class="num">16</span><span class="dow">Tue</span><span class="tag">Golf</span></div>
+        <h3>Grayhawk Raptor</h3>
+        <p>North Scottsdale · ~30 min</p>
+      </article>
+      <article class="day k-ride">
+        <div class="day-top"><span class="num">17</span><span class="dow">Wed</span><span class="tag">Ride</span></div>
+        <h3>Big day</h3>
+        <p>Brown&#x27;s Ranch 30+ mi, or Bartlett Lake Rd climb</p>
+      </article>
+      <article class="day k-golf">
+        <div class="day-top"><span class="num">18</span><span class="dow">Thu</span><span class="tag">Golf</span></div>
+        <h3>Troon North Pinnacle</h3>
+        <p>Completes both Troon courses</p>
+      </article>
+      <article class="day k-ride">
+        <div class="day-top"><span class="num">19</span><span class="dow">Fri</span><span class="tag">Ride</span></div>
+        <h3>Pemberton, easy</h3>
+        <p>Then fresh sealant and spares for Patagonia</p>
+      </article>
+      <article class="day k-golf">
+        <div class="day-top"><span class="num">20</span><span class="dow">Sat</span><span class="tag">Golf</span></div>
+        <h3>The Boulders or Legend Trail</h3>
+        <p>Carefree · ~25–30 min</p>
+      </article>
+      <article class="day k-travel">
+        <div class="day-top"><span class="num">21</span><span class="dow">Sun</span><span class="tag">Travel</span></div>
+        <h3>Drive to Tucson</h3>
+        <p>~2 hr · stay with Lyndon</p>
+      </article>
+      <article class="day k-gravel">
+        <div class="day-top"><span class="num">22</span><span class="dow">Mon</span><span class="tag">Gravel</span></div>
+        <h3>Patagonia 50</h3>
+        <p>~50 mi, counter-clockwise · overnight in Patagonia</p>
+      </article>
+      <article class="day k-gravel">
+        <div class="day-top"><span class="num">23</span><span class="dow">Tue</span><span class="tag">Gravel</span></div>
+        <h3>Canelo Pass + San Rafael</h3>
+        <p>~48 mi · drive back to Tucson</p>
+      </article>
+      <article class="day k-travel">
+        <div class="day-top"><span class="num">24</span><span class="dow">Wed</span><span class="tag">Travel</span></div>
+        <h3>Back to Scottsdale</h3>
+        <p>Morning ride or round with Lyndon · ship the bike home</p>
+      </article>
+      <article class="day k-golf">
+        <div class="day-top"><span class="num">25</span><span class="dow">Thu</span><span class="tag">Golf</span></div>
+        <h3>TPC Scottsdale Stadium</h3>
+        <p>Early tee time · ship clubs · evening flight to Philadelphia</p>
+      </article>
+      <article class="day k-event">
+        <div class="day-top"><span class="num">26</span><span class="dow">Fri</span><span class="tag">Event</span></div>
+        <h3>Wedding, Philadelphia</h3>
+        <p>5:30 pm ET</p>
+      </article>
+      <article class="day k-blank" aria-hidden="true"><div class="day-top"><span class="num">27</span></div></article>
+      <article class="day k-blank" aria-hidden="true"><div class="day-top"><span class="num">28</span></div></article>
+    </section>
+
+    <section class="notes">
+      <div><h2>Key dates</h2><p>WM Phoenix Open, Feb 8&ndash;14 (rounds Feb 11&ndash;14). Spring training opens Feb 19. Wedding in Philadelphia Fri Feb 26, 5:30 pm &mdash; fly out Thu Feb 25 evening.</p></div>
+      <div><h2>Tucson &amp; Patagonia</h2><p>Base at Lyndon&rsquo;s in Tucson, Feb 21&ndash;24. One night in Patagonia (Feb 22). No water on the routes and patchy cell &mdash; carry everything.</p></div>
+      <div><h2>Ride kit</h2><p>Grizl with wide tubeless tires, fresh sealant, plugs, a spare tube. Knee warmers, vest and full-finger gloves for cold starts.</p></div>
+    </section>
+  </main>
+
+  <div class="back-home">
+    <a href="second-arc.html">&#8592; The Second Arc</a>
+    <a href="index.html">Portfolio Home</a>
+  </div>
+  <footer>
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michael Patrick — Tim O'Brien</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(14px, 0.6vw + 12px, 19px);
+      line-height: 1.75;
+    }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      background: var(--warm-dark);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .masthead::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      width: 60%;
+      margin: 0.6rem auto 0;
+      opacity: 0.4;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .site-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: 1.4rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--parchment);
+      border-bottom: 2px solid var(--rule);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    nav a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    /* ── HERO (PORTRAIT-FRAMED) ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      background: var(--warm-dark);
+      padding: 4rem 2rem 4.5rem;
+      text-align: center;
+      overflow: hidden;
+    }
+    /* subtle vignette / texture on the dark backdrop */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, rgba(184,150,62,0.08) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,0.15), transparent 30%, transparent 70%, rgba(0,0,0,0.25));
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1.1rem;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4.4rem);
+      line-height: 1.15;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .hero-headline em { font-style: italic; color: var(--gold-light); }
+    .hero-divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 2.5rem;
+    }
+    .hero-photo-wrap {
+      position: relative;
+      display: inline-block;
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    /* gold double-frame around the portrait */
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -16px;
+      border: 1px solid var(--gold);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border: 1px solid var(--gold-light);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .hero-photo-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.5), 0 4px 14px rgba(0,0,0,0.4);
+    }
+    .caption-tag {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--rule);
+      letter-spacing: 0.08em;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    @media (max-width: 800px) {
+      .hero { padding: 2.5rem 1.2rem 3rem; }
+      .hero-photo-wrap { max-width: 100%; }
+      .hero-photo-wrap::before { inset: -10px; }
+      .hero-photo-wrap::after { inset: -5px; }
+    }
+
+    /* ── HERO LEAD-IN PROSE (below the hero) ── */
+    .hero-lead {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+    .hero-lead p {
+      color: #3a302a;
+      font-size: 1.5rem;
+      line-height: 1.75;
+      margin-bottom: 1.3rem;
+    }
+    .hero-lead p:first-of-type::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.6rem;
+      float: left;
+      line-height: 1;
+      padding: 0.4rem 0.6rem 0 0;
+      color: var(--sienna);
+      font-weight: 600;
+    }
+    .hero-lead-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.6;
+      margin: 0 auto 2.5rem;
+    }
+    @media (max-width: 800px) {
+      .hero-lead { padding: 3rem 1.2rem 2.5rem; }
+      .hero-lead p { font-size: 1.4rem; }
+    }
+
+    /* ── HISTORY / ESSAY ── */
+    .history {
+      background: var(--parchment);
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+      padding: 5rem 2rem;
+    }
+    .history-inner { max-width: 860px; margin: 0 auto; }
+    .section-label {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      text-align: center;
+      color: var(--warm-dark);
+      margin-bottom: 0.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--sienna); }
+    .center-rule {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1rem auto 2.5rem;
+    }
+    .history-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.4rem 3rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 700px) {
+      .history-grid { grid-template-columns: 1fr; }
+    }
+    .history-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--sienna);
+      margin-bottom: 0.5rem;
+    }
+    .history-block p { font-size: 1.4rem; color: #3a302a; }
+    .essay { border-top: 1px solid var(--rule); padding-top: 2.5rem; }
+    .essay p { font-size: 1.45rem; color: #3a302a; margin-bottom: 1.2rem; }
+    .pull-quote {
+      border-left: 3px solid var(--gold);
+      padding: 0.6rem 0 0.6rem 1.8rem;
+      margin: 0 0 2rem 0;
+    }
+    .pull-quote p {
+      font-style: italic !important;
+      font-size: 1.6rem !important;
+      color: var(--warm-dark) !important;
+      line-height: 1.55;
+    }
+
+    /* ── PROFESSIONAL / CAREER ── */
+    .career {
+      background: var(--cream);
+      padding: 5rem 2rem 4rem;
+    }
+    .career-inner { max-width: 920px; margin: 0 auto; }
+    .career-intro {
+      max-width: 720px;
+      margin: 0 auto 3.5rem;
+      text-align: center;
+    }
+    .career-intro p {
+      font-size: 1.45rem;
+      color: #3a302a;
+      font-style: italic;
+      line-height: 1.6;
+    }
+    .role {
+      border-left: 2px solid var(--rule);
+      padding: 0 0 2.4rem 2.2rem;
+      margin-left: 0.5rem;
+      position: relative;
+    }
+    .role::before {
+      content: '';
+      position: absolute;
+      left: -7px;
+      top: 0.6rem;
+      width: 12px;
+      height: 12px;
+      background: var(--gold);
+      border: 2px solid var(--cream);
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px var(--gold);
+    }
+    .role:last-child { border-left-color: transparent; padding-bottom: 0; }
+    .role-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+    .role-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: var(--warm-dark);
+      font-weight: 600;
+      line-height: 1.25;
+    }
+    .role-title em { font-style: italic; color: var(--sienna); font-weight: 400; }
+    .role-dates {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--stone);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .role-company {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.35rem;
+      color: var(--sienna);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.2rem;
+    }
+    .role-meta {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--stone);
+      margin-bottom: 0.9rem;
+      letter-spacing: 0.04em;
+    }
+    .role ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.4rem 0 0;
+    }
+    .role ul li {
+      font-size: 1.3rem;
+      color: #3a302a;
+      line-height: 1.55;
+      margin-bottom: 0.55rem;
+      padding-left: 1.4rem;
+      position: relative;
+    }
+    .role ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--gold);
+      font-size: 1rem;
+    }
+    .sub-role {
+      margin-top: 1.4rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--rule);
+    }
+    .sub-role .role-title { font-size: 1.5rem; }
+
+    /* Education / Certifications / Languages ── three columns */
+    .career-footer {
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 2px solid var(--rule);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+    @media (max-width: 700px) {
+      .career-footer { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    .career-footer h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      color: var(--warm-dark);
+      margin-bottom: 0.7rem;
+      font-weight: 600;
+    }
+    .career-footer h4 em { font-style: italic; color: var(--sienna); font-weight: 400; }
+    .career-footer p,
+    .career-footer li {
+      font-size: 1.2rem;
+      color: #3a302a;
+      line-height: 1.55;
+      margin-bottom: 0.3rem;
+    }
+    .career-footer ul { list-style: none; padding: 0; }
+    .career-footer .small {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--stone);
+    }
+
+    /* ── BACK HOME ── */
+    .back-home {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .back-home a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-home a:hover { color: var(--sienna); border-color: var(--sienna); }
+
+    /* ── CONTINUE READING ── */
+    .continue-reading {
+      text-align: center;
+      padding: 3.5rem 1rem 1.5rem;
+      background: var(--cream);
+    }
+    .cr-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--stone);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.6rem;
+    }
+    .cr-link {
+      display: inline-block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: var(--sienna);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 4px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .cr-link:hover { color: var(--warm-dark); border-color: var(--sienna); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--warm-dark);
+      color: var(--stone);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 1.1rem;
+      border-top: 2px solid var(--gold);
+    }
+    footer span { color: var(--gold-light); }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="site-title">Dispatches from the Road</div>
+    <div class="site-subtitle">Notes from a life well traveled &nbsp;&middot;&nbsp; Tim O'Brien</div>
+  </header>
+
+  <nav>
+    <a href="#story">The Story</a>
+    <a href="#work">The Work</a>
+    <a href="index.html">&#8592; Portfolio Home</a>
+  </nav>
+
+  <section id="top">
+    <div class="hero">
+      <div class="hero-inner">
+        <p class="hero-eyebrow">A Son Who &nbsp;&middot;&nbsp; Opened Up the World</p>
+        <h1 class="hero-headline">Michael Patrick &amp; <em>Yaamy</em></h1>
+        <div class="hero-divider"></div>
+        <div class="hero-photo-wrap">
+          <img src="images/michael-patrick-img-01.jpg" alt="Michael Patrick O'Brien and Yaamy at an autumn vineyard wedding" />
+        </div>
+        <p class="caption-tag">Michael &amp; Yaamy &nbsp;&middot;&nbsp; Trump Winery, Charlottesville, Virginia</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero-lead">
+    <p>Some children keep the world close. Others, from an early age, seem to understand that the world is larger than any one place, and quietly set about the business of learning it. Michael Patrick has always been the second kind.</p>
+    <p>He is the son who taught his parents, by his own living example, that a life can be conducted in more than one language, on more than one continent, with more than one set of assumptions about what matters. He learned French in the Loire Valley as a teenage exchange student, and Spanish in the mountains of Colombia as a young man. He has made homes in places most of us only read about.</p>
+    <p>And then, in his own good time, he came home to Texas — and brought with him Yaamy, from Monterrey, who has become family.</p>
+    <div class="hero-lead-rule" style="margin-top:2.5rem;"></div>
+  </section>
+
+
+  <section class="history" id="story">
+    <div class="history-inner">
+      <p class="section-label">A Portrait in Places</p>
+      <h2 class="section-title">The Making of a <em>Citizen of the World</em></h2>
+      <div class="center-rule"></div>
+      <div class="history-grid">
+        <div class="history-block">
+          <h3>Gien, France</h3>
+          <p>It began, as these things often do, with a single audacious decision made at an age when most of us are worrying about algebra homework. Michael left Jamestown as a Rotary exchange student and landed in Gien, a small town on the banks of the Loire in central France — a place of porcelain kilns, medieval bridges, and the measured rhythms of the French provinces. He left American, in the way teenagers are American. He returned fluent, transformed, and already looking past the horizon.</p>
+        </div>
+        <div class="history-block">
+          <h3>Medellín, Colombia</h3>
+          <p>Years later, it was Medellín — a city in the Aburrá Valley high in the Andes, once notorious and now one of the great urban reinvention stories of the hemisphere. Michael lived there long enough to inhabit the Spanish language rather than merely speak it, to understand the texture of paisa culture, to know the city not as a visitor but as a temporary resident. It was the kind of immersion that changes how a person thinks, not just how they talk.</p>
+        </div>
+        <div class="history-block">
+          <h3>San Antonio, Texas</h3>
+          <p>Now home is San Antonio — a city that sits at the cultural crossroads of the United States and Mexico, where Spanish and English mix easily on the same street, where the Alamo and the River Walk and the old Spanish missions all coexist within the same few square miles. For a man whose life has been a steady crossing of borders, San Antonio is a fitting place to put down roots. His brother Tim Jr. is out in Arizona, one sister in Roanoke, Texas just up the road, and another sister in Rochester, New York. The rest of the country is a short flight away.</p>
+        </div>
+        <div class="history-block">
+          <h3>Monterrey, Mexico</h3>
+          <p>Yaamy comes from Monterrey — a city in the northeast of Mexico, cradled by the Sierra Madre Oriental, industrial and cosmopolitan, home to some of the finest universities and most ambitious entrepreneurs in Latin America. It is a city that has long looked both north toward the United States and south into the Mexican interior, and its people carry that dual orientation with grace. That Michael's wife comes from such a place seems, in hindsight, almost inevitable.</p>
+        </div>
+      </div>
+      <div class="essay">
+        <div class="pull-quote">
+          <p>"He is our child who opened up the world to us — the one who showed us, by going out into it, that the world was larger than we had imagined, and more hospitable than we had dared to hope."</p>
+        </div>
+        <p>There is a particular kind of gratitude a parent feels toward a child who has shown them something new. It is not the gratitude owed to a teacher or a guide — it is quieter than that, and more durable. It is the recognition that this person, whom you once held in your arms and carried to bed, has grown into someone who can genuinely widen your field of vision.</p>
+        <p>Michael did this for his mother and me. Every postcard from Gien, every phone call from Medellín, every Spanish phrase spoken at a family dinner, every introduction to a new friend from a country we had not yet visited — these accumulated, over years, into a different understanding of what our family was. Not just a family rooted in western New York, but a family with reach. A family whose members had business, friendships, and affections on multiple continents.</p>
+        <p>The photograph on this page was taken on an autumn afternoon at Trump Winery in Charlottesville, Virginia — the kind of setting that feels, to a Western New Yorker, both familiar and slightly elevated. The grass is the grass of our childhood. The light is the light of our own autumns. But the couple standing on that grass represents something we did not plan for, and are all the richer for: a son who made the world his classroom, and a daughter-in-law who brought her own country with her when she joined our family.</p>
+        <p>Yaamy is from Monterrey, which means she is from a place of mountains and industry and serious food and very direct conversation. She fits in well. Michael is from here but belongs, by now, to several places at once — which is, when you think about it, the most American thing a person can be.</p>
+        <p>There are moments in a parent's life that invite reflection on what one's children have become. When we reflect on Michael, what we find is this: a man who took a chance on Gien at sixteen and never stopped taking chances afterward, who learned languages the way some people learn skills, who chose to live in places where he would have to earn his belonging, and who in the end chose a partner whose own life is a crossing of borders.</p>
+        <p>The world is larger because of him. And so are we.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="career" id="work">
+    <div class="career-inner">
+      <p class="section-label">The Work</p>
+      <h2 class="section-title">A Decade in <em>Data</em></h2>
+      <div class="center-rule"></div>
+
+      <div class="career-intro">
+        <p>From emergency-response analytics during the pandemic, to the trading floor of a global investment firm, to the supply chains of one of the world's largest brewers and the claims data of a major health insurer — a career built on turning large, unruly datasets into decisions people actually act on.</p>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-title">Senior Power BI Developer</div>
+          <div class="role-dates">Mar 2024 – Apr 2025</div>
+        </div>
+        <div class="role-company">Centene Corporation</div>
+        <div class="role-meta">Full-time &nbsp;&middot;&nbsp; New York, NY (Remote)</div>
+        <ul>
+          <li>Designed and maintained 17+ Power BI dashboards, integrating healthcare data from Snowflake, Oracle, Teradata, SharePoint, and Excel to sharpen decision-making for key stakeholders.</li>
+          <li>Analyzed complex healthcare datasets — claims, provider, member, and encounter data — identifying trends that improved clinical outcomes and reduced cost of care.</li>
+          <li>Developed and optimized SQL queries to extract and validate large-scale healthcare data, ensuring accuracy and efficiency in reporting and analysis.</li>
+          <li>Implemented CI/CD pipelines to automate reporting and analytics processes, streamlining workflows and enabling faster, more reliable decision-making.</li>
+          <li>Conducted root-cause analyses on data irregularities, presenting findings and strategic recommendations to leadership to improve data integrity and operational performance.</li>
+          <li>Collaborated cross-functionally with business leaders and technical teams to define analytics requirements and enhance stakeholder satisfaction.</li>
+          <li>Provided technical mentorship to junior analysts, sharing best practices in SQL, Power BI, and healthcare data analytics.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-title">Senior Power BI Developer</div>
+          <div class="role-dates">Apr 2023 – Nov 2023</div>
+        </div>
+        <div class="role-company">Janus Henderson Investors</div>
+        <div class="role-meta">Contract &nbsp;&middot;&nbsp; Denver, Colorado</div>
+        <ul>
+          <li>Pioneered the transformation of the firm's legacy on-premise trading infrastructure to cloud-native infrastructure on AWS (EC2), re-engineering mean-reversion trading algorithms for institutional clients — achieving a 15% increase in trading speed and 20% reduction in latency.</li>
+          <li>Engineered high-performance SQL pipelines in Snowflake, optimizing complex data retrieval and reducing query execution time by 30%.</li>
+          <li>Developed a centralized Power BI dashboard with role-based access controls and sector-specific drilldowns, strengthening data governance and enhancing portfolio decision-making.</li>
+          <li>Implemented and administered a JIRA-based operational tracking system, establishing best practices in agile workflow management and improving team coordination and sprint velocity.</li>
+          <li>Led application rationalization and decommissioning efforts, conducting risk and cost-benefit analyses on legacy systems; achieved $3.5M in annual savings while improving client satisfaction from 70% to 92%.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-title">Data Engineer</div>
+          <div class="role-dates">Apr 2022 – Apr 2023</div>
+        </div>
+        <div class="role-company">Anheuser-Busch</div>
+        <div class="role-meta">Full-time &nbsp;&middot;&nbsp; New York, NY</div>
+        <ul>
+          <li>Led the company's response to national supply-chain issues and glass shortages by developing a Power BI tool that geographically pinpointed over 300,000 affected SKUs across more than 90,000 retail accounts.</li>
+          <li>Routinely ran SQL queries in Snowflake against 28 TB of data spanning 500+ wholesalers, 500,000+ retail accounts, 6,000 brands, and virtually limitless packaging variations.</li>
+          <li>Ran national statistical studies in Python to analyze account discrepancies, correlation among brand families, fastest routes to market, and volume lift in key markets — finding that beer sales increased 35% when product displays were flanked with brand-family extensions.</li>
+          <li>Partnered with a third party to implement an internal employee-recognition program and built a Power BI dashboard to track cross-departmental recognitions, with a cost-prediction model that kept the program on budget.</li>
+          <li>Drafted wireframes, gathered UX feedback, managed requirements, and directed the national rollout of a wholesaler KPI portal on Microsoft Azure — increasing wholesaler engagement in the KPI program by over 250%.</li>
+        </ul>
+
+        <div class="sub-role">
+          <div class="role-header">
+            <div class="role-title">Insights Analyst, Trade Strategy</div>
+            <div class="role-dates">Apr 2021 – Apr 2022</div>
+          </div>
+          <div class="role-company">Anheuser-Busch</div>
+          <div class="role-meta">Contract &nbsp;&middot;&nbsp; New York, NY</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-title">COVID-19 Emergency Response Analyst</div>
+          <div class="role-dates">Mar 2020 – Mar 2021</div>
+        </div>
+        <div class="role-company">Hagerty Consulting</div>
+        <div class="role-meta">Contract &nbsp;&middot;&nbsp; Salt Lake County, Utah &amp; Denver, Colorado</div>
+        <ul>
+          <li><strong>Salt Lake County — Intelligence Section:</strong> Built a sentinel observational warning system for 189 K-12 schools using SQL and Tableau; if absenteeism rose more than 15% above the prior year's average, the school superintendent was notified. Paired with a predictive case model by age demographic that shaped the reopening plan.</li>
+          <li>Conducted a statewide facial-covering observational survey and wrote a custom Python/Pandas data parser to analyze results. Even as mask-wearing rose from 90% to 96%, case counts rose 130% — pointing to household transmission as the primary driver of new cases.</li>
+          <li>Provided supporting data for a $5M+ state legislative package using CARES Act funding to treat PTSD, depression, and substance abuse among first responders.</li>
+          <li>Maintained situational awareness of disruptions to critical state functions, supply chain, civil unrest, and the 2020 vice-presidential debate. Coordinated with private-industry partners on vaccine distribution and at-home rapid testing.</li>
+          <li>Delivered the mayor's evening briefing daily, informing policy-level decisions. Assisted with long-term-care facility reopening and used ArcGIS to heat-map potential outbreaks and case outliers.</li>
+          <li><strong>City of Denver (Mar – Apr 2020):</strong> Performed correlation analysis on COVID-19 spread between in-state and out-of-state universities across the PAC 12, Big Sky, and Mountain West conferences; out-of-state students carried a positive case correlation of 0.277 and were deemed higher risk. Analyzed flu overlap on COVID-19 and built predictive models for unemployment claims from Bureau of Labor Statistics data.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-title">Strategic Data Architect</div>
+          <div class="role-dates">Aug 2019 – Feb 2020</div>
+        </div>
+        <div class="role-company">Goldman Sachs</div>
+        <div class="role-meta">Contract &nbsp;&middot;&nbsp; Salt Lake City, Utah</div>
+        <ul>
+          <li>Opened brokerage, advisory, trust, offshore, and options accounts for ultra-high-net-worth international clients, professional athletes, heads of state, offshore entities, trust funds, philanthropy funds, and religious institutions.</li>
+          <li>Performed Know-Your-Client due diligence, ran background checks, and carried out anti-money-laundering procedures in accordance with international law.</li>
+          <li>Managed and trained coworkers on internal audit projects to ensure client data accuracy across jurisdictions.</li>
+          <li>Collaborated with Compliance colleagues to approve IRA accounts in accordance with banking regulations.</li>
+        </ul>
+      </div>
+
+      <div class="career-footer">
+        <div>
+          <h4><em>Education</em></h4>
+          <p><strong>University of Utah</strong></p>
+          <p>B.S., Certified Financial Planning &nbsp;&middot;&nbsp; 2014 – 2017</p>
+          <p class="small">GPA 3.9 &nbsp;&middot;&nbsp; Phi Kappa Phi, Golden Key International Honor Society, National Society of Leadership and Success, Financial Planning Association, Finance Club, International Business Club, Rotaract Club</p>
+        </div>
+        <div>
+          <h4><em>Credentials</em></h4>
+          <ul>
+            <li>CompTIA Network+</li>
+            <li>SQL: Data Reporting and Analysis — LinkedIn, May 2021</li>
+          </ul>
+          <h4 style="margin-top:1.4rem;"><em>Languages</em></h4>
+          <ul>
+            <li>English &nbsp;<span class="small">— Native</span></li>
+            <li>Spanish &nbsp;<span class="small">— Professional</span></li>
+            <li>French &nbsp;<span class="small">— Professional</span></li>
+            <li>Mandarin &nbsp;<span class="small">— Elementary</span></li>
+          </ul>
+        </div>
+        <div>
+          <h4><em>Selected Skills</em></h4>
+          <ul>
+            <li>SQL &nbsp;&middot;&nbsp; Python &nbsp;&middot;&nbsp; Power BI</li>
+            <li>Snowflake &nbsp;&middot;&nbsp; Oracle &nbsp;&middot;&nbsp; Teradata</li>
+            <li>AWS (EC2) &nbsp;&middot;&nbsp; Microsoft Azure</li>
+            <li>Tableau &nbsp;&middot;&nbsp; ArcGIS &nbsp;&middot;&nbsp; Pandas</li>
+            <li>CI/CD &nbsp;&middot;&nbsp; JIRA &nbsp;&middot;&nbsp; Linux</li>
+            <li>Data Governance &nbsp;&middot;&nbsp; Data Visualization</li>
+          </ul>
+          <h4 style="margin-top:1.4rem;"><em>Earlier</em></h4>
+          <p class="small">Web developer for The Crèche, a women's non-profit (2012–2013). Patient aid at Pine Grove Ambulatory Surgery Center (summer 2015).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="continue-reading">
+    <p class="cr-eyebrow">The Same Person, Decades Earlier</p>
+    <a class="cr-link" href="mission-meadows.html">&larr; &nbsp; A Moment at Mission Meadows</a>
+  </div>
+
+  <div class="back-home">
+    <a href="index.html">&#8592; Portfolio Home</a>
+  </div>
+
+  <footer id="contact">
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien &nbsp;&middot;&nbsp; All photographs &amp; text &copy; Tim O'Brien</p>
+    <p style="margin-top:0.5rem; opacity:0.6;">Built with intention &nbsp;&middot;&nbsp; Lake Chautauqua, New York</p>
+  </footer>
+
+</body>
+</html>

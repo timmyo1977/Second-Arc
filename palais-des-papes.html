@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Palais des Papes — Dispatches from the Road</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(14px, 0.6vw + 12px, 19px);
+      line-height: 1.75;
+    }
+
+    /* MASTHEAD */
+    .masthead {
+      background: var(--warm-dark);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .masthead::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      width: 60%;
+      margin: 0.6rem auto 0;
+      opacity: 0.4;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .site-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: 1.4rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--parchment);
+      border-bottom: 2px solid var(--rule);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    @media (max-width: 700px) {
+      nav { display: none; }
+    }
+    nav a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      gap: 5rem;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1.2rem; }
+    }
+    .hero-photo-wrap { position: relative; }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -10px -10px 10px 10px;
+      border: 2px solid var(--gold);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .hero-photo-wrap img {
+      width: 100%;
+      display: block;
+      box-shadow: 6px 6px 32px rgba(0,0,0,0.25);
+      position: relative;
+    }
+    .caption-tag {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--stone);
+      margin-top: 0.9rem;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+    .hero-eyebrow {
+      font-size: 1.3rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      line-height: 1.2;
+      color: var(--warm-dark);
+      margin-bottom: 1.2rem;
+    }
+    .hero-headline em { font-style: italic; color: var(--sienna); }
+    .divider {
+      width: 64px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 1.4rem 0;
+    }
+    .hero-text p { font-size: 1.5rem; line-height: 1.7; color: #3a302a; margin-bottom: 1.1rem; }
+
+    /* HISTORY */
+    .history {
+      background: var(--parchment);
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+      padding: 5rem 2rem;
+    }
+    .history-inner { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      font-size: 1.3rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      text-align: center;
+      color: var(--warm-dark);
+      margin-bottom: 0.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--sienna); }
+    .center-rule { width: 80px; height: 1px; background: var(--gold); margin: 1rem auto 2.4rem; }
+
+    .history-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem 4rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 700px) { .history-grid { grid-template-columns: 1fr; } }
+    .history-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: var(--sienna);
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .history-block p { font-size: 1.4rem; color: #3d342c; line-height: 1.7; }
+
+    /* ESSAY */
+    .essay { max-width: 960px; margin: 0 auto; }
+    .essay p {
+      font-size: 1.5rem;
+      color: #3d342c;
+      margin-bottom: 1.3rem;
+      line-height: 1.75;
+      text-align: justify;
+    }
+    .essay p:first-child::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      float: left;
+      line-height: 0.78;
+      margin: 0.08em 0.1em 0 0;
+      color: var(--sienna);
+    }
+    .pull-quote {
+      border-left: 4px solid var(--gold);
+      margin: 2.5rem 0;
+      padding: 1rem 2rem;
+      background: rgba(184,150,62,0.06);
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.7rem;
+      color: var(--warm-dark);
+      text-align: left;
+      margin: 0;
+    }
+
+    /* TIMELINE */
+    .timeline {
+      max-width: 960px;
+      margin: 3rem auto 0;
+      border-left: 3px solid var(--gold);
+      padding-left: 2.5rem;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -3.1rem;
+      top: 0.55rem;
+      width: 14px;
+      height: 14px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+    .timeline-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      font-style: italic;
+      margin-bottom: 0.2rem;
+    }
+    .timeline-item h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: var(--sienna);
+      margin-bottom: 0.3rem;
+    }
+    .timeline-item p { font-size: 1.4rem; color: #3d342c; line-height: 1.7; }
+
+    /* FOOTER */
+    footer {
+      background: var(--warm-dark);
+      color: var(--rule);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+    }
+    footer span { color: var(--gold); }
+    footer a {
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="site-title">Dispatches from the Road</div>
+    <div class="site-subtitle">Notes from a life well traveled &nbsp;&middot;&nbsp; Tim O'Brien</div>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#story">The Palace</a>
+    <a href="#history">History</a>
+    <a href="#timeline">Timeline</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="story">
+    <div class="hero">
+      <div class="hero-photo-wrap">
+        <img src="images/palais-des-papes-img-01.jpg" alt="Inside the Palais des Papes, Avignon, France" />
+        <p class="caption-tag">Palais des Papes &nbsp;&middot;&nbsp; Avignon, Provence, France</p>
+      </div>
+      <div class="hero-text">
+        <p class="hero-eyebrow">France &nbsp;&middot;&nbsp; Avignon &nbsp;&middot;&nbsp; Palais des Papes</p>
+        <h1 class="hero-headline">Inside the <em>Palace of Popes</em></h1>
+        <div class="divider"></div>
+        <p>Standing inside the Palais des Papes, one hand resting on the ancient oak door, the Gothic tracery of the rose window behind casting its geometry against the pale stone — this is what it feels like to be inside the largest and most important Gothic palace ever built.</p>
+        <p>For nearly seventy years in the 14th century, this was not merely a palace. It was the centre of the Christian world — the throne room of God's earthly representative, the seat from which seven popes governed kingdoms, launched crusades, excommunicated emperors, and shaped the course of Western civilisation.</p>
+        <p>The courtyard visible through the window behind is the Grand Courtyard, where today the Festival d'Avignon fills the summer nights with theatre. Seven hundred years ago, it echoed with the footsteps of cardinals and kings.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="history" id="history">
+    <div class="history-inner">
+      <p class="section-label">Chronicle &amp; Context</p>
+      <h2 class="section-title">The <em>Palais des Papes</em></h2>
+      <div class="center-rule"></div>
+
+      <div class="history-grid">
+        <div class="history-block">
+          <h3>Why Avignon?</h3>
+          <p>In 1305, the newly elected Pope Clement V — a Frenchman — found Rome ungovernable, torn apart by feuding noble families. He never made it to the city. Instead, after a peripatetic papacy moving between French towns, his successor John XXII settled permanently in Avignon in 1316. The city belonged to the papacy's vassal, the Kingdom of Naples, making it technically independent of France — a political convenience that suited everyone.</p>
+        </div>
+        <div class="history-block">
+          <h3>Building the Palace</h3>
+          <p>Construction began in earnest under Pope Benedict XII from 1334, who demolished the old bishop's palace and raised in its place the Old Palace — austere, fortress-like, a monument to Cistercian severity. His successor Clement VI, a man of entirely different temperament, added the New Palace between 1342 and 1352: grander, more ornate, filled with frescoes by the Sienese painter Matteo Giovannetti, and befitting a pope who famously declared that "a pontiff must give generously."</p>
+        </div>
+        <div class="history-block">
+          <h3>Scale &amp; Power</h3>
+          <p>The completed palace covers some 15,000 square metres across two main structures. Its walls reach 50 metres in height; its towers are visible for miles across the Rh&ocirc;ne valley. At its height it housed not just the pope but an entire bureaucratic city: the papal chancery, the treasury, the law courts, stables, kitchens capable of feeding thousands, and the private apartments of the most powerful man in Christendom.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Schism</h3>
+          <p>When Pope Gregory XI returned the papacy to Rome in 1377, the relief in Rome was immense — but the peace did not last. On his death in 1378 the cardinals, pressured by a Roman mob, elected an Italian pope. Then, reconvening in safety, they declared the election void and elected a French pope, who returned to Avignon. For nearly forty years, Christendom had two — and briefly three — simultaneous popes, each excommunicating the other's followers. This Great Schism fractured the Church and planted seeds of doubt that would eventually flower into the Reformation.</p>
+        </div>
+        <div class="history-block">
+          <h3>Revolution &amp; Ruin</h3>
+          <p>After the Schism was resolved at the Council of Constance in 1417, the Avignon papacy faded. The palace became a residence for papal legates, then a prison, then — during the French Revolution — a barracks and a jail. Revolutionary soldiers stripped its frescoes, burned its furniture, and used its grand halls to stable horses. By the time the French state took it over in the 19th century, the interior was largely bare — a magnificent shell.</p>
+        </div>
+        <div class="history-block">
+          <h3>UNESCO &amp; Today</h3>
+          <p>In 1995, the Palais des Papes and the historic centre of Avignon were inscribed as a UNESCO World Heritage Site. Today it is one of the most visited medieval monuments in Europe, receiving some 650,000 visitors a year. Ongoing restoration work continues to reveal fragments of the original frescoes beneath centuries of grime and whitewash. Each summer, the Grand Courtyard hosts the centrepiece performances of the Festival d'Avignon, founded in 1947 — one of the world's great theatre festivals.</p>
+        </div>
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="pull-quote">
+        <p>"The palace is not a ruin — it is a presence. Its emptied halls are not a loss but an invitation: to fill them, in the imagination, with the world that once moved through them."</p>
+      </div>
+
+      <!-- ESSAY -->
+      <div class="essay">
+        <p>The Gothic tracery visible through the archway in this photograph belongs to one of the palace's interior windows overlooking the Grand Courtyard — the Cour d'Honneur. That rose window pattern, with its interlocking trefoils and lancets, is characteristic of the Rayonnant Gothic style that spread outward from the Île-de-France in the 13th century, carried south by the architects and master masons who followed the papal court. To stand in its shadow is to stand inside one of the supreme achievements of medieval European construction.</p>
+        <p>What is remarkable about the Palais des Papes is not merely its size — though its size is staggering — but the speed of its construction. The bulk of the complex was raised in less than thirty years, between the 1330s and the 1360s. This required an organisation of labour, materials, and capital that had no precedent in medieval France outside of cathedral building, and in several respects surpassed it. Limestone was quarried from the hills above Avignon; timber came down the Rh&ocirc;ne from the forests of Burgundy; lead for the roofs was imported from England. The papal treasury, swollen by the revenues of the universal Church, could afford what no secular prince in Europe could match.</p>
+        <p>The oak doors visible in this photograph — dark, massive, iron-studded — are among the best-preserved original fittings remaining in the palace. Most of the furnishings were destroyed or removed over the centuries of neglect that followed the return of the papacy to Rome. But the doors endured, as doors often do: too heavy to move, too solid to burn, too large to ignore. They open, as doors in this part of the world have always opened, onto centuries of accumulated human story.</p>
+        <p>To travel is, in part, to place oneself inside other people's histories — to walk through the rooms where decisions were made that still reverberate. The Palais des Papes is one of those rare places where the scale of what happened here is still legible in the stones themselves: in the height of the towers, the thickness of the walls, the ambition of the windows. It asks you, simply by existing, to take seriously the world that made it.</p>
+      </div>
+
+      <!-- TIMELINE -->
+      <div id="timeline" style="margin-top: 4rem;">
+        <p class="section-label" style="text-align:left; margin-bottom: 1.5rem;">Key Dates</p>
+        <h3 style="font-family:'Playfair Display',serif; font-size:2rem; color:var(--warm-dark); margin-bottom:2rem;">A <em style="color:var(--sienna);">Timeline</em> of the Palace</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-year">1309</div>
+            <h4>The Papacy Arrives in Avignon</h4>
+            <p>Pope Clement V settles in Avignon, beginning the period known as the Avignon Papacy or, to its critics, the "Babylonian Captivity of the Church."</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">1316</div>
+            <h4>John XXII Makes It Permanent</h4>
+            <p>Pope John XXII establishes a permanent papal court in Avignon, renovating the bishop's palace and beginning the transformation of the city into the capital of Christendom.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">1334–1342</div>
+            <h4>Benedict XII Builds the Old Palace</h4>
+            <p>The austere Cistercian pope demolishes the earlier structures and raises the Palais Vieux — the Old Palace — a severe, fortress-like structure whose towers still define Avignon's skyline.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">1342–1352</div>
+            <h4>Clement VI Adds the New Palace</h4>
+            <p>The magnificent Palais Neuf is added by Clement VI, including the Grand Audience Hall and the papal apartments decorated with extraordinary frescoes by Matteo Giovannetti.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">1348</div>
+            <h4>The Black Death</h4>
+            <p>The plague kills roughly half of Avignon's population. Pope Clement VI, advised by his physician, sits between two large fires to purify the air — and survives, though tens of thousands in the city do not.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">1377</div>
+            <h4>The Return to Rome</h4>
+            <p>Pope Gregory XI — persuaded in part by the mystic Catherine of Siena — returns the papacy to Rome, ending 72 years of Avignon rule. He dies the following year, triggering the Great Schism.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">1378–1417</div>
+            <h4>The Great Schism</h4>
+            <p>Two — and briefly three — rival popes claim the throne of Saint Peter simultaneously. The Avignon line, known as the Antipopes, continue to hold the palace until 1403. The Schism ends at the Council of Constance.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">1791</div>
+            <h4>France Annexes Avignon</h4>
+            <p>During the Revolution, Avignon is formally incorporated into France. The palace becomes a prison and military barracks; its frescoes are defaced and its furnishings destroyed.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">1947</div>
+            <h4>The Festival Is Born</h4>
+            <p>Director Jean Vilar founds the Festival d'Avignon, staging performances in the Grand Courtyard of the Palais des Papes. It grows into one of the world's premier theatre festivals, transforming the palace's legacy.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">1995</div>
+            <h4>UNESCO World Heritage</h4>
+            <p>The Palais des Papes and Avignon's historic centre are inscribed on the UNESCO World Heritage List, recognising their outstanding universal value as monuments of medieval civilisation.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien &nbsp;&middot;&nbsp; All photographs &amp; text &copy; Tim O'Brien</p>
+    <p style="margin-top:0.5rem; opacity:0.6;">Built with intention &nbsp;&middot;&nbsp; Avignon, France</p>
+    <p style="margin-top:0.5rem; opacity:0.6; font-style:italic;">Written by me and Anthropic</p>
+    <p style="margin-top:0.75rem;">
+      <a href="index.html">&larr; Back to Home</a>
+    </p>
+  </footer>
+
+</body>
+</html>

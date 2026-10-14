@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Home screen icon (iOS & Android) -->
+  <link rel="apple-touch-icon" sizes="512x512" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Dispatches">
+  <meta name="theme-color" content="#3e2814">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispatches from the Road · Tim O'Brien</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #1a1410;
+    --warm-dark:  #2c2318;
+    --parchment:  #f5f0e8;
+    --cream:      #faf7f2;
+    --paper:      #f7f1e3;
+    --gold:       #b8963e;
+    --gold-light: #d4b06a;
+    --sienna:     #8b3a2a;
+    --sienna-deep:#6b2a1e;
+    --stone:      #9e9080;
+    --rule:       #c9b99a;
+    --body-text:  #3a302a;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    /* Subtle paper grain — keeps the cream from feeling flat */
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(184,150,62,0.04) 0, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(139,58,42,0.035) 0, transparent 50%);
+    background-attachment: fixed;
+  }
+  ::selection { background: rgba(184,150,62,0.35); color: var(--ink); }
+
+  /* ============================================================
+     EDITORIAL MASTHEAD — broadsheet inspired, not just a header
+  ============================================================ */
+  .masthead {
+    background: var(--warm-dark);
+    color: var(--cream);
+    padding: 1.6rem 2rem 1.4rem;
+    border-bottom: 4px double var(--gold);
+    position: relative;
+  }
+  .masthead-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto 0.8rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-style: italic;
+    opacity: 0.85;
+  }
+  .masthead-meta span:nth-child(2) {
+    flex: 1;
+    text-align: center;
+    font-style: normal;
+  }
+  .masthead-meta span:nth-child(3) { text-align: right; }
+  .site-title {
+    font-family: 'Cinzel Decorative', 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6.4vw, 4.6rem);
+    color: var(--gold-light);
+    text-align: center;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  }
+  .site-subtitle {
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--rule);
+    font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+    letter-spacing: 0.18em;
+    margin-top: 0.55rem;
+    text-transform: lowercase;
+  }
+  .masthead-rule {
+    max-width: 1280px;
+    margin: 1rem auto 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-light) 20%, var(--gold-light) 80%, transparent);
+    opacity: 0.4;
+  }
+
+  /* ============================================================
+     NAVIGATION — works on mobile, sticks subtly
+  ============================================================ */
+  nav.primary {
+    background: var(--parchment);
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 4px 14px rgba(26,20,16,0.06);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.7rem 1.2rem;
+    gap: 2.4rem;
+  }
+  .nav-inner a {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--warm-dark);
+    text-decoration: none;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .nav-inner a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--rule);
+    color: var(--warm-dark);
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.45rem 1rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 720px) {
+    .nav-inner { flex-direction: column; gap: 0.4rem; padding: 0.7rem 1rem; }
+    .nav-toggle { display: block; align-self: center; margin-bottom: 0.2rem; }
+    .nav-links { display: none; flex-wrap: wrap; justify-content: center; gap: 1rem 1.6rem; padding-top: 0.4rem; border-top: 1px solid var(--rule); width: 100%; }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 0.82rem; }
+  }
+  @media (min-width: 721px) {
+    .nav-links { display: flex; gap: 2.4rem; }
+  }
+
+  /* ============================================================
+     LEAD — the front-page article
+  ============================================================ */
+  .lead {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4.5rem;
+    align-items: center;
+  }
+  @media (max-width: 880px) {
+    .lead { grid-template-columns: 1fr; gap: 2.4rem; padding: 2.4rem 1.2rem 2rem; }
+  }
+
+  .lead-photo {
+    position: relative;
+  }
+  .lead-photo .frame {
+    position: relative;
+    box-shadow:
+      0 1px 0 rgba(0,0,0,0.05),
+      14px 14px 0 0 var(--paper),
+      14px 14px 0 1px var(--rule),
+      14px 14px 36px rgba(0,0,0,0.18);
+  }
+  .lead-photo img {
+    display: block;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  .lead-photo .corner {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--gold);
+    pointer-events: none;
+  }
+  .lead-photo .corner.tl { top: -8px; left: -8px; border-right: none; border-bottom: none; }
+  .lead-photo .corner.tr { top: -8px; right: -8px; border-left: none; border-bottom: none; }
+  .lead-photo .corner.bl { bottom: -8px; left: -8px; border-right: none; border-top: none; }
+  .lead-photo .corner.br { bottom: -8px; right: -8px; border-left: none; border-top: none; }
+  .lead-photo .caption {
+    margin-top: 1.4rem;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--stone);
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+
+  .lead-text { padding-right: 0.5rem; }
+  .kicker {
+    display: inline-block;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1.4rem;
+  }
+  .headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+    line-height: 1.05;
+    color: var(--warm-dark);
+    margin-bottom: 1rem;
+    letter-spacing: -0.005em;
+  }
+  .headline em { font-style: italic; color: var(--sienna); font-weight: 400; }
+  .standfirst {
+    font-family: 'Cormorant Garamond', 'EB Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.2rem, 1.6vw, 1.45rem);
+    line-height: 1.5;
+    color: var(--body-text);
+    margin-bottom: 1.6rem;
+    max-width: 38ch;
+  }
+  .byline {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 0.6rem;
+  }
+  .byline strong { color: var(--warm-dark); font-weight: 500; }
+  .lead-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 1.4rem 0;
+  }
+  .lead-text p.dek {
+    color: var(--body-text);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+  .lead-actions {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 1.8rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid var(--warm-dark);
+    color: var(--warm-dark);
+    background: transparent;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .btn:hover { background: var(--warm-dark); color: var(--cream); transform: translateY(-1px); }
+  .btn.primary { background: var(--sienna); color: var(--cream); border-color: var(--sienna); }
+  .btn.primary:hover { background: var(--sienna-deep); border-color: var(--sienna-deep); }
+  .btn-arrow { font-style: normal; }
+
+  /* ============================================================
+     SECTION SHARED
+  ============================================================ */
+  .section-wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+  @media (max-width: 720px) { .section-wrap { padding: 3.2rem 1.2rem; } }
+
+  .section-eyebrow {
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.9rem;
+  }
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+    text-align: center;
+    color: var(--warm-dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+  }
+  .section-heading em { font-style: italic; color: var(--sienna); font-weight: 400; }
+  .section-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.2rem auto 2.6rem;
+  }
+  .section-rule.with-ornament {
+    position: relative;
+    background: transparent;
+    height: 14px;
+    width: 200px;
+  }
+  .section-rule.with-ornament::before,
+  .section-rule.with-ornament::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    width: 70px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .section-rule.with-ornament::before { left: 0; }
+  .section-rule.with-ornament::after { right: 0; }
+  .section-rule.with-ornament .ornament {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    color: var(--sienna);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+  }
+
+  /* ============================================================
+     ESSAY — A LONG ROAD HOME
+  ============================================================ */
+  .essay-section {
+    background:
+      linear-gradient(180deg, var(--cream) 0%, var(--paper) 100%);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .essay-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+  @media (max-width: 720px) { .essay-inner { padding: 3rem 1.4rem; } }
+
+  .essay-chapter {
+    position: relative;
+    margin-bottom: 3.6rem;
+    padding-bottom: 3.6rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .essay-chapter:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+
+  .chapter-num {
+    display: block;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.36em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .essay-chapter h3 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+    color: var(--sienna);
+    margin-bottom: 1.4rem;
+    line-height: 1.15;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .essay-chapter h3 .seal {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .essay-chapter h3 a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .essay-chapter h3 a:hover { color: var(--gold); border-bottom-color: var(--sienna); }
+
+  .essay-chapter p {
+    font-size: 1.06rem;
+    line-height: 1.8;
+    color: var(--body-text);
+    margin-bottom: 1.1rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .essay-chapter p em { color: var(--sienna-deep); }
+
+  /* Drop cap on the very first paragraph */
+  .essay-chapter:first-of-type > p:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 4.2rem;
+    line-height: 0.86;
+    float: left;
+    color: var(--sienna);
+    margin: 0.06em 0.12em -0.05em 0;
+  }
+
+  /* Marginalia — sit alongside chapters on wide screens */
+  .marginalia {
+    position: absolute;
+    width: 150px;
+    top: 0.6rem;
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  .marginalia.left { right: calc(100% + 2.2rem); }
+  .marginalia.right { left: calc(100% + 2.2rem); }
+  .marginalia svg { width: 100%; height: auto; display: block; }
+  .marginalia .label {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--stone);
+    text-align: center;
+    margin-top: 0.5rem;
+    letter-spacing: 0.04em;
+  }
+  /* Need ~760 + 2*(150 + 2.2rem) = ~1124px, plus padding */
+  @media (max-width: 1180px) {
+    .marginalia { display: none; }
+  }
+
+  /* Pull quote between movements */
+  .pull-quote {
+    margin: 0 -1rem 0;
+    padding: 2.2rem 1.2rem 2.2rem 1.6rem;
+    border-left: 3px solid var(--gold);
+    background: rgba(184,150,62,0.05);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+    line-height: 1.4;
+    color: var(--warm-dark);
+  }
+  .pull-quote::before { content: '“'; font-size: 2em; line-height: 0; vertical-align: -0.4em; color: var(--gold); margin-right: 0.05em; }
+  .pull-quote::after { content: '”'; font-size: 2em; line-height: 0; vertical-align: -0.4em; color: var(--gold); margin-left: 0.05em; }
+
+  /* ============================================================
+     JOURNEY MAP — context piece
+  ============================================================ */
+  .map-section {
+    padding: 4rem 2rem 1rem;
+    background: var(--cream);
+    text-align: center;
+  }
+  .map-frame {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+  }
+  .map-frame::before {
+    content: '';
+    position: absolute;
+    inset: -10px -10px 10px 10px;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+  }
+  .map-frame:hover { transform: translateY(-3px); }
+  .map-frame img { display: block; width: 100%; height: auto; box-shadow: 0 18px 48px rgba(0,0,0,0.18); }
+  .map-caption {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--stone);
+    margin-top: 1.4rem;
+    letter-spacing: 0.04em;
+  }
+  .map-caption .hint {
+    display: block;
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 0.4rem;
+    opacity: 0.8;
+  }
+
+  /* ============================================================
+     JOURNEYS — TWO TIERS: FOUNDATIONS + DISPATCHES
+  ============================================================ */
+  .journeys-section {
+    background: var(--parchment);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .tier-label {
+    text-align: center;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--sienna);
+    margin: 1rem 0 0.4rem;
+  }
+  .tier-sub {
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--stone);
+    font-size: 0.95rem;
+    margin-bottom: 2.4rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* === Foundations: Tall doors, prominent === */
+  .foundations {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem 1.6rem;
+    margin: 0 auto 3.5rem;
+    max-width: 980px;
+  }
+  @media (max-width: 880px) { .foundations { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 460px) { .foundations { grid-template-columns: repeat(2, 1fr); gap: 1.4rem 1rem; } }
+
+  .door {
+    aspect-ratio: 5 / 8;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.2rem 1rem 1.4rem;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 50% 50% 4px 4px / 22% 22% 3% 3%;
+    background:
+      linear-gradient(180deg,
+        rgba(0,0,0,0.10) 0%,
+        rgba(0,0,0,0) 8%,
+        rgba(0,0,0,0) 92%,
+        rgba(0,0,0,0.14) 100%),
+      repeating-linear-gradient(90deg,
+        rgba(90,40,20,0.05) 0px,
+        rgba(90,40,20,0.05) 2px,
+        rgba(90,40,20,0) 2px,
+        rgba(90,40,20,0) 7px),
+      linear-gradient(145deg, #9a4530 0%, #7a2f20 45%, #6a281b 100%);
+    box-shadow:
+      0 0 0 5px var(--paper),
+      0 0 0 6px var(--rule),
+      inset 0 3px 14px rgba(0,0,0,0.35),
+      inset 0 -3px 10px rgba(0,0,0,0.25),
+      6px 8px 18px rgba(0,0,0,0.16);
+    transform-origin: left center;
+    transition: transform 0.45s cubic-bezier(.2,.7,.3,1), box-shadow 0.45s ease, filter 0.45s ease;
+  }
+  .door::before {
+    content: '';
+    position: absolute;
+    top: 11%; left: 14%; right: 14%; height: 34%;
+    border-radius: 50% 50% 4px 4px / 30% 30% 5% 5%;
+    border: 1px solid rgba(0,0,0,0.35);
+    box-shadow:
+      inset 0 2px 6px rgba(0,0,0,0.35),
+      inset 0 -1px 2px rgba(255,220,180,0.08),
+      0 1px 0 rgba(255,220,180,0.06);
+    pointer-events: none;
+  }
+  .door::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 14%; right: 14%; height: 28%;
+    border: 1px solid rgba(0,0,0,0.35);
+    box-shadow:
+      inset 0 2px 6px rgba(0,0,0,0.35),
+      inset 0 -1px 2px rgba(255,220,180,0.08),
+      0 1px 0 rgba(255,220,180,0.06);
+    pointer-events: none;
+  }
+  .door .knob {
+    position: absolute;
+    right: 10%; top: 62%;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--gold-light) 0%, var(--gold) 45%, #6e5520 100%);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.35), 0 2px 3px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,240,200,0.6);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .door .num {
+    position: absolute;
+    top: 4.5%; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.78rem;
+    color: var(--gold-light);
+    letter-spacing: 0.18em;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+    z-index: 2;
+  }
+  .door h4, .door p {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+  .door h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--cream);
+    margin-bottom: 0.2rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+  }
+  .door p {
+    font-size: 0.78rem;
+    color: var(--rule);
+    font-style: italic;
+    line-height: 1.35;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+  }
+  .door:hover {
+    transform: perspective(1200px) rotateY(-12deg) translateX(-2px);
+    box-shadow:
+      0 0 0 5px var(--paper),
+      0 0 0 6px var(--gold),
+      inset 0 3px 14px rgba(0,0,0,0.35),
+      inset 0 -3px 10px rgba(0,0,0,0.25),
+      16px 12px 28px rgba(0,0,0,0.24);
+    filter: brightness(1.05);
+  }
+  .door:hover .knob {
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.35),
+      0 0 10px rgba(212,176,106,0.6),
+      0 2px 3px rgba(0,0,0,0.4),
+      inset 0 1px 1px rgba(255,240,200,0.7);
+  }
+
+  /* Door inline seal/icon */
+  .door .icon {
+    width: 36px; height: 36px;
+    display: block;
+    margin: 0 auto 0.4rem;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+  }
+
+  /* === Dispatches: Index card grid, lighter weight === */
+  .dispatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .dispatch {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 1.4rem 1.4rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-height: 170px;
+  }
+  .dispatch::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 28px; height: 28px;
+    border-top: 1px solid var(--gold);
+    border-left: 1px solid var(--gold);
+    transition: width 0.25s ease, height 0.25s ease;
+  }
+  .dispatch:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold);
+    box-shadow: 0 14px 28px rgba(26,20,16,0.1);
+  }
+  .dispatch:hover::before { width: 100%; height: 100%; }
+  .dispatch .file {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.2rem;
+  }
+  .dispatch h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--warm-dark);
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+  }
+  .dispatch p {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--body-text);
+    line-height: 1.45;
+  }
+  .dispatch .read {
+    margin-top: auto;
+    padding-top: 0.8rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--sienna);
+  }
+  .dispatch .read::after {
+    content: ' →';
+    transition: margin-left 0.25s ease;
+    display: inline-block;
+  }
+  .dispatch:hover .read::after { margin-left: 0.3rem; }
+
+  /* Dispatch card with an inset photo */
+  .dispatch.with-photo { padding-top: 0; }
+  .dispatch.with-photo .thumb {
+    position: relative;
+    margin: 0 -1.4rem 1rem;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dispatch.with-photo .thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transition: transform 0.45s ease, filter 0.45s ease;
+    filter: saturate(0.92);
+  }
+  .dispatch.with-photo:hover .thumb img {
+    transform: scale(1.04);
+    filter: saturate(1);
+  }
+  .dispatch.with-photo .file { padding-top: 1.1rem; }
+
+  /* ============================================================
+     COLOPHON / FOOTER
+  ============================================================ */
+  footer.colophon {
+    background: var(--warm-dark);
+    color: var(--rule);
+    padding: 3.2rem 1.5rem 2.2rem;
+    text-align: center;
+    border-top: 4px double var(--gold);
+  }
+  .colophon-mark {
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--gold-light);
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+  .colophon p {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+  .colophon p span { color: var(--gold-light); }
+  .colophon .built {
+    margin-top: 1rem;
+    font-style: italic;
+    opacity: 0.65;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+  }
+  .colophon .smugmug {
+    margin-top: 1.6rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid rgba(212,176,106,0.18);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .colophon .smugmug a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    text-decoration: none;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+    opacity: 0.85;
+  }
+  .colophon .smugmug a + a {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .colophon .smugmug a + a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 14px;
+    background: rgba(212,176,106,0.3);
+  }
+  .colophon .smugmug a:hover {
+    color: var(--cream);
+    border-bottom-color: var(--gold-light);
+    opacity: 1;
+  }
+  .colophon .smugmug svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.4;
+  }
+
+  /* ============================================================
+     LIGHTBOX
+  ============================================================ */
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(26,20,16,0.93);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 2rem;
+    cursor: zoom-out;
+    animation: fadeIn 0.25s ease;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 95%;
+    max-height: 95vh;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    border: 1px solid var(--gold);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 1.2rem; right: 1.6rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 2.2rem;
+    color: var(--gold-light);
+    background: none; border: none; cursor: pointer;
+    line-height: 1;
+  }
+  .lightbox-close:hover { color: var(--cream); }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     MASTHEAD — like a literary broadsheet's nameplate
+============================================================ -->
+<header class="masthead">
+  <div class="masthead-meta">
+    <span>Vol. I · No. 1</span>
+    <span id="masthead-date">A Personal Edition</span>
+    <span>Chautauqua · Avignon · Bradford</span>
+  </div>
+  <h1 class="site-title">Dispatches from the Road</h1>
+  <p class="site-subtitle">notes from a life well traveled · Tim O'Brien</p>
+  <div class="masthead-rule"></div>
+</header>
+
+<!-- ============================================================
+     PRIMARY NAV
+============================================================ -->
+<nav class="primary" aria-label="Primary">
+  <div class="nav-inner">
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Sections ▾</button>
+    <div class="nav-links" id="nav-links">
+      <a href="#story">The Story</a>
+      <a href="#map">The Map</a>
+      <a href="#journeys">Journeys</a>
+      <a href="#colophon">Colophon</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     LEAD — front-page article
+============================================================ -->
+<section class="lead" id="story">
+  <div class="lead-photo">
+    <div class="frame">
+      <span class="corner tl"></span><span class="corner tr"></span>
+      <span class="corner bl"></span><span class="corner br"></span>
+      <img src="images/index-img-01.jpg" alt="Tim O'Brien standing before a red door, No. 22 Rue de la République, Avignon, France">
+    </div>
+    <p class="caption">No. 22, Rue de la République &nbsp;·&nbsp; Avignon, France</p>
+  </div>
+
+  <div class="lead-text">
+    <span class="kicker">From Bradford to Avignon · A Life</span>
+    <h1 class="headline">A Long Road <em>Home</em></h1>
+    <p class="standfirst">A first-generation college student from oil country becomes a surgeon, a husband, a father — and one day finds himself at a red door in the south of France with the long arc behind him.</p>
+    <p class="byline">By <strong>Timothy J. O'Brien, MD</strong> &nbsp;·&nbsp; Jamestown, NY</p>
+    <div class="lead-divider"></div>
+    <p class="dek">This is a portfolio of essays, photographs, and remembrances — the chapters of a life that began in a Pennsylvania oil town and led, eventually, to thirty years of cataract surgery in rural western New York. The doors below open to the places, people, and ideas that mattered along the way.</p>
+    <div class="lead-actions">
+      <a class="btn primary" href="#essay">Read the Essay <span class="btn-arrow">↓</span></a>
+      <a class="btn" href="#journeys">Browse the Journeys</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ESSAY — the long-form piece
+============================================================ -->
+<section class="essay-section" id="essay">
+  <div class="essay-inner">
+    <p class="section-eyebrow">A personal essay · in six chapters</p>
+    <h2 class="section-heading">A Long Road <em>Home</em></h2>
+    <div class="section-rule with-ornament"><span class="ornament">❦</span></div>
+
+    <article class="essay-chapter">
+      <aside class="marginalia left" aria-hidden="true">
+        <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-label="Oil derrick — Bradford, Pennsylvania">
+          <path d="M 5 130 Q 30 110 60 118 Q 90 124 115 108" fill="none" stroke="#9e9080" stroke-width="0.8" opacity="0.5"/>
+          <path d="M 5 138 Q 35 125 60 130 Q 90 134 115 122" fill="none" stroke="#9e9080" stroke-width="0.8" opacity="0.4"/>
+          <line x1="10" y1="140" x2="110" y2="140" stroke="#1a1410" stroke-width="1"/>
+          <line x1="40" y1="140" x2="55" y2="40" stroke="#1a1410" stroke-width="1.2"/>
+          <line x1="80" y1="140" x2="65" y2="40" stroke="#1a1410" stroke-width="1.2"/>
+          <line x1="42" y1="125" x2="78" y2="125" stroke="#1a1410" stroke-width="0.7"/>
+          <line x1="44" y1="110" x2="76" y2="110" stroke="#1a1410" stroke-width="0.7"/>
+          <line x1="46" y1="95" x2="74" y2="95" stroke="#1a1410" stroke-width="0.7"/>
+          <line x1="48" y1="80" x2="72" y2="80" stroke="#1a1410" stroke-width="0.7"/>
+          <line x1="50" y1="65" x2="70" y2="65" stroke="#1a1410" stroke-width="0.7"/>
+          <line x1="52" y1="50" x2="68" y2="50" stroke="#1a1410" stroke-width="0.7"/>
+          <line x1="42" y1="140" x2="78" y2="125" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <line x1="78" y1="140" x2="42" y2="125" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <line x1="44" y1="125" x2="76" y2="110" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <line x1="76" y1="125" x2="44" y2="110" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <line x1="46" y1="110" x2="74" y2="95" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <line x1="74" y1="110" x2="46" y2="95" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <line x1="48" y1="95" x2="72" y2="80" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <line x1="72" y1="95" x2="48" y2="80" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <line x1="50" y1="80" x2="70" y2="65" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <line x1="70" y1="80" x2="50" y2="65" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <line x1="52" y1="65" x2="68" y2="50" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <line x1="68" y1="65" x2="52" y2="50" stroke="#1a1410" stroke-width="0.5" opacity="0.7"/>
+          <rect x="55" y="35" width="10" height="6" fill="none" stroke="#1a1410" stroke-width="1"/>
+          <circle cx="60" cy="32" r="1.2" fill="#b8963e"/>
+        </svg>
+        <div class="label">Oil country</div>
+      </aside>
+      <span class="chapter-num">Chapter I</span>
+      <h3>Bradford</h3>
+      <p>I grew up in Bradford, Pennsylvania — a small oil-country town in the northwest corner of the state, the kind of place where a good living meant steady work and nobody in my family had been to college. That was simply the world as it was, and it did not feel like a lack. But somewhere in high school, sitting in a chemistry classroom, something clicked. The logic of it, the precision, the way the physical world followed rules you could actually learn — I was good at it, and I knew I was good at it, which is a feeling that tends to point you somewhere.</p>
+      <p>The somewhere it pointed me was through the door of a local pharmacy. I walked in, watched the pharmacist behind the counter — the clean white coat, the authority, the decent living he was clearly making — and thought: that. That is what I will do. It was not a calling in any grand sense. It was a young man from Bradford doing the sensible thing with the one talent he had clearly identified. I am not ashamed of that. Practicality is its own kind of wisdom when you are starting from nothing.</p>
+      <p>The teacher who first showed me what chemistry could be was Richard Ambrose. He had that rare gift — the ability to make a subject feel alive rather than assigned — and I carried something of his example with me long after I left his classroom. Some teachers mark you without knowing it. He was one of those.</p>
+    </article>
+
+    <article class="essay-chapter">
+      <aside class="marginalia right" aria-hidden="true">
+        <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-label="Mortar and pestle — pharmacy">
+          <line x1="38" y1="20" x2="68" y2="78" stroke="#1a1410" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="38" cy="20" r="5" fill="#faf7f2" stroke="#1a1410" stroke-width="1.5"/>
+          <path d="M 30 90 L 90 90 L 80 130 Q 60 138 40 130 Z" fill="#faf7f2" stroke="#1a1410" stroke-width="1.5"/>
+          <ellipse cx="60" cy="135" rx="22" ry="3" fill="none" stroke="#1a1410" stroke-width="1"/>
+          <text x="60" y="118" text-anchor="middle" font-family="Georgia,serif" font-size="14" font-style="italic" fill="#8b3a2a">Rx</text>
+        </svg>
+        <div class="label">Pharmacy</div>
+      </aside>
+      <span class="chapter-num">Chapter II</span>
+      <h3>
+        <a href="pitt-pharmacy.html">Pitt</a>
+        <svg class="seal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-label="University of Pittsburgh seal">
+          <circle cx="50" cy="50" r="48" fill="#003594" stroke="#FFB81C" stroke-width="4"/>
+          <text x="50" y="38" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="11" fill="#FFB81C" letter-spacing="1">UNIV. OF</text>
+          <text x="50" y="53" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="11" fill="#FFB81C" letter-spacing="1">PITTSBURGH</text>
+          <text x="50" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="#FFB81C" letter-spacing="1">EST. 1787</text>
+        </svg>
+      </h3>
+      <p>I went to the University of Pittsburgh for pharmacy, and I worked. I graduated at the top of my class and took a position at Children's Hospital of Pittsburgh — a serious institution, important work, the kind of job that by any reasonable measure I should have been proud to settle into. And I was proud of it. For a while.</p>
+      <p>But something began to nag at me, quietly at first and then louder. The decisions had already been made by the time the prescription reached my hands. The diagnosis, the treatment plan, the clinical judgment — all of it happened upstream, in rooms I was not in. I was executing, not deciding. And I realized, in that slow and uncomfortable way that real self-knowledge usually arrives, that what I wanted was to be in the room where the decisions were made. I wanted to look at a patient and figure out what was wrong and what to do about it. I wanted the full weight of it.</p>
+      <p>That recognition — that I had gone as far as pharmacy could take me and it was not far enough — was the first door. It was frightening to stand in front of it. I had a good job. I had a credential. Going back to nothing, starting over, competing for medical school against twenty-two-year-olds who had been pointed at medicine their whole lives — it was not obvious that this was a reasonable thing to do.</p>
+      <p>Years earlier, at the Bradford campus where I had started, my pre-pharmacy advisor had told me I was aiming too low. Thomas Gerteisen was his name — a chemistry professor, formally assigned to point me toward the pharmacy track, who looked at me across a desk one day and told me instead to apply to medical school. I had not taken the advice. I could not afford to. Coming from a family where no one had gone to college, medical school was not a door I could picture with any plan B behind it — pharmacy was a floor, a salary, a credential I could not fail back out of. So I had thanked him and kept my hand on the railing. But I had carried his words the way you carry a thing a serious person says to you in a serious voice, and now, standing in front of this second door with a credential finally in my pocket, I could hear him. He had seen it before I was able to afford to see it. When someone who has seen a lot of students looks at you and says <em>you should push further</em>, you carry it with you — through the years it takes to make his advice survivable, through the application, through the doubt.</p>
+    </article>
+
+    <aside class="pull-quote">
+      You stand in front of the door, arms crossed, and you decide whether you are the kind of person who knocks. I have always knocked.
+    </aside>
+
+    <article class="essay-chapter">
+      <aside class="marginalia left" aria-hidden="true">
+        <svg viewBox="0 0 140 160" xmlns="http://www.w3.org/2000/svg" aria-label="Anatomical eye — ophthalmology">
+          <path d="M 18 78 Q 70 38 122 78" fill="none" stroke="#1a1410" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M 18 78 Q 70 110 122 78" fill="none" stroke="#1a1410" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="70" cy="78" r="22" fill="none" stroke="#1a1410" stroke-width="1"/>
+          <circle cx="70" cy="78" r="22" fill="#8b3a2a" opacity="0.15"/>
+          <g stroke="#8b3a2a" stroke-width="0.5" opacity="0.6">
+            <line x1="70" y1="58" x2="70" y2="68"/>
+            <line x1="70" y1="88" x2="70" y2="98"/>
+            <line x1="50" y1="78" x2="60" y2="78"/>
+            <line x1="80" y1="78" x2="90" y2="78"/>
+          </g>
+          <circle cx="70" cy="78" r="7" fill="#1a1410"/>
+          <circle cx="67" cy="75" r="1.8" fill="#faf7f2"/>
+        </svg>
+        <div class="label">An ophthalmologist's eye</div>
+      </aside>
+      <span class="chapter-num">Chapter III</span>
+      <h3>
+        The Door Opens: Jefferson
+        <svg class="seal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 110" aria-label="Jefferson Medical College seal">
+          <circle cx="55" cy="55" r="52" fill="#14234B" stroke="#C8A84B" stroke-width="3"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#C8A84B" stroke-width="1.2"/>
+          <rect x="52" y="42" width="6" height="28" rx="2" fill="#C8A84B"/>
+          <ellipse cx="55" cy="36" rx="5" ry="7" fill="#E8874A"/>
+          <ellipse cx="55" cy="34" rx="3" ry="5" fill="#FFD166"/>
+          <ellipse cx="55" cy="32" rx="1.5" ry="3" fill="#fff"/>
+          <rect x="50" y="68" width="10" height="3" rx="1.5" fill="#C8A84B"/>
+          <path id="top-arc" d="M 17,55 A 38,38 0 0,1 93,55" fill="none"/>
+          <text font-family="Georgia,serif" font-size="6.8" fill="#C8A84B" letter-spacing="1.5">
+            <textPath href="#top-arc" startOffset="4%">JEFFERSON MEDICAL COLLEGE</textPath>
+          </text>
+          <path id="bot-arc" d="M 20,62 A 38,38 0 0,0 90,62" fill="none"/>
+          <text font-family="Georgia,serif" font-size="6.5" fill="#C8A84B" letter-spacing="1">
+            <textPath href="#bot-arc" startOffset="8%">PHILADELPHIA · EST. 1824</textPath>
+          </text>
+        </svg>
+      </h3>
+      <p>The letter from Jefferson Medical College in Philadelphia arrived, and everything changed at once — the way the best things in a life tend to change everything at once, not in tidy sequence.</p>
+      <p>I got married. Nancy was an operating room nurse at Children's Hospital of Philadelphia — skilled, steady, completely at home in the controlled intensity of a surgical suite — and it was her income that carried us through those early years of medical school while I was still becoming something. I have never forgotten that. There is a particular kind of partnership where one person holds the whole thing together while the other one reaches for something they cannot yet touch, and Nancy was that partner without complaint or condition. We moved to Philadelphia together and she went to work, and I walked into one of the oldest and most demanding medical schools in America with a pharmacy degree, a Bradford upbringing, and a wife who made it possible. Dr. Edward Jaeger, who had served as my medical school advisor, had seen something worth betting on. Nancy had already placed her bet.</p>
+      <p>Philadelphia was an education inside the education. The city's medical quarter — Jefferson, Pennsylvania Hospital, Wills Eye — was unlike anything I had encountered. Medicine practiced at that scale and density, with that history pressing against every wall, sharpened something in me. The clinical years especially: the rotations through internal medicine and surgery and the specialties, the patients who arrived with conditions I had only read about, the attending physicians who expected you to think on your feet. Bradford had not prepared me for it, and I would not trade a day of it.</p>
+      <p>Somewhere in those years, in the ophthalmology rotation, I found my answer. The eye is the one place in the body where you can look directly at living tissue — nerves, vessels, the retina — without surgery. It combined the precision I had always loved with a kind of intimacy that surgery in other fields rarely offered. And the possibility of restoring sight — of giving someone back the ability to see their grandchildren, to drive, to read — felt like the right way to spend a professional life. I was going to be an ophthalmologist.</p>
+    </article>
+
+    <article class="essay-chapter">
+      <aside class="marginalia right" aria-hidden="true">
+        <svg viewBox="0 0 140 160" xmlns="http://www.w3.org/2000/svg" aria-label="Envelope with wax seal — Match Day">
+          <rect x="20" y="50" width="100" height="62" fill="#faf7f2" stroke="#1a1410" stroke-width="1.4"/>
+          <path d="M 20 50 L 70 85 L 120 50" fill="none" stroke="#1a1410" stroke-width="1.4"/>
+          <line x1="20" y1="112" x2="64" y2="82" stroke="#1a1410" stroke-width="0.8" opacity="0.5"/>
+          <line x1="120" y1="112" x2="76" y2="82" stroke="#1a1410" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="70" cy="95" r="11" fill="#8b3a2a" stroke="#5a2418" stroke-width="0.8"/>
+          <text x="70" y="100" text-anchor="middle" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#faf7f2" font-style="italic">W</text>
+        </svg>
+        <div class="label">The envelope</div>
+      </aside>
+      <span class="chapter-num">Chapter IV</span>
+      <h3>
+        Match Day
+        <svg class="seal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-label="Wills Eye Hospital seal">
+          <circle cx="50" cy="50" r="48" fill="#fff8f0" stroke="#8b1a1a" stroke-width="3"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#8b1a1a" stroke-width="1"/>
+          <text x="50" y="30" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="#8b1a1a" letter-spacing="2">WILLS EYE</text>
+          <text x="50" y="41" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="#8b1a1a" letter-spacing="1">HOSPITAL</text>
+          <path d="M28 50 Q50 33 72 50 Q50 67 28 50Z" fill="none" stroke="#8b1a1a" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="4" fill="#8b1a1a"/>
+          <text x="50" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#8b1a1a" letter-spacing="1">EST. 1832</text>
+        </svg>
+      </h3>
+      <p>There is a day in every medical student's fourth year called Match Day, when you learn where you will do your residency. Wills Eye Hospital in Philadelphia — the oldest eye hospital in the Western Hemisphere, founded in 1832, one of the most competitive ophthalmology residencies in the country — was where I wanted to be.</p>
+      <p>I matched at Wills Eye. And on that same day — that same extraordinary day — Tim Jr. was born.</p>
+      <p>I have thought about that day many times since. A son and a residency at the finest eye hospital in the country, arriving together before I had time to catch my breath from either. It did not feel like coincidence. It felt like the universe deciding, on my behalf, that there was no more time for waiting. I was a father and I was going to Wills Eye and that was the shape my life was going to take, all at once, ready or not.</p>
+      <p>Wills Eye made me the physician I became. The rigor of it, the volume and variety of pathology, the attending surgeons who held you to a standard that left no room for imprecision — it was the final shaping. By the time I finished, I knew what I was doing and I knew who I wanted to serve.</p>
+    </article>
+
+    <article class="essay-chapter">
+      <aside class="marginalia left" aria-hidden="true">
+        <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-label="Snellen eye chart">
+          <rect x="22" y="18" width="76" height="120" fill="#faf7f2" stroke="#1a1410" stroke-width="1.2"/>
+          <text x="60" y="46" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="#1a1410">E</text>
+          <text x="48" y="68" text-anchor="middle" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#1a1410">F</text>
+          <text x="72" y="68" text-anchor="middle" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#1a1410">P</text>
+          <text x="42" y="86" text-anchor="middle" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#1a1410">T</text>
+          <text x="60" y="86" text-anchor="middle" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#1a1410">O</text>
+          <text x="78" y="86" text-anchor="middle" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#1a1410">Z</text>
+        </svg>
+        <div class="label">Restoring sight</div>
+      </aside>
+      <span class="chapter-num">Chapter V</span>
+      <h3>Home: Rural Ophthalmology</h3>
+      <p>We came home. Rural western New York, with an office in Bradford too — back to the town that made me, as it turned out. The distances are real out here, the specialists are few, and patients drive an hour each way for care that in a city they could find on the next block. I understood that world from the inside. I had grown up in it, which meant I also understood what it meant to the people sitting across from me when someone simply showed up and did the work.</p>
+      <p>Rural ophthalmology is not glamorous medicine. The resources are limited, the referral networks are thin, and you routinely handle cases that in an academic center would be parceled out among three different subspecialists. You figure it out, because the alternative is that your patient drives three hours to Buffalo or Rochester, which many of them simply will not do, which means they go without. The challenges that once felt like constraints I came to see as the point. Being the person who is there, who shows up, who does the work in a place that needs it — that is a complete professional life. I am grateful for every year of it.</p>
+      <p>And through all of it: family. Nancy, who built a life alongside mine with the same steadiness I tried to bring to the office. Four children who grew up watching their father leave early and come home late and understood, I hope, what it was all for.</p>
+      <p>Timothy Jr. came into the world on Match Day and has been keeping pace with milestones ever since — Allegheny College, then the University of Buffalo for graduate school. Kaitlin followed her own exacting path: Allegheny College and then Boston University School of Law, her J.D. earned with the same determination that runs in this family. Michael made his way to the University of Utah, and Anna Christine walked through the doors of the Newhouse School at Syracuse, one of the finest communications programs in the country. Four children, four doors, four lives assembling themselves in the way lives do when the people living them are paying attention. They did what I did: figured out what they were good at, found the door that fit, and knocked. I could not be more proud of any of them.</p>
+    </article>
+
+    <article class="essay-chapter">
+      <aside class="marginalia right" aria-hidden="true">
+        <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-label="Red door — Avignon">
+          <path d="M 30 140 L 30 60 Q 30 25 60 25 Q 90 25 90 60 L 90 140 Z" fill="#8b3a2a" stroke="#1a1410" stroke-width="1.5"/>
+          <rect x="38" y="55" width="20" height="30" fill="none" stroke="#5a2418" stroke-width="0.8"/>
+          <rect x="62" y="55" width="20" height="30" fill="none" stroke="#5a2418" stroke-width="0.8"/>
+          <rect x="38" y="92" width="20" height="38" fill="none" stroke="#5a2418" stroke-width="0.8"/>
+          <rect x="62" y="92" width="20" height="38" fill="none" stroke="#5a2418" stroke-width="0.8"/>
+          <circle cx="60" cy="75" r="5" fill="none" stroke="#b8963e" stroke-width="2"/>
+          <circle cx="78" cy="105" r="2" fill="#b8963e"/>
+          <text x="60" y="48" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#b8963e" font-weight="bold">22</text>
+        </svg>
+        <div class="label">No. 22, Avignon</div>
+      </aside>
+      <span class="chapter-num">Chapter VI</span>
+      <h3>The Red Door</h3>
+      <p>This photograph was taken in Avignon, in the south of France, on a trip that felt like the kind of reward a life earns after enough decades of early mornings. The door behind me is deep red, set into a limestone arch, numbered twenty-two. It is the door of a restaurant, in fact — the <em>Salle Climatisée</em> sign gives it away — but it does not look like a restaurant door. It looks like a door to somewhere significant. It looks like the kind of door you are not sure you should knock on.</p>
+      <p>That is what I want it to mean, standing here in front of it. Because that is what every door that mattered in my life looked like from the outside: significant, slightly forbidding, uncertain in what it promised. The pharmacy in Bradford. The application to Jefferson. The Match Day envelope. The decision to come home and practice in a place that needed a doctor more than it needed another specialist in a city full of them.</p>
+      <p>Nobody from Bradford had a map to any of those doors. I found them the way most people find the things that define them — by paying attention, by following what I was good at and what I cared about, by being lucky enough to have a teacher, a professor, an advisor, and a wife who believed the doors were worth opening.</p>
+      <p>I do not know what is behind the red door at No. 22. That, finally, is the whole point. You never do. You stand in front of it, arms crossed, and you decide whether you are the kind of person who knocks.</p>
+      <p>I have always knocked.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     JOURNEY MAP
+============================================================ -->
+<section class="map-section" id="map">
+  <p class="section-eyebrow">A cartography of the chapters</p>
+  <h2 class="section-heading">The <em>Map</em></h2>
+  <div class="section-rule"></div>
+  <div class="map-frame" tabindex="0" role="button" aria-label="Open journey map" onclick="openMap()">
+    <img src="images/index-img-02.jpg" alt="Hand-drawn map of Tim O'Brien's journey">
+  </div>
+  <p class="map-caption">From Bradford, Pennsylvania to the south of France <span class="hint">Click to enlarge</span></p>
+</section>
+
+<!-- ============================================================
+     JOURNEYS — TWO TIERS
+============================================================ -->
+<section class="journeys-section" id="journeys">
+  <div class="section-wrap">
+    <p class="section-eyebrow">Doors to open</p>
+    <h2 class="section-heading">The <em>Journeys</em></h2>
+    <div class="section-rule with-ornament"><span class="ornament">❦</span></div>
+
+    <p class="tier-label">Foundations</p>
+    <p class="tier-sub">The institutions and decades that shaped a working life</p>
+
+    <div class="foundations">
+      <a class="door" href="pitt-pharmacy.html">
+        <span class="knob" aria-hidden="true"></span>
+        <span class="num">I</span>
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-label="Pharmacy mortar and pestle">
+          <circle cx="50" cy="50" r="48" fill="none" stroke="#d4b06a" stroke-width="2"/>
+          <path d="M 28 58 Q 28 76 50 76 Q 72 76 72 58 Z" fill="none" stroke="#d4b06a" stroke-width="2" stroke-linejoin="round"/>
+          <ellipse cx="50" cy="58" rx="22" ry="3.5" fill="none" stroke="#d4b06a" stroke-width="2"/>
+          <line x1="62" y1="22" x2="46" y2="60" stroke="#d4b06a" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="63" cy="20" r="3.2" fill="#d4b06a"/>
+          <text x="34" y="32" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#d4b06a" font-style="italic">R</text>
+          <line x1="38" y1="30" x2="44" y2="38" stroke="#d4b06a" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h4>Pitt Pharmacy</h4>
+        <p>The foundation that made medicine possible.</p>
+      </a>
+
+      <a class="door" href="jefferson.html">
+        <span class="knob" aria-hidden="true"></span>
+        <span class="num">II</span>
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 110" aria-label="Jefferson Medical College">
+          <circle cx="55" cy="55" r="52" fill="#14234B" stroke="#d4b06a" stroke-width="2"/>
+          <rect x="52" y="42" width="6" height="28" rx="2" fill="#d4b06a"/>
+          <ellipse cx="55" cy="36" rx="5" ry="7" fill="#E8874A"/>
+          <ellipse cx="55" cy="34" rx="3" ry="5" fill="#FFD166"/>
+        </svg>
+        <h4>Jefferson</h4>
+        <p>Four years in Philadelphia, learning to heal.</p>
+      </a>
+
+      <a class="door" href="wills-eye.html">
+        <span class="knob" aria-hidden="true"></span>
+        <span class="num">III</span>
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-label="Wills Eye Hospital">
+          <circle cx="50" cy="50" r="48" fill="none" stroke="#d4b06a" stroke-width="2"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#d4b06a" stroke-width="0.8"/>
+          <path d="M30 50 Q50 35 70 50 Q50 65 30 50Z" fill="none" stroke="#d4b06a" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="4" fill="#d4b06a"/>
+        </svg>
+        <h4>Wills Eye</h4>
+        <p>The residency that made the surgeon.</p>
+      </a>
+
+      <a class="door" href="cataract-surgery.html">
+        <span class="knob" aria-hidden="true"></span>
+        <span class="num">IV</span>
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-label="Cataract surgery">
+          <ellipse cx="50" cy="50" rx="38" ry="22" fill="none" stroke="#d4b06a" stroke-width="2"/>
+          <circle cx="50" cy="50" r="14" fill="none" stroke="#d4b06a" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="6" fill="#d4b06a"/>
+          <circle cx="47" cy="47" r="1.6" fill="#1a1410"/>
+        </svg>
+        <h4>Cataract Surgery</h4>
+        <p>Thirty years of restoring sight.</p>
+      </a>
+    </div>
+
+    <p class="tier-label">Dispatches</p>
+    <p class="tier-sub">Travels, places, people — the chapters between the chapters</p>
+
+    <div class="dispatches">
+      <a class="dispatch with-photo" href="two-wheels.html">
+        <span class="thumb">
+          <img src="images/index-img-07.jpg" alt="Tim with his Specialized road bike beneath a blossoming crabapple tree, ready to ride in his Upstate Cycles kit">
+        </span>
+        <span class="file">No. 01</span>
+        <h4>Two Wheels</h4>
+        <p>A life on the bike — essays, rides, and the machine itself.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch with-photo" href="empire-state-ride.html">
+        <span class="thumb">
+          <img src="images/index-img-09.jpg" alt="Tim and his Empire State Ride teammates in a fist-bump circle beneath the trees, jerseys on, ready to ride to end cancer">
+        </span>
+        <span class="file">No. 02</span>
+        <h4>Empire State Ride</h4>
+        <p>Cycling across New York State to end cancer.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch with-photo" href="pierce-stocking.html">
+        <span class="thumb">
+          <img src="images/index-img-08.jpg" alt="Tim and Nancy atop the dunes at Sleeping Bear, Lake Michigan stretching to the horizon behind them">
+        </span>
+        <span class="file">No. 03</span>
+        <h4>Pierce Stocking Drive</h4>
+        <p>Cycling Sleeping Bear Dunes in the rain.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch with-photo" href="pine-valley.html">
+        <span class="thumb">
+          <img src="images/index-img-11.jpg" alt="Pine Valley — sandy waste area winding through the pines">
+        </span>
+        <span class="file">No. 04</span>
+        <h4>Pine Valley</h4>
+        <p>Trying to find the short grass at the world's greatest course.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch" href="palais-des-papes.html">
+        <span class="file">No. 05</span>
+        <h4>Palais des Papes</h4>
+        <p>Inside the greatest Gothic palace ever built.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch" href="london.html">
+        <span class="file">No. 06</span>
+        <h4>London</h4>
+        <p>A pink door in Belgravia, a striped bag from Peggy Porschen.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch" href="playa-del-carmen.html">
+        <span class="file">No. 07</span>
+        <h4>Playa del Carmen</h4>
+        <p>Footprints in the sand with Anna Christine.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch" href="turks-and-caicos.html">
+        <span class="file">No. 08</span>
+        <h4>Turks &amp; Caicos</h4>
+        <p>Father and son on the impossibly blue water of Grace Bay.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch with-photo" href="mission-meadows.html">
+        <span class="thumb">
+          <img src="images/index-img-13.jpg" alt="Mission Meadows — the door of Cabin 12 on the red camp building">
+        </span>
+        <span class="file">No. 09</span>
+        <h4>Mission Meadows</h4>
+        <p>A summer evening at Lake Chautauqua with Michael Patrick.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch with-photo" href="chedwell-overlook.html">
+        <span class="thumb">
+          <img src="images/index-img-10.jpg" alt="Chedwell Overlook — daylilies, Adirondack chairs, and the dock on Chautauqua Lake">
+        </span>
+        <span class="file">No. 10</span>
+        <h4>Chedwell Overlook</h4>
+        <p>The cottage on Chautauqua Lake — west-facing, hydrangeas, sunsets.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch with-photo" href="marriott-ranch.html">
+        <span class="thumb">
+          <img src="images/index-img-12.jpg" alt="Marriott Ranch — red barn and black fences against the Blue Ridge at dusk">
+        </span>
+        <span class="file">No. 11</span>
+        <h4>Marriott Ranch</h4>
+        <p>A summer evening in Hume, Virginia — Blue Ridge light.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch with-photo" href="bu-law.html">
+        <span class="thumb">
+          <img src="images/index-img-03.jpg" alt="Tim and Kaitlin — a sunlit afternoon at the cottage">
+        </span>
+        <span class="file">No. 12</span>
+        <h4>Kaitlin Elizabeth</h4>
+        <p>Kaitlin Elizabeth O'Brien earns her J.D.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch with-photo" href="timothy-jr.html">
+        <span class="thumb">
+          <img src="images/index-img-04.jpg" alt="Tim and Timothy Jr. — a day at the beach">
+        </span>
+        <span class="file">No. 13</span>
+        <h4>Timothy Jr.</h4>
+        <p>A son who came into the world on Match Day.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch with-photo" href="michael-patrick.html">
+        <span class="thumb">
+          <img src="images/index-img-05.jpg" alt="Tim and Michael Patrick — a summer evening at Lake Chautauqua">
+        </span>
+        <span class="file">No. 14</span>
+        <h4>Michael Patrick</h4>
+        <p>Trump Winery — a wedding day in Virginia.</p>
+        <span class="read">Open</span>
+      </a>
+      <a class="dispatch with-photo" href="anna-christine-today.html">
+        <span class="thumb">
+          <img src="images/index-img-06.jpg" alt="Tim and Anna Christine — a summer afternoon at the cottage">
+        </span>
+        <span class="file">No. 15</span>
+        <h4>Anna Christine</h4>
+        <p>Producer, daughter, traveler — the shape of a life in progress.</p>
+        <span class="read">Open</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COLOPHON / FOOTER
+============================================================ -->
+<footer class="colophon" id="colophon">
+  <div class="colophon-mark">❦ &nbsp; D · F · R &nbsp; ❦</div>
+  <p><span>Dispatches from the Road</span> &middot; Tim O'Brien</p>
+  <p>All photographs &amp; text © Timothy J. O'Brien, MD</p>
+  <p class="built">Set in Cinzel Decorative, Playfair Display, &amp; EB Garamond &middot; Written by me and Anthropic</p>
+  <div class="smugmug">
+    <a href="https://eyes1.smugmug.com/" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 8h3l1.5-2h9L18 8h3v11H3z" stroke-linejoin="round"/>
+        <circle cx="12" cy="13.5" r="3.5"/>
+      </svg>
+      <span>Photography</span>
+    </a>
+    <a href="https://www.strava.com/athletes/30561636" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 3 3 14h3.6L9 9.2 11.4 14H15z" stroke-linejoin="round"/>
+        <path d="M15 14l-2.2 4.2L10.6 14H8l4.8 7L18 14z" stroke-linejoin="round"/>
+      </svg>
+      <span>Strava</span>
+    </a>
+  </div>
+</footer>
+
+<!-- Lightbox for journey map -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-label="Map enlarged" aria-hidden="true">
+  <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close">×</button>
+  <img id="lightbox-img" src="" alt="Map — full size">
+</div>
+
+<script>
+  // Mobile nav toggle
+  (function () {
+    var btn = document.querySelector('.nav-toggle');
+    var links = document.getElementById('nav-links');
+    if (btn && links) {
+      btn.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      // Close mobile menu on link click
+      links.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          links.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  })();
+
+  // Date in masthead
+  (function () {
+    var el = document.getElementById('masthead-date');
+    if (!el) return;
+    var d = new Date();
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    el.textContent = months[d.getMonth()] + ' · ' + d.getFullYear();
+  })();
+
+  // Lightbox
+  function openMap() {
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightbox-img');
+    img.src = document.querySelector('.map-frame img').src;
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e) {
+    if (e) e.stopPropagation();
+    var lb = document.getElementById('lightbox');
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+  var mapFrame = document.querySelector('.map-frame');
+  if (mapFrame) {
+    mapFrame.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openMap();
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

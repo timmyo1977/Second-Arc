@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chedwell Overlook &middot; Dispatches from the Road</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(16px, 1.2vw + 12px, 27px);
+      line-height: 1.75;
+    }
+    .masthead {
+      background: var(--warm-dark);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .masthead::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      width: 60%;
+      margin: 0.6rem auto 0;
+      opacity: 0.4;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(3.2rem, 8vw, 5.6rem);
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .site-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: 2rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.12em;
+    }
+    nav {
+      background: var(--parchment);
+      border-bottom: 2px solid var(--rule);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    nav a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    .hero {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5.5vw, 4.6rem);
+      line-height: 1.15;
+      color: var(--warm-dark);
+      margin-bottom: 1.2rem;
+    }
+    .hero-headline em { font-style: italic; color: var(--sienna); }
+    .divider-centered {
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.8rem auto;
+    }
+    .hero-tagline {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.75rem;
+      color: #3a302a;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .history {
+      background: var(--parchment);
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+      padding: 5rem 2rem;
+    }
+    .history-inner { max-width: 860px; margin: 0 auto; }
+    .section-label {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.56rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.4rem, 6vw, 5.2rem);
+      text-align: center;
+      color: var(--warm-dark);
+      margin-bottom: 0.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--sienna); }
+    .center-rule { width: 80px; height: 1px; background: var(--gold); margin: 1rem auto 2.4rem; }
+
+    .history-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 3.5rem;
+    }
+    @media (max-width: 680px) { .history-grid { grid-template-columns: 1fr; } }
+    .history-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.3rem;
+      color: var(--sienna);
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .history-block p { font-size: 2rem; color: #3d342c; line-height: 1.8; }
+
+    .essay { max-width: 860px; margin: 3rem auto 0; }
+    .essay p { font-size: 2.1rem; color: #3d342c; margin-bottom: 1.3rem; line-height: 1.85; text-align: justify; }
+    .essay p:first-child::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 8.4rem;
+      float: left;
+      line-height: 0.78;
+      margin: 0.08em 0.1em 0 0;
+      color: var(--sienna);
+    }
+    .pull-quote {
+      border-left: 4px solid var(--gold);
+      margin: 2rem 0;
+      padding: 0.8rem 1.5rem;
+      background: rgba(184,150,62,0.06);
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2.5rem;
+      color: var(--warm-dark);
+      text-align: left;
+      margin: 0;
+    }
+
+    .essay-section {
+      background: var(--cream);
+      padding: 5rem 2rem;
+    }
+    .essay-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .essay-chapter {
+      margin-bottom: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .essay-chapter:last-child {
+      border-bottom: none;
+    }
+    .essay-chapter h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--sienna);
+      font-style: italic;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.02em;
+    }
+    .essay-chapter p {
+      margin-bottom: 1.3rem;
+      color: var(--ink);
+      font-size: 2.1rem;
+      line-height: 1.85;
+      text-align: justify;
+    }
+    .essay-chapter p:last-child { margin-bottom: 0; }
+
+    .essay-figure {
+      margin: 2.8rem auto 3rem;
+      max-width: 680px;
+      text-align: center;
+    }
+    .essay-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+      box-shadow:
+        0 1px 0 var(--rule),
+        0 18px 40px -12px rgba(44, 35, 24, 0.35),
+        0 4px 14px -4px rgba(44, 35, 24, 0.18);
+    }
+    .essay-figure figcaption {
+      margin-top: 1.2rem;
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.7rem;
+      letter-spacing: 0.04em;
+      color: var(--warm-dark);
+      opacity: 0.78;
+      line-height: 1.5;
+    }
+    .essay-figure figcaption::before {
+      content: "";
+      display: block;
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 0.9rem;
+      opacity: 0.7;
+    }
+    @media (max-width: 720px) {
+      .essay-figure { margin: 2rem auto 2.4rem; }
+      .essay-figure figcaption { font-size: 1.5rem; }
+    }
+
+    footer {
+      background: var(--warm-dark);
+      color: var(--rule);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.76rem;
+      letter-spacing: 0.08em;
+    }
+    footer span { color: var(--gold); }
+  
+    /* ===== Slideshow ===== */
+    .gallery {
+      background: var(--warm-dark);
+      padding: 0;
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+    }
+    .gallery-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 2rem 3rem;
+    }
+    .gallery-heading {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .gallery-heading .section-label { color: var(--gold-light); }
+    .gallery-heading h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      color: var(--cream);
+      font-weight: 400;
+    }
+    .gallery-heading h2 em { font-style: italic; color: var(--gold-light); }
+    .gallery-heading .center-rule { background: var(--gold-light); }
+
+    .slideshow {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      max-height: 78vh;
+      background: #0d0a08;
+      overflow: hidden;
+      border: 1px solid var(--gold);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 0 6px rgba(0,0,0,0.3);
+    }
+    .slideshow .slide {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      opacity: 0;
+      transition: opacity 1.4s ease-in-out;
+      pointer-events: none;
+    }
+    .slideshow .slide.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .slideshow .slide img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .slideshow .slide figcaption {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 3.5rem 2rem 1.5rem;
+      color: var(--cream);
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.7rem;
+      letter-spacing: 0.04em;
+      text-align: center;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, transparent 100%);
+    }
+
+    .slideshow-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(245, 240, 232, 0.55);
+      background: rgba(26, 20, 16, 0.35);
+      color: var(--cream);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      line-height: 1;
+    }
+    .slideshow-nav:hover {
+      background: rgba(139, 58, 42, 0.75);
+      border-color: var(--gold-light);
+      color: var(--gold-light);
+    }
+    .slideshow-nav.prev { left: 1.2rem; }
+    .slideshow-nav.next { right: 1.2rem; }
+
+    .slideshow-dots {
+      position: absolute;
+      left: 0; right: 0; top: 1.2rem;
+      z-index: 4;
+      display: flex;
+      justify-content: center;
+      gap: 0.55rem;
+    }
+    .slide-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: 1px solid rgba(245, 240, 232, 0.65);
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s, border-color 0.25s;
+    }
+    .slide-dot.is-active {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: scale(1.3);
+    }
+    .slide-dot:hover { border-color: var(--gold-light); }
+
+    @media (max-width: 640px) {
+      .slideshow-nav { width: 42px; height: 42px; font-size: 1.4rem; }
+      .slideshow-nav.prev { left: 0.6rem; }
+      .slideshow-nav.next { right: 0.6rem; }
+      .slideshow .slide figcaption { font-size: 1.3rem; padding: 2.5rem 1rem 1rem; }
+      .gallery-inner { padding: 3rem 1rem 2rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="site-title">Dispatches from the Road</div>
+    <div class="site-subtitle">A Traveller's Portfolio &nbsp;&middot;&nbsp; Tim O'Brien</div>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#journeys">Journeys</a>
+    <a href="index.html#history">History</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-eyebrow">Chautauqua Lake, Western New York &nbsp;&middot;&nbsp; Est. 2002</p>
+    <h1 class="hero-headline">Chedwell <em>Overlook</em></h1>
+    <div class="divider-centered"></div>
+    <p class="hero-tagline">A cottage on the water, twenty-three summers of friends around the picnic table, and a lake old enough to have watched glaciers retreat.</p>
+  </section>
+
+
+  <section class="gallery" aria-label="Photographs of Chedwell Overlook">
+    <div class="gallery-inner">
+      <div class="gallery-heading">
+        <p class="section-label">A Portfolio of Summers</p>
+        <h2>The <em>Cottage</em> &amp; the Lake</h2>
+        <div class="center-rule"></div>
+      </div>
+
+      <div class="slideshow" id="chedwellSlideshow" role="region" aria-roledescription="carousel" aria-label="Chedwell Overlook photographs">
+        <div class="slideshow-track">
+        <figure class="slide is-active" aria-hidden="false">
+          <img src="images/chedwell-overlook-img-01.jpg" alt="The cottage in summer, flanked by hydrangeas" loading="eager" />
+          <figcaption>The cottage in summer, flanked by hydrangeas</figcaption>
+        </figure>
+        <figure class="slide" aria-hidden="true">
+          <img src="images/chedwell-overlook-img-02.jpg" alt="Daylilies above the lawn, the dock and lake beyond" loading="lazy" />
+          <figcaption>Daylilies above the lawn, the dock and lake beyond</figcaption>
+        </figure>
+        <figure class="slide" aria-hidden="true">
+          <img src="images/chedwell-overlook-img-03.jpg" alt="Across the lake to the far shore" loading="lazy" />
+          <figcaption>Across the lake to the far shore</figcaption>
+        </figure>
+        <figure class="slide" aria-hidden="true">
+          <img src="images/chedwell-overlook-img-04.jpg" alt="Clouds mirrored on a still afternoon" loading="lazy" />
+          <figcaption>Clouds mirrored on a still afternoon</figcaption>
+        </figure>
+        <figure class="slide" aria-hidden="true">
+          <img src="images/chedwell-overlook-img-05.jpg" alt="The Miller Bell Tower at the Chautauqua Institution" loading="lazy" />
+          <figcaption>The Miller Bell Tower at the Chautauqua Institution</figcaption>
+        </figure>
+        <figure class="slide" aria-hidden="true">
+          <img src="images/chedwell-overlook-img-06.jpg" alt="Under sail on the north basin" loading="lazy" />
+          <figcaption>Under sail on the north basin</figcaption>
+        </figure>
+        <figure class="slide" aria-hidden="true">
+          <img src="images/chedwell-overlook-img-07.jpg" alt="The dock at golden hour, the flag at rest" loading="lazy" />
+          <figcaption>The dock at golden hour, the flag at rest</figcaption>
+        </figure>
+        <figure class="slide" aria-hidden="true">
+          <img src="images/chedwell-overlook-img-08.jpg" alt="Evening drawing down over the water" loading="lazy" />
+          <figcaption>Evening drawing down over the water</figcaption>
+        </figure>
+        <figure class="slide" aria-hidden="true">
+          <img src="images/chedwell-overlook-img-09.jpg" alt="The lake at last light" loading="lazy" />
+          <figcaption>The lake at last light</figcaption>
+        </figure>
+        </div>
+
+        <div class="slideshow-dots" role="tablist">
+        <button class="slide-dot is-active" data-index="0" aria-label="Go to slide 1"></button>
+        <button class="slide-dot" data-index="1" aria-label="Go to slide 2"></button>
+        <button class="slide-dot" data-index="2" aria-label="Go to slide 3"></button>
+        <button class="slide-dot" data-index="3" aria-label="Go to slide 4"></button>
+        <button class="slide-dot" data-index="4" aria-label="Go to slide 5"></button>
+        <button class="slide-dot" data-index="5" aria-label="Go to slide 6"></button>
+        <button class="slide-dot" data-index="6" aria-label="Go to slide 7"></button>
+        <button class="slide-dot" data-index="7" aria-label="Go to slide 8"></button>
+        <button class="slide-dot" data-index="8" aria-label="Go to slide 9"></button>
+        </div>
+
+        <button class="slideshow-nav prev" aria-label="Previous photograph">&#10094;</button>
+        <button class="slideshow-nav next" aria-label="Next photograph">&#10095;</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="history" id="history">
+    <div class="history-inner">
+      <p class="section-label">Context &amp; Chronicle</p>
+      <h2 class="section-title">Chautauqua Lake &amp; <em>Its Deep Past</em></h2>
+      <div class="center-rule"></div>
+
+      <div class="history-grid">
+        <div class="history-block">
+          <h3>The Name</h3>
+          <p>The word <em>Chautauqua</em> comes from the now-extinct Erie language. Because the Erie were defeated in the Beaver Wars before a comprehensive study of their tongue could be made, its meaning remains speculative &mdash; the two folk translations are "bag tied in the middle" and "place where fish are taken out." The first is hard to argue with: from height, the lake's two basins are cinched together at a narrow waist between Bemus Point and Stow.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Keepers of the Western Door</h3>
+          <p>For generations before European settlement, this land belonged to the Senecas &mdash; the westernmost and most powerful nation of the Iroquois Confederacy, the Keepers of the Western Door. A well-worn portage path connected Lake Erie to the Chautauqua, linking the Great Lakes trade with the Allegheny and the Ohio river systems. The lake was a hinge in the geography of a continent.</p>
+        </div>
+        <div class="history-block">
+          <h3>C&eacute;loron's Expedition</h3>
+          <p>In 1749, the French officer Pierre-Joseph C&eacute;loron de Blainville traveled the portage on his grand expedition down the Ohio, burying lead plates to claim the valley for the King of France. The village at the southern end of the lake &mdash; where Lucille Ball would be born a century and a half later &mdash; still bears his name, worn down into English as Celoron.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Southward Drainage</h3>
+          <p>Unlike nearly every other significant body of water in the region, Chautauqua Lake does not drain north into the Great Lakes. It drains south &mdash; into the Chadakoin River at Jamestown, then into Cassadaga and Conewango Creeks, into the Allegheny, and finally into the Ohio at Pittsburgh. A kayak launched from our dock, if given world enough and time, would eventually pass New Orleans.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Institution</h3>
+          <p>At the northern end of the lake, the Chautauqua Institution was founded in 1874 as a summer school for Sunday-school teachers. It grew, quickly, into the namesake of the Chautauqua adult education movement &mdash; a nineteenth-century American phenomenon so influential that Theodore Roosevelt called it "the most American thing in America." It still convenes every summer on the same ground.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Ferry</h3>
+          <p>The Bemus Point&ndash;Stow ferry has crossed the narrows in one form or another since the 1850s, when it was a log raft pulled by cable to save settlers a twenty-mile trek around the lake. Upgraded and rebuilt across a hundred and seventy years, the nine-car cable ferry now runs summers only &mdash; less a utility than a living piece of the lake's memory.</p>
+        </div>
+      </div>
+
+      <div class="essay">
+        <div class="pull-quote">
+          <p>"From a lakefront cottage, the boat expands our world &mdash; to the entire world of the lake."</p>
+        </div>
+        <p>We moved into the cottage in the summer of 2002, when the children were still small enough to come running down the slope with towels trailing behind them like ship's pennants. We have spent every summer here since. A cottage is not a summer house in the formal sense. A cottage is an <em>outside house</em> &mdash; a place where the most important room is the deck, and the most important piece of furniture is the long picnic table on it, around which an enormous number of friends have sat, over an enormous number of barbecues, through an enormous number of long and slow and forgiving evenings.</p>
+        <p>Twenty-three summers in, we know the rhythm of the place. The Fourth of July is the high holy day, when fireworks rise in overlapping arcs all along the forty-one miles of shoreline &mdash; from Mayville at the northern tip, to Bemus Point and Maple Springs in the middle, to Lakewood and Celoron at the south &mdash; reflected and doubled on the lake's surface. From a cottage deck you see not one display but a dozen at once. The thunder rolls across the water long after the light has faded. For one evening the whole lake is a single, enormous, improvised theater, and every porch and dock is a seat.</p>
+        <p>But the Fourth is not my favorite. My favorite is a <em>quiet Monday.</em> The weekend boats have gone home, the water is mine, and there is no one in sight. The lake on a Monday morning is what the lake was before any of us arrived &mdash; before the steamers, before the cottages, before the Chautauqua Belle, before even the Erie and the Seneca, back to when a glacier retreated and left behind a long, narrow, doubled trough of water with a hinge in the middle. On a quiet Monday you can believe in that kind of time.</p>
+        <p>On Sunday mornings the water is flat enough to paddleboard. You step onto the board at our shoreline, push off, and the whole lake receives you silently. You are a small vertical mark on a long horizontal one. Later in the day we take off on the boat, and the world of the cottage &mdash; the deck, the slope, the view of our particular cove &mdash; becomes something larger. The cottage is a seat; the boat is the range. The lake stops being the backdrop and becomes the country.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-section">
+    <div class="essay-inner">
+      <p class="section-label">A Life on the Water</p>
+      <h2 class="section-title">The <em>Cottage</em>, in Full</h2>
+      <div class="center-rule"></div>
+
+      <div class="essay-chapter">
+        <h3>The Picnic Table</h3>
+        <p>The cottage has rooms, of course. There are beds and a kitchen and the usual accommodations of indoor life. But the house's real center of gravity is outside: the deck, and on the deck, the long picnic table. It is a table that has grown into its job. Over the years it has held every imaginable summer meal &mdash; burgers off the grill, corn husked on the spot, tomatoes still warm from whoever's garden they came from, birthday cakes with candles that the lake breeze was always threatening to blow out. It has held card games and jigsaw puzzles and, more than once, a game of Wingspan played late enough that we finally gave up and read the cards by lantern.</p>
+        <figure class="essay-figure">
+          <img src="images/chedwell-overlook-img-10.jpg" alt="Friends gathered around the picnic table on the cottage deck, hydrangeas in bloom behind them" loading="lazy" />
+          <figcaption>An evening at the table &mdash; hydrangeas in full bloom, the lake just out of frame</figcaption>
+        </figure>
+        <p>The friends who have sat around that table are the real chronicle of this place. Some have been with us since the first summer. Some are newer. Some came for one weekend and never forgot it. A cottage summer is generous that way. It does not ask much of its guests other than that they be willing to sit a while, take their shoes off, let the afternoon slow down, and stay for one more.</p>
+      </div>
+
+      <div class="essay-chapter">
+        <h3>The Calendar of a Summer</h3>
+        <p>Summers here move to a rhythm that repeats, and it is the repetition that makes it sacred rather than monotonous. The Fourth of July is the high holy day, the lake turned theater, the sky turned chandelier. But the Fourth is not my favorite. My favorite is a quiet Monday, when the weekend boats have gone home and the water is mine and there is no one in sight.</p>
+        <p>Sunday mornings are for the paddleboard. The water is flat, the sun is still working out what kind of day it wants to be, and for twenty minutes the lake belongs to whoever got up first. Then, later in the day, the boat. Leaving the cottage on the boat is the closest thing I know to walking through a door in your own house and finding a country behind it. Seventeen miles of shoreline, two basins, a cinched waist, a ferry crossing it the way ferries have crossed it since before the Civil War. The lake is not large by the measure of lakes, but from the helm of a boat in the middle of the north basin on a July afternoon, it is as large as any place you have ever been.</p>
+      </div>
+
+      <div class="essay-chapter">
+        <h3>What a Cottage Is For</h3>
+        <p>Twenty-three summers in, I have a clearer sense of what this place is than I did in 2002. The cottage is not a retreat from the world; it is a particular way of being inside of it. The lake reminds you, every morning, that you live in a landscape older than you, inside a history deeper than your own, among friends and family who arrive and leave and return. The Fourth of July reminds you that you are part of a much larger community, all of them pointing their faces at the same sky. The quiet Monday reminds you that the lake existed long before any of us, and will go on existing long after.</p>
+        <p>And the picnic table reminds you of the only thing a summer is actually for: to gather the people you love, and to sit with them, outside, for as long as the light will let you.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien &nbsp;&middot;&nbsp; All photographs &amp; text &copy; Tim O'Brien</p>
+    <p style="margin-top:0.5rem; opacity:0.6;">Chedwell Overlook &nbsp;&middot;&nbsp; Chautauqua Lake, Western New York</p>
+    <p style="margin-top:0.5rem; opacity:0.6; font-style:italic;">Written by me and Anthropic</p>
+  </footer>
+
+
+  <script>
+    (function() {
+      const root = document.getElementById('chedwellSlideshow');
+      if (!root) return;
+      const slides = root.querySelectorAll('.slide');
+      const dots = root.querySelectorAll('.slide-dot');
+      const prev = root.querySelector('.slideshow-nav.prev');
+      const next = root.querySelector('.slideshow-nav.next');
+      let current = 0;
+      let timer = null;
+      const INTERVAL = 6000;
+
+      function goTo(index) {
+        const n = slides.length;
+        const target = ((index % n) + n) % n;
+        if (target === current) return;
+        slides[current].classList.remove('is-active');
+        slides[current].setAttribute('aria-hidden', 'true');
+        dots[current].classList.remove('is-active');
+        current = target;
+        slides[current].classList.add('is-active');
+        slides[current].setAttribute('aria-hidden', 'false');
+        dots[current].classList.add('is-active');
+        restart();
+      }
+
+      function advance() { goTo(current + 1); }
+      function retreat() { goTo(current - 1); }
+
+      function restart() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(advance, INTERVAL);
+      }
+
+      next.addEventListener('click', advance);
+      prev.addEventListener('click', retreat);
+      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+      root.addEventListener('mouseenter', () => { if (timer) clearInterval(timer); });
+      root.addEventListener('mouseleave', restart);
+
+      // Keyboard support when slideshow is in view
+      document.addEventListener('keydown', (e) => {
+        const rect = root.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight && rect.bottom > 0;
+        if (!inView) return;
+        if (e.key === 'ArrowLeft') retreat();
+        if (e.key === 'ArrowRight') advance();
+      });
+
+      // Pause while tab is hidden
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { if (timer) clearInterval(timer); }
+        else { restart(); }
+      });
+
+      restart();
+    })();
+  </script>
+
+</body>
+</html>
