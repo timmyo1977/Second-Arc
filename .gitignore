@@ -1,0 +1,15 @@
+# Office / editor temp and lock files
+~$*
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+.~lock.*
+
+# macOS / Windows / OneDrive clutter
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+Icon?

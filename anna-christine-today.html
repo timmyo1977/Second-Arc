@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-xAcxQdszKd2yBhPJzlWM5S6q5mM9lqm7cgPuDP3Zxfk='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anna Christine Today &middot; Dispatches from the Road</title>
@@ -263,8 +265,7 @@
       <div class="hero-photo-wrap">
         <img class="hero-photo"
              src="images/anna-christine-today-img-01.jpg"
-             alt="Anna Christine, present day"
-             onerror="this.style.background='linear-gradient(135deg, var(--parchment), var(--rule))';this.alt='Photograph placeholder &mdash; replace with current portrait';" />
+             alt="Anna Christine, present day" data-fallback="portrait" />
         <p class="caption-tag">Portrait &nbsp;&middot;&nbsp; Present Day</p>
       </div>
       <div class="hero-text">
@@ -330,5 +331,14 @@
     <p style="margin-top:0.5rem; opacity:0.6;">Built with intention</p>
   </footer>
 
+<script>
+  document.querySelectorAll('img[data-fallback="portrait"]').forEach(function (img) {
+    function fb() {
+      img.style.background = 'linear-gradient(135deg, var(--parchment), var(--rule))';
+      img.alt = 'Photograph placeholder — replace with current portrait';
+    }
+    if (img.complete && img.naturalWidth === 0) fb(); else img.addEventListener('error', fb);
+  });
+</script>
 </body>
 </html>

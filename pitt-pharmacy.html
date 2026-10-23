@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ouSM7nq+a2zG+ZM7fF6gcwBHcjFD2djFvzpTnkY4uqM=' 'sha256-7AU5vMs9GJXSowblprPeLQZeN+u7sSSODIsstRCSBLg='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://upload.wikimedia.org; media-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pitt Pharmacy &middot; Dispatches from the Road</title>
@@ -621,7 +623,7 @@
       <div class="hero-crest-line">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Pittsburgh_Panthers_logo.svg/800px-Pittsburgh_Panthers_logo.svg.png"
              alt="University of Pittsburgh"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+             data-fallback="crest" />
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="display:none;">
           <circle cx="50" cy="50" r="48" fill="#003594" stroke="#FFB81C" stroke-width="4"/>
           <text x="50" y="38" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="11" fill="#FFB81C" letter-spacing="1">UNIV. OF</text>
@@ -836,5 +838,14 @@
     })();
   </script>
 
+<script>
+  document.querySelectorAll('img[data-fallback="crest"]').forEach(function (img) {
+    function fb() {
+      img.style.display = 'none';
+      if (img.nextElementSibling) img.nextElementSibling.style.display = 'block';
+    }
+    if (img.complete && img.naturalWidth === 0) fb(); else img.addEventListener('error', fb);
+  });
+</script>
 </body>
 </html>
