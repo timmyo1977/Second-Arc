@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marriott Ranch — Hume, Virginia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+      --green-dark: #2e3d2a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(16px, 1.2vw + 12px, 27px);
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       EDITORIAL MASTHEAD — broadsheet inspired, not just a header
+    ============================================================ */
+    .masthead {
+      background: var(--warm-dark);
+      color: var(--cream);
+      padding: 1.6rem 2rem 1.4rem;
+      border-bottom: 4px double var(--gold);
+      position: relative;
+    }
+    .masthead-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto 0.8rem;
+      font-family: 'EB Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-style: italic;
+      opacity: 0.85;
+    }
+    .masthead-meta span:nth-child(2) {
+      flex: 1;
+      text-align: center;
+      font-style: normal;
+    }
+    .masthead-meta span:nth-child(3) { text-align: right; }
+    .site-title {
+      font-family: 'Cinzel Decorative', 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(2.4rem, 6.4vw, 4.6rem);
+      color: var(--gold-light);
+      text-align: center;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+    }
+    .site-subtitle {
+      text-align: center;
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+      letter-spacing: 0.18em;
+      margin-top: 0.55rem;
+      text-transform: lowercase;
+    }
+    .masthead-rule {
+      max-width: 1280px;
+      margin: 1rem auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-light) 20%, var(--gold-light) 80%, transparent);
+      opacity: 0.4;
+    }
+
+    /* ============================================================
+       NAVIGATION — works on mobile, sticks subtly
+    ============================================================ */
+    nav.primary {
+      background: var(--parchment);
+      border-bottom: 1px solid var(--rule);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 4px 14px rgba(26,20,16,0.06);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.7rem 1.2rem;
+      gap: 2.4rem;
+    }
+    .nav-inner a {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .nav-inner a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--rule);
+      color: var(--warm-dark);
+      font-family: 'EB Garamond', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner { flex-direction: column; gap: 0.4rem; padding: 0.7rem 1rem; }
+      .nav-toggle { display: block; align-self: center; margin-bottom: 0.2rem; }
+      .nav-links { display: none; flex-wrap: wrap; justify-content: center; gap: 1rem 1.6rem; padding-top: 0.4rem; border-top: 1px solid var(--rule); width: 100%; }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 0.82rem; }
+    }
+    @media (min-width: 721px) {
+      .nav-links { display: flex; gap: 2.4rem; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.05) 0%,
+        rgba(0,0,0,0.08) 40%,
+        rgba(0,0,0,0.65) 80%,
+        rgba(0,0,0,0.82) 100%
+      );
+      z-index: 1;
+    }
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 4rem 4rem 5rem;
+      color: #f0ebe0;
+    }
+    @media (max-width: 800px) {
+      .hero-text { padding: 2.5rem 1.5rem 3.5rem; }
+    }
+    .caption-tag {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.7rem;
+      color: var(--stone);
+      margin-top: 0.9rem;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+    .hero-eyebrow {
+      font-size: 1.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 0.6rem;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      line-height: 1.1;
+      color: #f5f0e8;
+      margin-bottom: 1.4rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+    }
+    .hero-headline em { color: var(--gold-light); font-style: italic; }
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+    .hero-text p {
+      margin-bottom: 1.1rem;
+      color: #e8e0d0;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    }
+
+    /* ── GALLERY ── */
+    .gallery-section {
+      background: var(--parchment);
+      padding: 4rem 2rem 5rem;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .gallery-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 1.5rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--stone);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 4.5vw, 4rem);
+      color: var(--warm-dark);
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+    .section-title em { color: var(--sienna); font-style: italic; }
+    .center-rule {
+      width: 80px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 2.5rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    @media (max-width: 800px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      box-shadow: 4px 4px 20px rgba(0,0,0,0.18);
+    }
+    .gallery-item .caption-tag { margin-top: 0.6rem; }
+
+    /* ── HISTORY ── */
+    .history {
+      padding: 5rem 2rem 6rem;
+    }
+    .history-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .history-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem 4rem;
+      margin-bottom: 3.5rem;
+    }
+    @media (max-width: 800px) {
+      .history-grid { grid-template-columns: 1fr; }
+    }
+    .history-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--sienna);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .history-block p { color: #2a2018; }
+    .essay p {
+      margin-bottom: 1.3rem;
+      color: #2a2018;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .pull-quote {
+      border-left: 4px solid var(--gold);
+      padding: 1rem 2rem;
+      margin: 2.5rem auto;
+      max-width: 820px;
+      background: var(--parchment);
+    }
+    .pull-quote p {
+      font-style: italic;
+      font-size: 2.2rem;
+      line-height: 1.5;
+      color: var(--warm-dark);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--warm-dark);
+      color: var(--rule);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 1.6rem;
+      border-top: 3px solid var(--gold);
+      letter-spacing: 0.08em;
+    }
+    footer span { color: var(--gold-light); font-style: italic; }
+
+    /* ── SCROLL FADE ── */
+    .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="masthead-meta">
+      <span>Vol. I &middot; No. 1</span>
+      <span id="masthead-date">A Personal Edition</span>
+      <span>Chautauqua &middot; Avignon &middot; Bradford</span>
+    </div>
+    <h1 class="site-title">Dispatches from the Road</h1>
+    <p class="site-subtitle">notes from a life well traveled &middot; Tim O'Brien</p>
+    <div class="masthead-rule"></div>
+  </header>
+
+  <nav class="primary" aria-label="Primary">
+    <div class="nav-inner">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Sections &#9662;</button>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">&larr; Portfolio Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" style="background-image: url('images/marriott-ranch-img-01.jpg');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-text fade-in">
+      <p class="hero-eyebrow">Virginia &nbsp;&middot;&nbsp; Hume &nbsp;&middot;&nbsp; Fauquier County</p>
+      <h1 class="hero-headline">An Evening at <em>Marriott Ranch</em></h1>
+      <div class="divider"></div>
+      <p>There are places that earn their beauty honestly — not through architecture or artifice, but through the slow, patient layering of land and light and sky. Marriott Ranch in Hume, Virginia is one of those places. Standing on the stone path at dusk with the Blue Ridge fading into violet behind you and the last warmth of a summer evening in the air, the rest of the world feels very far away.</p>
+      <p>The ranch sits in the rolling piedmont of Fauquier County, cradled between the Bull Run Mountains to the east and the Blue Ridge proper to the west. The land here has been grazed and farmed for more than two centuries, and it carries that history lightly — in the set of a fence line, in the sway of old hardwoods, in the quiet confidence of a well-kept Georgian brick manor.</p>
+      <p>The photograph was taken in May 2024, when the fields were newly green and the sky was doing what Virginia evening skies do best: performing.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery-section">
+    <div class="gallery-inner">
+      <p class="section-label">In the Moment</p>
+      <h2 class="section-title">The <em>Other Doors</em></h2>
+      <div class="center-rule"></div>
+      <div class="gallery-grid">
+        <div class="gallery-item fade-in">
+          <img src="images/marriott-ranch-img-02.jpg" alt="Tim O'Brien in front of the red door at No. 22, Avignon" />
+          <p class="caption-tag">No. 22, Rue de la R&eacute;publique &nbsp;&middot;&nbsp; Avignon, France</p>
+        </div>
+        <div class="gallery-item fade-in">
+          <img src="images/marriott-ranch-img-03.jpg" alt="Tim O'Brien at the entrance to the Palais des Papes, Avignon" />
+          <p class="caption-tag">Palais des Papes &nbsp;&middot;&nbsp; Avignon, Provence</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="history" id="history">
+    <div class="history-inner">
+      <p class="section-label">Place &amp; Provenance</p>
+      <h2 class="section-title">Hume, Virginia &amp; <em>The Ranch's Story</em></h2>
+      <div class="center-rule"></div>
+      <div class="history-grid">
+        <div class="history-block fade-in">
+          <h3>Fauquier County Piedmont</h3>
+          <p>Fauquier County occupies the northern Virginia piedmont — that long transitional shelf between the coastal plain and the Blue Ridge. The county was established in 1759, named for Virginia's royal governor Francis Fauquier, and its fertile rolling terrain quickly made it one of the wealthiest agricultural counties in colonial America. Horse farming and grain production defined its character for generations, and both endure today.</p>
+        </div>
+        <div class="history-block fade-in">
+          <h3>The Marriott Connection</h3>
+          <p>The land that became Marriott Ranch was part of a working cattle operation assembled by the Marriott family — yes, that Marriott — beginning in the mid-twentieth century. J. Willard Marriott Sr., founder of the hotel empire, purchased the Virginia property as a personal retreat and working farm. The family operated it for decades before eventually opening it to guests, preserving the agricultural character that gives the property its authentic, unhurried atmosphere.</p>
+        </div>
+        <div class="history-block fade-in">
+          <h3>The Blue Ridge at Dusk</h3>
+          <p>The mountains in the background of this photograph are the northern Blue Ridge — part of the ancient Appalachian chain, among the oldest mountain ranges on earth. They were formed some 480 million years ago and have been worn by time into the gentle, rounded ridgelines that define the Virginia landscape. At dusk, when atmospheric haze deepens the gradation of blues, the effect is precisely what gave the range its name.</p>
+        </div>
+        <div class="history-block fade-in">
+          <h3>Virginia's Horse Country</h3>
+          <p>The land surrounding Hume is the heart of Virginia's hunt country — a landscape of post-and-board fencing, black barns, and carefully maintained paddocks that extends across Fauquier, Loudoun, and Clarke counties. The tradition of foxhunting was brought here by English settlers in the colonial era and has never entirely left. Today the piedmont is home to several of the oldest continuously operating fox hunts in the United States, and the landscape itself has been shaped — fenced, hedged, grazed — by that equestrian tradition.</p>
+        </div>
+        <div class="history-block fade-in">
+          <h3>The Manor House</h3>
+          <p>The brick Georgian manor visible at the right edge of the photograph is characteristic of the grand plantation-era architecture of northern Virginia. Built with locally fired brick and designed with the formal symmetry favored in the eighteenth and nineteenth centuries, these houses were meant to project permanence and prosperity across the open fields. Against a stormy May sky, that architectural confidence reads as something close to poetry.</p>
+        </div>
+        <div class="history-block fade-in">
+          <h3>Sky as Subject</h3>
+          <p>The light in this photograph — that particular quality of a clearing mid-Atlantic storm at sunset, with cumulus clouds backlit in orange and the foreground still washed in the cool green of an afternoon shower — is one of the defining visual experiences of the Virginia piedmont. Painters of the Hudson River School, working just a hundred miles north, spent careers trying to capture exactly this quality of American sky. Standing in the middle of it requires nothing but presence.</p>
+        </div>
+      </div>
+      <div class="essay">
+        <div class="pull-quote">
+          <p>"The Blue Ridge at dusk does not ask for your attention. It simply has it — whether you intend to give it or not."</p>
+        </div>
+        <p>There is a version of the American landscape that exists almost entirely in the mind — a pastoral ideal assembled from Currier &amp; Ives prints and Andrew Wyeth paintings and the half-remembered drive through countryside glimpsed from the backseat of a car in childhood. Marriott Ranch, on an evening in late May, is where that imagined landscape and the actual one converge.</p>
+        <p>The stone path that winds past the brick manor, the black board fencing dividing the green fields, the white farmhouse at the far treeline, the single tall pine standing sentinel at the edge of the drive — these are not picturesque accidents. They are the accumulated aesthetic decisions of two centuries of people who understood that land, properly kept, becomes its own argument for staying.</p>
+        <p>The ranch sits at roughly 600 feet of elevation on the piedmont shelf, which places it in a peculiar atmospheric zone — high enough to catch the weather rolling off the Blue Ridge, low enough to feel the warmth rising from the Rappahannock basin to the south. The result, on an evening like this one, is a sky of unusual drama: the kind of layered, performative cloudscape that makes you stop walking and simply stand still.</p>
+        <p>The Blue Ridge in the background appears in shades of receding grey-blue, each successive ridge slightly paler than the one before it — an atmospheric perspective effect that the Blue Ridge Parkway was designed, a century ago, to exploit. From this angle, in this light, those mountains look precisely as they have looked from this particular stretch of piedmont for as long as there have been human eyes to see them.</p>
+        <p>To stand in that landscape, in the long quiet of a Virginia evening, is to feel briefly that you have earned your place in it. Not by virtue of anything you have done, but simply by having arrived — and having had the sense to look up.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien &nbsp;&middot;&nbsp; All photographs &amp; text &copy; Tim O'Brien</p>
+    <p style="margin-top:0.5rem; opacity:0.6;">Built with intention &nbsp;&middot;&nbsp; Hume, Virginia</p>
+  </footer>
+
+  <script>
+    // Fade-in observer
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+    // Mobile nav toggle
+    (function () {
+      var btn = document.querySelector('.nav-toggle');
+      var links = document.getElementById('nav-links');
+      if (btn && links) {
+        btn.addEventListener('click', function () {
+          var open = links.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        links.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            links.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+
+    // Date in masthead
+    (function () {
+      var el = document.getElementById('masthead-date');
+      if (!el) return;
+      var d = new Date();
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      el.textContent = months[d.getMonth()] + ' \u00b7 ' + d.getFullYear();
+    })();
+  </script>
+
+</body>
+</html>

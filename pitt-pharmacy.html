@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pitt Pharmacy &middot; Dispatches from the Road</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+      --pitt-blue:  #003594;
+      --pitt-gold:  #FFB81C;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(16px, 1.2vw + 12px, 27px);
+      line-height: 1.75;
+    }
+    .masthead {
+      background: var(--warm-dark);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .masthead::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      width: 60%;
+      margin: 0.6rem auto 0;
+      opacity: 0.4;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(3.2rem, 8vw, 5.6rem);
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .site-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: 2rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.12em;
+    }
+    nav {
+      background: var(--parchment);
+      border-bottom: 2px solid var(--rule);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    nav a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+    .nav-links { display: inline; }
+
+    /* Mobile menu — hidden on desktop */
+    .nav-toggle { position: absolute; opacity: 0; pointer-events: none; }
+    .nav-toggle-label {
+      display: none;
+      cursor: pointer;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      padding: 0.3rem 1rem;
+      user-select: none;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .nav-toggle-label .bars {
+      display: inline-block;
+      width: 22px;
+      height: 16px;
+      position: relative;
+    }
+    .nav-toggle-label .bars::before,
+    .nav-toggle-label .bars::after,
+    .nav-toggle-label .bars span {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--warm-dark);
+      transition: transform 0.25s, opacity 0.2s, top 0.25s;
+    }
+    .nav-toggle-label .bars::before { top: 0; }
+    .nav-toggle-label .bars span    { top: 7px; }
+    .nav-toggle-label .bars::after  { top: 14px; }
+    .nav-toggle:checked ~ .nav-toggle-label .bars::before { top: 7px; transform: rotate(45deg); }
+    .nav-toggle:checked ~ .nav-toggle-label .bars span    { opacity: 0; }
+    .nav-toggle:checked ~ .nav-toggle-label .bars::after  { top: 7px; transform: rotate(-45deg); }
+
+    @media (max-width: 720px) {
+      nav {
+        padding: 0.5rem 1rem;
+        text-align: left;
+      }
+      .nav-toggle-label { display: inline-flex; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        padding: 0.4rem 0 0.6rem;
+        border-top: 1px solid var(--rule);
+        margin-top: 0.5rem;
+      }
+      .nav-toggle:checked ~ .nav-links { display: flex; }
+      .nav-links a {
+        display: block;
+        margin: 0;
+        padding: 0.7rem 0.5rem;
+        font-size: 1.6rem;
+        text-align: left;
+      }
+    }
+
+    .page-hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 2rem 3rem;
+      gap: 4.5rem;
+      align-items: center;
+    }
+    @media (max-width: 850px) {
+      .hero-split { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1.2rem 2rem; }
+    }
+    .hero-photo-frame { position: relative; }
+    .hero-photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -10px -10px 10px 10px;
+      border: 2px solid var(--gold);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .hero-photo-frame img {
+      width: 100%;
+      display: block;
+      box-shadow: 6px 6px 32px rgba(0,0,0,0.28);
+      position: relative;
+    }
+    .hero-caption {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.7rem;
+      color: var(--stone);
+      margin-top: 1rem;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+    .hero-text-block .hero-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.7rem;
+    }
+    .hero-text-block h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+      line-height: 1.15;
+      color: var(--warm-dark);
+      margin-bottom: 0.6rem;
+    }
+    .hero-text-block h1 em { font-style: italic; color: var(--sienna); }
+    .hero-divider {
+      width: 64px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 1.3rem 0 1.6rem;
+    }
+    .hero-text-block p.hero-dek {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.9rem;
+      line-height: 1.55;
+      color: #3a302a;
+      margin-bottom: 1.4rem;
+    }
+    .hero-crest-line {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--rule);
+    }
+    .hero-crest-line img,
+    .hero-crest-line svg {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+    }
+    .hero-crest-line .crest-caption {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--stone);
+      letter-spacing: 0.08em;
+    }
+
+    .page-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.4rem, 6vw, 5.6rem);
+      line-height: 1.15;
+      color: var(--warm-dark);
+      margin-bottom: 1rem;
+    }
+    .page-title em { font-style: italic; color: var(--sienna); }
+    .page-rule {
+      width: 80px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.4rem auto 2rem;
+    }
+    .page-dek {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.9rem;
+      color: #3a302a;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .pitt-crest-band {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem 1rem 3rem;
+    }
+    .pitt-crest {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+    }
+    .pitt-crest-caption {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--stone);
+      font-size: 1.6rem;
+      letter-spacing: 0.06em;
+    }
+
+    .essay-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem 2rem 5rem;
+    }
+    .essay-section-label {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .essay-chapter {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .essay-chapter:last-of-type {
+      border-bottom: none;
+    }
+    .essay-chapter h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--sienna);
+      font-style: italic;
+      margin-bottom: 1.4rem;
+      letter-spacing: 0.02em;
+    }
+    .essay-chapter p {
+      margin-bottom: 1.3rem;
+      color: var(--ink);
+    }
+    .essay-chapter p:last-child { margin-bottom: 0; }
+    .essay-chapter em { color: var(--sienna); }
+
+    .narration-card {
+      background: var(--parchment);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--gold);
+      padding: 1.8rem 2rem 1.6rem;
+      margin: 0 0 3.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .narration-eyebrow {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .narration-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2.2rem;
+      color: var(--sienna);
+      text-align: center;
+      margin-bottom: 0.3rem;
+    }
+    .narration-byline {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--stone);
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 1.2rem;
+    }
+    .narration-divider {
+      width: 50%;
+      height: 1px;
+      background: var(--rule);
+      margin: 0 auto 1.4rem;
+    }
+    .narration-player {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .narration-play-btn {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: var(--cream);
+      color: var(--sienna);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.1s;
+      padding: 0;
+    }
+    .narration-play-btn:hover {
+      background: var(--gold);
+      color: var(--cream);
+    }
+    .narration-play-btn:active { transform: scale(0.95); }
+    .narration-play-btn svg { width: 20px; height: 20px; }
+    .narration-controls {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      min-width: 0;
+    }
+    .narration-progress {
+      width: 100%;
+      height: 6px;
+      background: var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .narration-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, var(--gold), var(--gold-light));
+      border-radius: 3px;
+      transition: width 0.1s linear;
+    }
+    .narration-time {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--stone);
+      font-variant-numeric: tabular-nums;
+    }
+    .narration-speed {
+      flex-shrink: 0;
+      background: transparent;
+      border: 1px solid var(--rule);
+      color: var(--warm-dark);
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      padding: 0.3rem 0.6rem;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background 0.15s;
+    }
+    .narration-speed:hover { background: var(--cream); }
+    @media (max-width: 600px) {
+      .narration-card { padding: 1.4rem 1.2rem 1.2rem; }
+      .narration-title { font-size: 1.9rem; }
+      .narration-play-btn { width: 46px; height: 46px; }
+    }
+
+    .pull-quote {
+      border-left: 3px solid var(--gold);
+      padding: 1.2rem 1.8rem;
+      margin: 2.5rem 0;
+      background: var(--parchment);
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2rem;
+      line-height: 1.5;
+      color: var(--warm-dark);
+      margin: 0;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem 2rem;
+      background: var(--parchment);
+      padding: 2.5rem 2rem;
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+      margin: 3rem 0;
+    }
+    @media (max-width: 700px) {
+      .facts-grid { grid-template-columns: 1fr; }
+    }
+    .fact-item .fact-label {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .fact-item .fact-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--warm-dark);
+      line-height: 1.4;
+    }
+
+    .colleagues {
+      background: var(--parchment);
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+      padding: 3rem 2rem;
+      margin: 3rem 0;
+      text-align: center;
+    }
+    .colleagues .colleagues-label {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .colleagues h3 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2.6rem;
+      color: var(--warm-dark);
+      margin-bottom: 0.2rem;
+    }
+    .colleagues .colleagues-sub {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--stone);
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
+    }
+    .colleagues-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 2rem;
+    }
+    .roster {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem 2.5rem;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    @media (max-width: 600px) {
+      .roster { grid-template-columns: 1fr; gap: 0.7rem; }
+    }
+    .roster li {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--warm-dark);
+      letter-spacing: 0.02em;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid transparent;
+    }
+    .roster li::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-right: 0.9rem;
+      vertical-align: middle;
+      opacity: 0.7;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      margin-top: 2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-link:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    footer {
+      background: var(--warm-dark);
+      color: var(--rule);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+    footer span {
+      font-family: 'Cinzel Decorative', serif;
+      color: var(--gold-light);
+      letter-spacing: 0.12em;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="site-title">Dispatches from the Road</div>
+    <div class="site-subtitle">A Traveller's Portfolio &nbsp;&middot;&nbsp; Tim O'Brien</div>
+  </header>
+
+  <nav>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+    <label for="nav-toggle" class="nav-toggle-label" aria-label="Menu">
+      <span class="bars"><span></span></span>
+      <span>Menu</span>
+    </label>
+    <div class="nav-links">
+      <a href="index.html#story">The Story</a>
+      <a href="index.html#history">History</a>
+      <a href="index.html#journeys">Journeys</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero-split">
+    <div>
+      <div class="hero-photo-frame">
+        <img src="images/pitt-pharmacy-img-01.jpg" alt="Tim O'Brien as a student at the University of Pittsburgh, dorm room in Tower C" />
+      </div>
+      <p class="hero-caption">Tower C, Litchfield Towers &nbsp;&middot;&nbsp; Pharmacy School Formal, 1979</p>
+    </div>
+    <div class="hero-text-block">
+      <p class="hero-eyebrow">School of Pharmacy &nbsp;&middot;&nbsp; A Life in Full</p>
+      <h1>Pitt <em>Pharmacy</em></h1>
+      <div class="hero-divider"></div>
+      <p class="hero-dek">The first credential, the first city, and the first growing sense that I had not yet found the room where the real decisions were made.</p>
+      <div class="hero-crest-line">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Pittsburgh_Panthers_logo.svg/800px-Pittsburgh_Panthers_logo.svg.png"
+             alt="University of Pittsburgh"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="display:none;">
+          <circle cx="50" cy="50" r="48" fill="#003594" stroke="#FFB81C" stroke-width="4"/>
+          <text x="50" y="38" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="11" fill="#FFB81C" letter-spacing="1">UNIV. OF</text>
+          <text x="50" y="53" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="11" fill="#FFB81C" letter-spacing="1">PITTSBURGH</text>
+          <text x="50" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="#FFB81C" letter-spacing="1">EST. 1787</text>
+        </svg>
+        <span class="crest-caption">Hail to Pitt</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="essay-wrap">
+
+    <p class="essay-section-label">A Life in Full &nbsp;&middot;&nbsp; Chapter Two</p>
+
+    <div class="facts-grid">
+      <div class="fact-item">
+        <span class="fact-label">Institution</span>
+        <span class="fact-value">University of Pittsburgh<br/>School of Pharmacy</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Degree</span>
+        <span class="fact-value">Bachelor of Science in Pharmacy</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Distinction</span>
+        <span class="fact-value">Graduated at the top of class</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">First Post</span>
+        <span class="fact-value">Children's Hospital of Pittsburgh</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">The Mentor</span>
+        <span class="fact-value">Thomas Gerteisen<br/><em style="font-size:1.5rem; color:var(--stone);">Professor of Chemistry, Pitt-Bradford</em></span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">What Came Next</span>
+        <span class="fact-value">Jefferson Medical College</span>
+      </div>
+    </div>
+
+    <div class="narration-card">
+      <p class="narration-eyebrow">Author's Narration</p>
+      <h3 class="narration-title">Pitt Pharmacy</h3>
+      <p class="narration-byline">Read by Timothy J. O'Brien, MD</p>
+      <div class="narration-divider"></div>
+      <div class="narration-player">
+        <button class="narration-play-btn" id="narrPlay" aria-label="Play narration">
+          <svg id="narrIcon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="narration-controls">
+          <div class="narration-progress" id="narrProgress" role="slider" aria-label="Audio progress" tabindex="0">
+            <div class="narration-progress-fill" id="narrFill"></div>
+          </div>
+          <div class="narration-time">
+            <span id="narrCurrent">0:00</span>
+            <span id="narrDuration">0:00</span>
+          </div>
+        </div>
+        <button class="narration-speed" id="narrSpeed" aria-label="Playback speed">1×</button>
+      </div>
+      <audio id="narrAudio" preload="metadata" src="audio/pitt-pharmacy-audio-02.mp3"></audio>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>Arriving in Pittsburgh</h2>
+      <p>Pittsburgh in those years was a city still re-making itself. The mills had begun their long retreat. The universities and hospitals that would come to define the modern economy of the place — Pitt, Carnegie Mellon, UPMC, Children's — were rising into the space the steel had left behind. For a young man from Bradford, coming down out of the oil country and through the Allegheny hills, the city felt enormous. It was the first time I had lived anywhere that had a skyline.</p>
+      <p>The School of Pharmacy gave me, almost immediately, something I had not expected: the realization that I could hold my own. The coursework at Pitt was serious — pharmacology, medicinal chemistry, pharmaceutics, therapeutics — and I found that the chemistry instinct Richard Ambrose had first awakened in me back in Bradford was real. It carried me. I worked hard, because I had grown up in a family where working hard was simply what you did, but the material genuinely interested me, and that made everything easier.</p>
+      <p>I graduated at the top of my class. I say that plainly because it mattered. It was the first external confirmation — the first report card from a serious institution — that the kid from Bradford could actually do this.</p>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>Children's Hospital</h2>
+      <p>A position at Children's Hospital of Pittsburgh was, by any reasonable measure, a wonderful first job. The institution was — and remains — one of the leading pediatric hospitals in the country. The work mattered. The colleagues were excellent. The cases were complicated in the way pediatric cases always are: weight-based dosing, pharmacokinetics in tiny patients whose renal and hepatic systems were still developing, narrow margins of error. I learned a great deal, and quickly.</p>
+      <p>For a while, it was enough. More than enough. I was proud to put on the white coat and walk the halls of a place where the work of the day was, quite literally, saving children. That is not a sentence I write lightly, and it is not a year of my life I want to diminish by what came after.</p>
+
+      <p>A hospital pharmacy is a small, close world. You stand shoulder to shoulder through long shifts, you double-check each other on the doses that cannot be wrong, and you learn very quickly who is good at their job and who is good to work with — and how rare it is to find people who are both. I was fortunate to work alongside a group of colleagues at Children's who were, to a person, both. I have never forgotten them, and forty years on I still hear their voices in the back of my head when a hard decision lands on my desk.</p>
+
+      <div class="colleagues">
+        <p class="colleagues-label">In Gratitude</p>
+        <h3>The Pharmacy at Children's</h3>
+        <p class="colleagues-sub">Colleagues who shaped a young pharmacist</p>
+        <div class="colleagues-rule"></div>
+        <ul class="roster">
+          <li>Joey Mazzotta, RPh</li>
+          <li>Mickey Mazzotta, RPh</li>
+          <li>Ray Stolz, RPh</li>
+          <li>Becky Hursen, RPh</li>
+          <li>Lenora Ledford, RPh</li>
+          <li>Pat Sing</li>
+          <li>Howard Mitchell</li>
+          <li>Richard Ferguson</li>
+          <li>Jan Wunderlick, RPh</li>
+          <li>Paul Hoffman, RPh</li>
+          <li>Eva Sudol, RPh</li>
+          <li>Virginia Dunst, RPh</li>
+          <li>Ruth Lenhart, RPh</li>
+        </ul>
+      </div>
+
+      <div class="pull-quote">
+        <p>"The decisions had already been made by the time the prescription reached my hands."</p>
+      </div>
+
+      <p>But something began to nag. Quietly at first, and then louder. It was not dissatisfaction with the profession so much as a dawning recognition of my own position within it. I was executing, competently and carefully, on decisions that had been made in a room I was not in. The diagnosis, the differential, the treatment plan — all of that had already happened upstream. By the time the order reached the pharmacy, the clinical judgment of the day was already settled.</p>
+      <p>I wanted to be in that room.</p>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>Thomas Gerteisen</h2>
+      <p>He was supposed to be steering me into pharmacy. That was his job. Thomas Gerteisen — organic chemistry, PhD out of Tennessee — was my chemistry professor and my pre-pharmacy advisor at Pitt-Bradford, which meant the college had formally assigned him to keep me pointed down the track I was already on. The sensible track. The track the kid from Bradford had chosen because it was the one he could see.</p>
+      <p>He did not do his job. Or rather, he did a larger version of it than the title described. He watched me through organic chemistry — the course that, more than any other in the pre-professional curriculum, separates the students who are executing from the students who are thinking — and at some point he sat me down and told me, as plainly as he told me anything, that I should not be applying to pharmacy school. He said I should be applying to medical school. The advisor was telling his advisee to abandon the track he was advising him into.</p>
+      <p>I did not take the advice. And the reason I did not take it is the reason that matters most, because it was not stubbornness and it was not that I failed to hear him. I came from a family where no one had gone to college. Not my parents, not the aunts and uncles, not anyone I could point to at the Thanksgiving table and say <em>that is how it is done</em>. I was the first one through that door, and I had gotten through it by being practical and by keeping my feet on the ground. Pharmacy was a white coat and a salary and a guaranteed seat in a respected profession. It was a floor. Medical school, from where I was standing in 1972 or thereabouts, was a gamble — longer, more expensive, with no template in my family for how you survive it if it does not work out. There was no money behind me to absorb a failure. There was no plan B that did not involve going backward.</p>
+      <p>Dr. Gerteisen was, in a certain sense, asking me to take a risk that only makes sense to someone who already has capital — financial or familial or psychological — to fall back on. I did not have that. So I did the rational thing for my circumstances, which was to thank him and keep my hand on the railing, and I went to main Pitt, and I got the pharmacy degree, and I took the job at Children's Hospital of Pittsburgh. I bought myself a floor to stand on.</p>
+      <p>And once I was standing on it — once the credential was in my pocket and the fallback was secured and I could no longer fail back into the life I had come from — I found I was able to hear him. The decisions were being made in rooms I was not in. The weight I wanted was upstream of where I was standing. The credential I had earned was good, and the work was honest, but it was not the shape of what I was for. I arrived, by my own route and in my own time, at the door he had already pointed to.</p>
+      <p>That is the hardest kind of mentorship to give, and the hardest to accept. Someone seeing further ahead than you can see yourself, and telling you, and being willing to be wrong in your eyes so that he can be right in your life. He was right the day he said it. But for a kid from a family with no college behind him, being right was not enough — the advice had to also be affordable, and in those years it was not yet affordable for me to take. I needed the pharmacy degree to make medical school survivable. He saw the destination. I had to build the stepping stone he had not needed to build. By the time I was ready, the words were waiting for me where he had left them. I think of that often. I think of how few advisors would have risked giving that advice — advice that ran against their own departmental interest, against the student's stated wishes, against every easy version of the conversation — and how the advice turned out to be exactly right, and how he was willing to be patient with a student who could not yet afford his vision.</p>
+      <p>A chemistry teacher in Bradford pointed me toward a career. A chemistry professor in Bradford, years later, told me to aim past it. The same small place saw me twice, through two different men, at the two moments that mattered most. I do not think that is coincidence. I think it means something that the people who saw me most clearly were the people who taught me to pay attention to the physical world, and that they happened to be standing, both of them, in the hills of Western Pennsylvania when they did it.</p>
+      <p style="margin-top:1.8rem; padding:1.5rem 1.8rem; border-left:3px solid var(--gold); background:rgba(184,150,62,0.06); font-style:italic; color:var(--warm-dark);">Dr. Gerteisen died in January 2025, at home, with his family. He went on from Pitt-Bradford to a long career in the pharmaceutical industry and to a retirement in North Carolina that included, of all things, ballroom dancing. He left behind, by every account I have read, a very wide circle of people who considered him family. He was right about me, and he was right about me years before I could afford to hear him. I was one of the students who sat in his classroom and did not yet know what a gift that was. I know now.</p>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>The Decision to Leave</h2>
+      <p>Walking away from a good job in a serious institution, at the age when most people are settling into careers rather than restarting them, was not obvious. I had a credential. I had a salary. I had a trajectory that any reasonable advisor would have told me to protect. Going back to being a student — a pre-medical student, competing for a seat in a medical school class against twenty-two-year-olds who had been pointed at medicine their whole lives — was, from the outside, a strange thing to choose.</p>
+      <p>But I knew, with the kind of certainty that is hard to argue with once it arrives, that I would spend the rest of my working life wondering what was behind that door if I did not at least try to open it. Pharmacy had given me a foundation I would draw on for the rest of my career — an understanding of drug mechanisms and interactions that most physicians do not have — and it had given me the confidence that I could compete academically at a high level. But it had also shown me the shape of my own ambition, which was larger than the role the profession could give me.</p>
+      <p>So I applied. And Jefferson Medical College, in Philadelphia, said yes.</p>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>What Pitt Gave Me</h2>
+      <p>I have been, in the decades since, a physician and a surgeon. The pharmacy degree is not the credential on my office wall. But it is in everything I do. Every time I write a prescription, I write it with a pharmacist's eye — for interactions, for renal dose adjustments, for the particular dangers of polypharmacy in older patients, for the difference between what is on the formulary and what actually works. Every time I have stood across from a pharmacist in a hospital and had a clinical conversation, I have been able to meet that person on their own ground. That matters. Medicine done well is a team sport, and understanding the next player's position makes you a better one yourself.</p>
+      <p>Pitt also gave me the confidence. That is the harder thing to measure, but it was probably the more important gift. I arrived in Pittsburgh as a kid from Bradford who was not entirely sure he belonged in a serious university. I left as someone who had been told, by his grades and by his professors and by a good job offer from a world-class institution, that he did. That confidence was what I needed to stand in front of the next door — the one in Philadelphia — and knock.</p>
+      <p>Hail to Pitt.</p>
+    </div>
+
+    <a class="back-link" href="index.html#essay">&larr; Back to The Long Way Here</a>
+
+  </div>
+
+  <footer>
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien &nbsp;&middot;&nbsp; All photographs &amp; text &copy; Tim O'Brien</p>
+    <p style="margin-top:0.5rem; opacity:0.6;">Built with intention &nbsp;&middot;&nbsp; Avignon, France</p>
+    <p style="margin-top:0.5rem; opacity:0.6; font-style:italic;">Written by me and Anthropic</p>
+  </footer>
+
+  <script>
+    (function() {
+      var audio = document.getElementById('narrAudio');
+      var playBtn = document.getElementById('narrPlay');
+      var icon = document.getElementById('narrIcon');
+      var progress = document.getElementById('narrProgress');
+      var fill = document.getElementById('narrFill');
+      var curEl = document.getElementById('narrCurrent');
+      var durEl = document.getElementById('narrDuration');
+      var speedBtn = document.getElementById('narrSpeed');
+      if (!audio) return;
+
+      var playPath = '<path d="M8 5v14l11-7z"/>';
+      var pausePath = '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';
+
+      function fmt(t) {
+        if (!isFinite(t) || t < 0) t = 0;
+        var m = Math.floor(t / 60);
+        var s = Math.floor(t % 60);
+        return m + ':' + (s < 10 ? '0' : '') + s;
+      }
+
+      audio.addEventListener('loadedmetadata', function() {
+        durEl.textContent = fmt(audio.duration);
+      });
+
+      audio.addEventListener('timeupdate', function() {
+        var pct = (audio.currentTime / audio.duration) * 100;
+        fill.style.width = (isFinite(pct) ? pct : 0) + '%';
+        curEl.textContent = fmt(audio.currentTime);
+      });
+
+      audio.addEventListener('ended', function() {
+        icon.innerHTML = playPath;
+        playBtn.setAttribute('aria-label', 'Play narration');
+      });
+
+      playBtn.addEventListener('click', function() {
+        if (audio.paused) {
+          audio.play();
+          icon.innerHTML = pausePath;
+          playBtn.setAttribute('aria-label', 'Pause narration');
+        } else {
+          audio.pause();
+          icon.innerHTML = playPath;
+          playBtn.setAttribute('aria-label', 'Play narration');
+        }
+      });
+
+      progress.addEventListener('click', function(e) {
+        var rect = progress.getBoundingClientRect();
+        var pct = (e.clientX - rect.left) / rect.width;
+        if (isFinite(audio.duration)) {
+          audio.currentTime = pct * audio.duration;
+        }
+      });
+
+      var speeds = [1, 1.25, 1.5, 0.75];
+      var speedIdx = 0;
+      speedBtn.addEventListener('click', function() {
+        speedIdx = (speedIdx + 1) % speeds.length;
+        audio.playbackRate = speeds[speedIdx];
+        speedBtn.textContent = speeds[speedIdx] + '×';
+      });
+    })();
+  </script>
+
+</body>
+</html>

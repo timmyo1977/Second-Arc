@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wills Eye Hospital &middot; Dispatches from the Road</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+      --wills-blue: #1a3a5c;
+      --wills-gold: #c9a961;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(16px, 1.2vw + 12px, 27px);
+      line-height: 1.75;
+    }
+    .masthead {
+      background: var(--warm-dark);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .masthead::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      width: 60%;
+      margin: 0.6rem auto 0;
+      opacity: 0.4;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(3.2rem, 8vw, 5.6rem);
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .site-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: 2rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.12em;
+    }
+    nav {
+      background: var(--parchment);
+      border-bottom: 2px solid var(--rule);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    nav a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+    .nav-links { display: inline; }
+
+    /* Mobile menu — hidden on desktop */
+    .nav-toggle { position: absolute; opacity: 0; pointer-events: none; }
+    .nav-toggle-label {
+      display: none;
+      cursor: pointer;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      padding: 0.3rem 1rem;
+      user-select: none;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .nav-toggle-label .bars {
+      display: inline-block;
+      width: 22px;
+      height: 16px;
+      position: relative;
+    }
+    .nav-toggle-label .bars::before,
+    .nav-toggle-label .bars::after,
+    .nav-toggle-label .bars span {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--warm-dark);
+      transition: transform 0.25s, opacity 0.2s, top 0.25s;
+    }
+    .nav-toggle-label .bars::before { top: 0; }
+    .nav-toggle-label .bars span    { top: 7px; }
+    .nav-toggle-label .bars::after  { top: 14px; }
+    /* Animate to X when open */
+    .nav-toggle:checked ~ .nav-toggle-label .bars::before { top: 7px; transform: rotate(45deg); }
+    .nav-toggle:checked ~ .nav-toggle-label .bars span    { opacity: 0; }
+    .nav-toggle:checked ~ .nav-toggle-label .bars::after  { top: 7px; transform: rotate(-45deg); }
+
+    @media (max-width: 720px) {
+      nav {
+        padding: 0.5rem 1rem;
+        text-align: left;
+      }
+      .nav-toggle-label { display: inline-flex; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        padding: 0.4rem 0 0.6rem;
+        border-top: 1px solid var(--rule);
+        margin-top: 0.5rem;
+      }
+      .nav-toggle:checked ~ .nav-links { display: flex; }
+      .nav-links a {
+        display: block;
+        margin: 0;
+        padding: 0.7rem 0.5rem;
+        font-size: 1.6rem;
+        text-align: left;
+      }
+    }
+
+    .page-hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 4rem 2rem 3rem;
+      gap: 4.5rem;
+      align-items: center;
+    }
+    @media (max-width: 850px) {
+      .hero-split { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1.2rem 2rem; }
+    }
+    .hero-photo-frame { position: relative; }
+    .hero-photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -10px -10px 10px 10px;
+      border: 2px solid var(--gold);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .hero-photo-frame img {
+      width: 100%;
+      display: block;
+      box-shadow: 6px 6px 32px rgba(0,0,0,0.28);
+      position: relative;
+    }
+    .hero-caption {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.7rem;
+      color: var(--stone);
+      margin-top: 1rem;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+    .hero-text-block .hero-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.7rem;
+    }
+    .hero-text-block h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+      line-height: 1.15;
+      color: var(--warm-dark);
+      margin-bottom: 0.6rem;
+    }
+    .hero-text-block h1 em { font-style: italic; color: var(--sienna); }
+    .hero-divider {
+      width: 64px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 1.3rem 0 1.6rem;
+    }
+    .hero-text-block p.hero-dek {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.9rem;
+      line-height: 1.55;
+      color: #3a302a;
+      margin-bottom: 1.4rem;
+    }
+    .hero-crest-line {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--rule);
+    }
+    .hero-crest-line svg {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+    }
+    .hero-crest-line .crest-caption {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--stone);
+      letter-spacing: 0.08em;
+    }
+
+    .essay-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem 2rem 5rem;
+    }
+    .essay-section-label {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .essay-chapter {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .essay-chapter:last-of-type {
+      border-bottom: none;
+    }
+    .essay-chapter h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--sienna);
+      font-style: italic;
+      margin-bottom: 1.4rem;
+      letter-spacing: 0.02em;
+    }
+    .essay-chapter p {
+      margin-bottom: 1.3rem;
+      color: var(--ink);
+    }
+    .essay-chapter p:last-child { margin-bottom: 0; }
+    .essay-chapter em { color: var(--sienna); }
+
+    .narration-card {
+      background: var(--parchment);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--gold);
+      padding: 1.8rem 2rem 1.6rem;
+      margin: 0 0 3.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .narration-eyebrow {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .narration-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2.2rem;
+      color: var(--warm-dark);
+      text-align: center;
+      margin-bottom: 0.4rem;
+    }
+    .narration-meta {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--stone);
+      text-align: center;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.04em;
+    }
+    .narration-card audio {
+      display: block;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      filter: sepia(8%) saturate(1.05);
+    }
+    @media (max-width: 700px) {
+      .narration-card { padding: 1.4rem 1.2rem 1.2rem; }
+      .narration-title { font-size: 1.8rem; }
+      .narration-meta { font-size: 1.2rem; }
+    }
+
+    .pull-quote {
+      border-left: 3px solid var(--gold);
+      padding: 1.2rem 1.8rem;
+      margin: 2.5rem 0;
+      background: var(--parchment);
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2rem;
+      line-height: 1.5;
+      color: var(--warm-dark);
+      margin: 0;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem 2rem;
+      background: var(--parchment);
+      padding: 2.5rem 2rem;
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+      margin: 3rem 0;
+    }
+    @media (max-width: 700px) {
+      .facts-grid { grid-template-columns: 1fr; }
+    }
+    .fact-item .fact-label {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .fact-item .fact-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--warm-dark);
+      line-height: 1.4;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      margin-top: 2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-link:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    footer {
+      background: var(--warm-dark);
+      color: var(--rule);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+    footer span {
+      font-family: 'Cinzel Decorative', serif;
+      color: var(--gold-light);
+      letter-spacing: 0.12em;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="site-title">Dispatches from the Road</div>
+    <div class="site-subtitle">A Traveller's Portfolio &nbsp;&middot;&nbsp; Tim O'Brien</div>
+  </header>
+
+  <nav>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+    <label for="nav-toggle" class="nav-toggle-label" aria-label="Menu">
+      <span class="bars"><span></span></span>
+      <span>Menu</span>
+    </label>
+    <div class="nav-links">
+      <a href="index.html#story">The Story</a>
+      <a href="index.html#history">History</a>
+      <a href="index.html#journeys">Journeys</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero-split">
+    <div>
+      <div class="hero-photo-frame">
+        <img src="images/wills-eye-img-01.jpg" alt="The O'Briens, Philadelphia, 1991" />
+      </div>
+      <p class="hero-caption">The Front Porch &nbsp;&middot;&nbsp; Philadelphia, 1991</p>
+    </div>
+    <div class="hero-text-block">
+      <p class="hero-eyebrow">Wills Eye Hospital &nbsp;&middot;&nbsp; A Life in Full</p>
+      <h1>Wills Eye <em>Residency</em></h1>
+      <div class="hero-divider"></div>
+      <p class="hero-dek">The room I had wanted to be in. The training that defined the rest of the working life. And the man, in a hallway, who gave me the thumbs-up I did not yet understand.</p>
+      <div class="hero-crest-line">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="48" fill="#1a3a5c" stroke="#c9a961" stroke-width="3"/>
+          <text x="50" y="38" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="10" fill="#c9a961" letter-spacing="1">WILLS EYE</text>
+          <text x="50" y="53" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="10" fill="#c9a961" letter-spacing="1">HOSPITAL</text>
+          <text x="50" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="#c9a961" letter-spacing="1">EST. 1832</text>
+        </svg>
+        <span class="crest-caption">Philadelphia, Pennsylvania</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="essay-wrap">
+
+    <p class="essay-section-label">A Life in Full &nbsp;&middot;&nbsp; Chapter Three</p>
+
+    <div class="facts-grid">
+      <div class="fact-item">
+        <span class="fact-label">Institution</span>
+        <span class="fact-value">Wills Eye Hospital<br/>Philadelphia, PA</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Founded</span>
+        <span class="fact-value">1832 &mdash; oldest eye hospital in the Western Hemisphere</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Residency</span>
+        <span class="fact-value">Ophthalmology, 1991&ndash;1994</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Selectivity</span>
+        <span class="fact-value">10 positions &middot; 900+ applicants</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">The Resident</span>
+        <span class="fact-value">Andrew J. Michael, MD<br/><em style="font-size:1.5rem; color:var(--stone);">Glaucoma specialist, Richmond, VA</em></span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">What Came Next</span>
+        <span class="fact-value">Thirty years in Western New York</span>
+      </div>
+    </div>
+
+    <div class="narration-card">
+      <div class="narration-eyebrow">Narration</div>
+      <div class="narration-title">The Room I Wanted To Be In</div>
+      <div class="narration-meta">Read by the author &middot; 8 minutes 55 seconds</div>
+      <audio controls preload="none">
+        <source src="audio/wills-eye-audio-02.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>The Room I Wanted To Be In</h2>
+      <p>Wills Eye Hospital was the room I had wanted to be in. Not Wills specifically &mdash; not at first &mdash; but a room like it. A room where the diagnosis is made, the surgical plan is drawn, the decision lands on the surgeon and not on someone downstream of the surgeon. I had walked away from a good pharmacy job at Children's Hospital in Pittsburgh because I had finally understood that I wanted to be that person, not the person executing on his orders. Jefferson Medical College was the door I went through to get there. Wills Eye was where I hoped to come out.</p>
+      <p>The numbers were not encouraging. The year I applied, there were over nine hundred applicants for ten positions. The math is not subtle. It tells you, before you even sit down to write the personal statement, that you are almost certainly not the person this is going to work out for. I knew it when I applied and I knew it when I drove down for the interview, and I will admit, freely, that part of me had already begun to make peace with the idea that this would be the dream that got close and did not quite happen.</p>
+      <p>What I did not know &mdash; what nobody tells you, because nobody yet had &mdash; was that the decision had, in a quiet way, already been partly made.</p>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>The Cocktail Party</h2>
+      <p>Jefferson students had a relationship with Wills. Through that affiliation we were granted interviews, and the night before the interviews there was a cocktail party &mdash; the kind of evening where the senior faculty come around with drinks and the applicants try to seem like the kind of person who belongs in the room. I was not, at that moment, the kind of person who believed he belonged in the room. I made a kind of peace with it by directing most of my attention toward the food. Nancy, my wife, was pregnant with our son Timmy at the time. We both, as I have since pointed out, had good reason to eat well.</p>
+      <p>What I want to say honestly is that I was not strategic about that evening. I was not networking. I was a tired medical student with a pregnant wife at the end of a long day in a city far from home, eating shrimp at a hospital cocktail party because the shrimp was free and the chances were slim. There is a version of this story where I worked the room. That is not what happened.</p>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>The Thumbs-Up</h2>
+      <p>The next morning I sat in a hallway outside the interview room, waiting my turn. A man came out of the room I was about to go into &mdash; a third-year resident named Andrew Michael, who I knew slightly from a rotation I had done at Wills earlier that same year as a Jefferson senior medical student. He caught my eye. He gave me a thumbs-up. He kept walking.</p>
+      <p>I did not know what the thumbs-up meant. I assumed it was a kind gesture, a fellow human wishing me well in a moment of obvious nervousness, and I tried to take it as encouragement and went into my interview. The interview went, by my honest assessment, fine. Not extraordinary. Fine.</p>
+      <p>Some weeks later I learned that I had been selected.</p>
+      <div class="pull-quote">
+        <p>"He had not been asked to come in and speak. He simply remembered, and he showed up."</p>
+      </div>
+      <p>And it was only later still &mdash; years later, in conversations and letters and the quiet way these stories accumulate &mdash; that I learned what had actually happened in that room before I walked into it. Andrew Michael had gone before the selection committee and told them about a patient. About an ER shift earlier that year, when a Jefferson senior medical student had been rotating through Wills, and a patient had come in whose medication regimen had been quietly written down wrong. The diuretic and the antibiotic had been reversed in dosing &mdash; the patient was taking the diuretic three times a day and the antibiotic only once. It was the kind of error that could have hurt someone. The student had noticed it, mentioned it without making a thing of it, and they had gotten it corrected. The student was me. I had moved on from the moment within ten minutes, the way you do during rotations &mdash; you see a thing, you act on it, you get to the next patient. I had not thought of it again.</p>
+      <p>Andrew had. And on the morning of my interview, later that same year, he had walked into the room where ten of nine hundred applicants would be chosen and he had told the committee about that medication catch. He had not been asked to come in and speak. He simply remembered, and he showed up.</p>
+      <p>The thumbs-up was Andrew Michael walking out of a room having just done something for me that I did not know he was doing.</p>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>Andrew Michael</h2>
+      <p>I have spent more than thirty years thinking about that morning, and the thing I keep arriving at is this: Andrew Michael did not have to do that. There was no mechanism that required it. The selection committee was not going to ask him whether any current resident had a recommendation about any particular applicant. He was a third-year resident in one of the most demanding training programs in American medicine, and he had a thousand other things to do that morning. He chose to walk in.</p>
+      <p>He chose to walk in on behalf of a person he had worked with briefly, earlier that same year, who had done something small and right in the middle of a busy shift. He had filed it away. He had remembered. And when the moment came that the small right thing could be put into the scales for that person, he put it in. That is a particular kind of generosity, and the longer I have practiced medicine the more I have understood how rare it is. People are busy. People forget. People are protective of their own time and their own credit. Andrew was none of those things on the morning of my interview.</p>
+      <p>What I have also come to understand is that the decision could have gone the other way without his testimony and I would never have known the difference. I would have gotten my rejection letter, applied somewhere else, ended up at some other program, lived some other professional life. The whole shape of the thirty years of cataract surgery and corneal disease and patients in Western New York chairs was, in a real sense, decided by a man who chose to walk into a room without being asked. The thumbs-up in the hallway was the most important hand gesture of my professional life, and I did not understand it for years.</p>
+
+      <aside style="margin:2.4rem 0 1.6rem; padding:2rem 2.2rem; background:linear-gradient(135deg, rgba(26,58,92,0.04) 0%, rgba(201,169,97,0.07) 100%); border-top:3px solid var(--wills-blue); border-bottom:3px solid var(--wills-gold); border-radius:2px;">
+        <p style="font-family:'Cinzel Decorative', serif; font-size:1.4rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--wills-blue); margin-bottom:0.4rem;">A Career in Brief</p>
+        <p style="font-family:'Playfair Display', serif; font-size:2.4rem; font-weight:600; color:var(--ink); margin-bottom:1.2rem; line-height:1.2;">Andrew J. Michael, MD</p>
+        <p style="font-style:italic; color:var(--stone); font-size:1.7rem; margin-bottom:1.4rem;">Glaucoma specialist &middot; Educator &middot; Founder</p>
+        <ul style="list-style:none; padding-left:0; font-size:1.85rem; line-height:1.7; color:var(--warm-dark);">
+          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(201,169,97,0.25);"><strong style="color:var(--wills-blue); display:inline-block; min-width:5.5rem;">1992</strong>Glaucoma fellowship, Wills Eye Hospital</li>
+          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(201,169,97,0.25);"><strong style="color:var(--wills-blue); display:inline-block; min-width:5.5rem;">1993&ndash;97</strong>Teaching faculty, University of Colorado Health Sciences Center</li>
+          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(201,169,97,0.25);"><strong style="color:var(--wills-blue); display:inline-block; min-width:5.5rem;">1998</strong>Relocated to Richmond, Virginia</li>
+          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(201,169,97,0.25);"><strong style="color:var(--wills-blue); display:inline-block; min-width:5.5rem;">2000</strong>Founded Commonwealth Eye Care Associates</li>
+          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(201,169,97,0.25);"><strong style="color:var(--wills-blue); display:inline-block; min-width:5.5rem;">Ongoing</strong>Editor &amp; co-author, AAO BCSC <em>Glaucoma</em> text &mdash; the foundational reference used to train ophthalmologists worldwide</li>
+          <li style="padding:0.5rem 0;"><strong style="color:var(--wills-blue); display:inline-block; min-width:5.5rem;">2025</strong>Named one of America's Leading Doctors by <em>Newsweek</em></li>
+        </ul>
+        <p style="margin-top:1.4rem; font-style:italic; color:var(--warm-dark); font-size:1.75rem; padding-top:1rem; border-top:1px solid rgba(201,169,97,0.4);">None of it surprises me. The thumbs-up in that hallway came from a man who would spend the rest of his career lifting people up.</p>
+      </aside>
+
+      <p style="margin-top:1.8rem; padding:1.5rem 1.8rem; border-left:3px solid var(--gold); background:rgba(184,150,62,0.06); font-style:italic; color:var(--warm-dark);">I have not, in the years since, found an adequate way to thank him for what he did. He would, I suspect, wave it off &mdash; he is that kind of man. But I want it written down somewhere that on a morning in 1989, in a hallway in Philadelphia, a third-year resident named Andrew Michael did a kindness for a tired Jefferson student he barely knew, and that kindness is the foundation under thirty years of work and several thousand patients and the entire shape of a life. There are not many gifts of that magnitude. I know, when I receive one, to keep saying thank you for as long as I have words.</p>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>Three Years in Philadelphia</h2>
+      <p>The three years that followed were the forge. An ophthalmology residency at Wills is concentrated and exacting in a way that is hard to convey to anyone who has not done it. Cataract surgery in volumes you could not get anywhere else. Retinal disease, glaucoma, corneal transplantation, pediatric pathology, neuro-ophthalmic emergencies in the middle of the night. You arrive a physician and you leave an ophthalmologist, and the difference between those two things is what those three years are for.</p>
+      <p>The hospital itself was its own kind of teacher. Wills had been founded in 1832 through the bequest of James Wills Jr., a Philadelphia merchant who had wanted the city to have a hospital for the eyes, and the institution carried the weight of that history. You could feel it in the corridors. You could feel it in the surgical observation room, watching a senior attending do something with a phaco needle that would take you a decade to imitate. You could feel it in the volume &mdash; the sheer number of patients and the sheer variety of pathology &mdash; that meant by the time you graduated you had seen almost everything that human vision could go wrong with, and you had operated on a great deal of it yourself.</p>
+      <p>The city was its own thing. Philadelphia in those years was the first great American city in the literal historical sense &mdash; the Constitutional Convention, Independence Hall, the Liberty Bell &mdash; and it was also a city of stone rowhouses and front porches and neighborhoods that had kept their shape since the photographs your grandparents might have taken. To live in Philadelphia is to live inside American history, even when you are walking to the corner for milk.</p>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>The Front Porch</h2>
+      <p>The photograph that opens this page is from one of those evenings. The tuxedo and the front porch and the sign on the door &mdash; <em>The O'Briens, Est. 1988</em> &mdash; suggests something the photograph itself does not say outright: that medicine, however all-consuming, was not the whole of the life being built in that house. There were dinners. There were friends. There was a baby. Nancy, who had moved to a city she did not know to support a husband doing a residency that would consume him, made the front porch look like a home, and the house behind it a place worth coming back to.</p>
+      <p>Behind the photograph is the daily work of building a life. A medical resident is an exhausting person to be married to. The hours are long, the pager goes off, the cases live in your head at the dinner table. Nancy carried the parts of our life that I could not get to in those years, and she did it with patience and steadiness and without complaint. I have not, in the photograph or anywhere else, ever pretended to have done that work alone. I would not have made it through Wills without her. The credential at the end says O'Brien on it, but the support structure underneath has Nancy's name written through every load-bearing piece of it.</p>
+    </div>
+
+    <div class="essay-chapter">
+      <h2>What Wills Gave Me</h2>
+      <p>I left Wills in 1994 and went home to Western New York to start a practice. I was not yet board-certified when I walked out the door &mdash; that came two years later, in 1996, after the written and oral examinations of the American Board of Ophthalmology. The practice grew, eventually became part of a larger group, and the long arc of that career is its own story for another page. But the foundation of it &mdash; the surgical confidence, the clinical eye, the capacity for sustained attention under pressure &mdash; was laid down in those three years in Philadelphia.</p>
+      <p>What I think about more often, though, as I move toward retirement and look back on what the work has actually been about, is the chain of people who put me in a position to do it at all. Richard Ambrose, my high school chemistry teacher in Bradford, who first told me I had the kind of mind that could go further than the people around me imagined. Thomas Gerteisen, my pre-pharmacy advisor at Pitt-Bradford, who told me I should aim past pharmacy and toward medical school years before I could afford to hear him. And Andrew Michael, who walked into a room in Philadelphia on a morning when I was about to be one of nine hundred and made me, instead, one of ten.</p>
+      <p>Three men, at three moments. None of them obligated. None of them noisy about it. Each of them seeing further ahead than I could see myself, and acting on what they saw. If there is a thesis to the long way I came to this profession, that is it. The work is mine. The doors were opened by other people's quiet decency. I have tried, in the years since, to be the kind of physician and the kind of man who passes some of that forward.</p>
+      <p>Hail to Wills.</p>
+    </div>
+
+    <a class="back-link" href="index.html#essay">&larr; Back to The Long Way Here</a>
+
+  </div>
+
+  <footer>
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien &nbsp;&middot;&nbsp; All photographs &amp; text &copy; Tim O'Brien</p>
+    <p style="margin-top:0.5rem; opacity:0.6;">Built with intention &nbsp;&middot;&nbsp; Philadelphia, Pennsylvania</p>
+    <p style="margin-top:0.5rem; opacity:0.6; font-style:italic;">Written by me and Anthropic</p>
+  </footer>
+
+</body>
+</html>

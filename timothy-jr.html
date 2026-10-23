@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timothy Jr. &mdash; Tim O'Brien</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(16px, 1.2vw + 12px, 27px);
+      line-height: 1.75;
+    }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      background: var(--warm-dark);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .masthead::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      width: 60%;
+      margin: 0.6rem auto 0;
+      opacity: 0.4;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(3.2rem, 8vw, 5.6rem);
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .site-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: 2rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--parchment);
+      border-bottom: 2px solid var(--rule);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    nav a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.6rem, 6.5vw, 5.8rem);
+      line-height: 1.12;
+      color: var(--warm-dark);
+      margin-bottom: 1rem;
+    }
+    .hero-headline em { font-style: italic; color: var(--sienna); }
+    .hero-sub {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 2rem;
+      color: var(--stone);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .divider-ornament {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 2rem auto;
+      position: relative;
+    }
+    .divider-ornament::after {
+      content: '✦';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--cream);
+      color: var(--gold);
+      padding: 0 0.6rem;
+      font-size: 1.2rem;
+    }
+
+    /* ── PHOTO HERO (full-bleed) ── */
+    .photo-hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background-image: url("images/timothy-jr-img-01.jpg");
+      background-size: cover;
+      background-position: center 22%;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+    /* soft vignette so text stays legible at the bottom */
+    .photo-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(26,20,16,0.05) 0%,
+          rgba(26,20,16,0.00) 30%,
+          rgba(26,20,16,0.00) 55%,
+          rgba(26,20,16,0.75) 85%,
+          rgba(26,20,16,0.92) 100%
+        );
+      pointer-events: none;
+    }
+    .photo-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: clamp(3rem, 8vh, 6rem) 2rem clamp(3rem, 6vh, 5rem);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-align: center;
+      color: var(--cream);
+    }
+    .photo-hero .hero-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .photo-hero .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.4rem, 6.5vw, 5.8rem);
+      line-height: 1.1;
+      color: var(--cream);
+      margin-bottom: 0.9rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.55);
+    }
+    .photo-hero .hero-headline em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .photo-hero .hero-caption {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.75rem;
+      letter-spacing: 0.06em;
+      color: var(--rule);
+      text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+    }
+    .photo-hero .hero-caption span {
+      color: var(--gold-light);
+      font-style: normal;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 1.25rem;
+      margin: 0 0.6rem;
+    }
+    .photo-hero .divider-ornament {
+      margin: 1.5rem auto 1.2rem;
+    }
+    .photo-hero .divider-ornament::after {
+      background: transparent;
+      color: var(--gold-light);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+    }
+    /* Mobile: switch from overlay hero to stacked layout — photo on top, text below */
+    @media (max-width: 700px) {
+      .photo-hero {
+        min-height: 0;
+        background: none;
+        padding: 0;
+      }
+      .photo-hero::before { display: none; }
+      .photo-hero-inner {
+        min-height: 0;
+        padding: 2.5rem 1.5rem 3rem;
+        color: var(--warm-dark);
+        background: var(--cream);
+      }
+      .photo-hero-inner::before {
+        content: '';
+        display: block;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        background-image: url("images/timothy-jr-img-01.jpg");
+        background-size: cover;
+        background-position: center 25%;
+        border: 1px solid var(--rule);
+        box-shadow: 0 6px 28px rgba(0,0,0,0.18);
+        margin-bottom: 2rem;
+      }
+      .photo-hero .hero-eyebrow {
+        color: var(--gold);
+        text-shadow: none;
+        font-size: 1.25rem;
+      }
+      .photo-hero .hero-headline {
+        color: var(--warm-dark);
+        text-shadow: none;
+        font-size: clamp(2.8rem, 10vw, 3.8rem);
+      }
+      .photo-hero .hero-headline em { color: var(--sienna); }
+      .photo-hero .hero-caption {
+        color: var(--stone);
+        text-shadow: none;
+        font-size: 1.4rem;
+      }
+      .photo-hero .hero-caption span { color: var(--gold); }
+      .photo-hero .divider-ornament::after {
+        background: var(--cream);
+        color: var(--gold);
+        text-shadow: none;
+      }
+    }
+
+    /* ── SECTION BASE ── */
+    .section-label {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.56rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5.5vw, 4.6rem);
+      text-align: center;
+      color: var(--warm-dark);
+      margin-bottom: 0.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--sienna); }
+    .center-rule {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1rem auto 2.5rem;
+    }
+
+    /* ── AT A GLANCE (identity card) ── */
+    .identity {
+      background: var(--parchment);
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+      padding: 4.5rem 2rem;
+    }
+    .identity-inner { max-width: 860px; margin: 0 auto; }
+    .identity-card {
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      padding: 3rem 2.5rem;
+      position: relative;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .identity-card::before,
+    .identity-card::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--gold);
+    }
+    .identity-card::before {
+      top: -1px; left: -1px;
+      border-right: none; border-bottom: none;
+    }
+    .identity-card::after {
+      bottom: -1px; right: -1px;
+      border-left: none; border-top: none;
+    }
+    .id-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      color: var(--warm-dark);
+      text-align: center;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.01em;
+    }
+    .id-role {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.9rem;
+      color: var(--sienna);
+      text-align: center;
+      margin-bottom: 0.3rem;
+    }
+    .id-location {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.6rem;
+      color: var(--stone);
+      text-align: center;
+      letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+    }
+    .id-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+    @media (max-width: 600px) { .id-grid { grid-template-columns: 1fr; } }
+    .id-cell h5 {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+    .id-cell p {
+      font-size: 1.85rem;
+      color: #3d342c;
+      line-height: 1.5;
+    }
+
+    /* ── CHRONICLE (experience & education) ── */
+    .chronicle {
+      padding: 5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .timeline {
+      position: relative;
+      margin-top: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(180deg,
+        transparent 0%,
+        var(--gold) 6%,
+        var(--gold) 94%,
+        transparent 100%);
+    }
+    .entry {
+      position: relative;
+      padding-left: 3.5rem;
+      padding-bottom: 2.6rem;
+    }
+    .entry:last-child { padding-bottom: 0; }
+    .entry::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 0.7rem;
+      width: 14px;
+      height: 14px;
+      background: var(--cream);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px var(--cream);
+    }
+    .entry-years {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+    .entry h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--warm-dark);
+      margin-bottom: 0.1rem;
+      line-height: 1.2;
+    }
+    .entry .org {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.9rem;
+      color: var(--sienna);
+      margin-bottom: 0.15rem;
+    }
+    .entry .place {
+      font-size: 1.55rem;
+      color: var(--stone);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.6rem;
+    }
+    .entry .note {
+      font-size: 1.85rem;
+      color: #3d342c;
+      line-height: 1.7;
+    }
+    .entry .note em {
+      color: var(--warm-dark);
+      font-style: italic;
+    }
+    .entry .skills {
+      margin-top: 0.7rem;
+      font-size: 1.55rem;
+      color: var(--stone);
+      font-style: italic;
+    }
+
+    /* Education sub-variant */
+    .entry.ed::before {
+      background: var(--gold);
+    }
+
+    /* ── ESSAY ── */
+    .essay-section {
+      background: var(--parchment);
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+      padding: 5rem 2rem;
+    }
+    .essay-inner { max-width: 780px; margin: 0 auto; }
+    .essay p {
+      font-size: 2.05rem;
+      color: #3d342c;
+      margin-bottom: 1.3rem;
+      line-height: 1.85;
+      text-align: justify;
+    }
+    .essay p:first-of-type::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 7.8rem;
+      float: left;
+      line-height: 0.78;
+      margin: 0.08em 0.1em 0 0;
+      color: var(--sienna);
+    }
+    .pull-quote {
+      border-left: 4px solid var(--gold);
+      margin: 2.2rem 0;
+      padding: 0.8rem 1.5rem;
+      background: rgba(184,150,62,0.06);
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2.3rem;
+      color: var(--warm-dark);
+      text-align: left;
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* ── BACK HOME ── */
+    .back-home {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .back-home a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-home a:hover { color: var(--sienna); border-color: var(--sienna); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--warm-dark);
+      color: var(--rule);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.08em;
+    }
+    footer span { color: var(--gold); }
+
+    /* ── ATHLETICS / VIDEO SECTION ── */
+    .athletics {
+      padding: 5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .video-frame {
+      margin: 2.5rem auto;
+      max-width: 640px;
+      background: var(--warm-dark);
+      padding: 12px;
+      border: 1px solid var(--rule);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      position: relative;
+    }
+    .video-frame::before,
+    .video-frame::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--gold);
+      pointer-events: none;
+    }
+    .video-frame::before {
+      top: -1px; left: -1px;
+      border-right: none; border-bottom: none;
+    }
+    .video-frame::after {
+      bottom: -1px; right: -1px;
+      border-left: none; border-top: none;
+    }
+    .video-frame video {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #000;
+    }
+    .video-caption {
+      text-align: center;
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--stone);
+      margin-top: 1rem;
+      letter-spacing: 0.04em;
+    }
+    .athletics .essay p {
+      font-size: 2.05rem;
+      color: #3d342c;
+      margin-bottom: 1.3rem;
+      line-height: 1.85;
+      text-align: justify;
+    }
+    .athletics .essay p em {
+      color: var(--warm-dark);
+      font-style: italic;
+    }
+
+    /* ── CROSS-LINK (companion chapter) ── */
+    .companion-link {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem 2rem;
+      text-align: center;
+    }
+    .companion-link a {
+      display: inline-block;
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.75rem;
+      color: var(--sienna);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-light);
+      padding-bottom: 3px;
+      letter-spacing: 0.03em;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .companion-link a:hover {
+      color: var(--warm-dark);
+      border-bottom-color: var(--sienna);
+    }
+    .companion-link .prefix {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    /* MOBILE OVERRIDES */
+    @media (max-width: 900px) {
+      nav { display: none !important; }
+      .section-title { font-size: clamp(2.4rem, 7vw, 3.4rem) !important; }
+      .section-label { font-size: 1.3rem !important; }
+      .id-name { font-size: 2.2rem !important; }
+      .id-role { font-size: 1.5rem !important; }
+      .id-location { font-size: 1.3rem !important; }
+      .entry h3 { font-size: 1.7rem !important; }
+      .entry .org { font-size: 1.5rem !important; }
+      .entry .place { font-size: 1.3rem !important; }
+      .entry .note { font-size: 1.4rem !important; line-height: 1.6 !important; }
+      .entry .skills { font-size: 1.3rem !important; }
+      .essay-section { padding: 3rem 1.5rem !important; }
+      .essay p { font-size: 1.5rem !important; line-height: 1.75 !important; }
+      .essay p:first-of-type::first-letter { font-size: 5.4rem !important; }
+      .pull-quote p { font-size: 1.7rem !important; }
+      .back-home a { font-size: 1.4rem !important; }
+      footer { font-size: 1.3rem !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="site-title">Dispatches from the Road</div>
+    <div class="site-subtitle">Notes from a life well traveled &nbsp;&middot;&nbsp; Tim O'Brien</div>
+  </header>
+
+  <nav>
+    <a href="index.html">&#8592; Portfolio Home</a>
+  </nav>
+
+  <section class="photo-hero" aria-label="Timothy Jr. at the triathlon finish line">
+    <div class="photo-hero-inner">
+      <p class="hero-eyebrow">Behind the Lens &nbsp;&middot;&nbsp; A Son's Chapter</p>
+      <h1 class="hero-headline">Timothy <em>Jr.</em></h1>
+      <div class="divider-ornament"></div>
+      <p class="hero-caption">Through the finish arch</p>
+    </div>
+  </section>
+
+  <section class="identity">
+    <div class="identity-inner">
+      <div class="identity-card">
+        <h2 class="id-name">Timothy Jr.</h2>
+        <p class="id-role">Analyst &nbsp;&middot;&nbsp; Engineer &nbsp;&middot;&nbsp; Endurance Athlete</p>
+        <div class="id-grid">
+          <div class="id-cell">
+            <h5>Graduate Study</h5>
+            <p>M.S., Biomedical Engineering</p>
+          </div>
+          <div class="id-cell">
+            <h5>Undergraduate</h5>
+            <p>B.S., Biology<br/>Varsity swimmer</p>
+          </div>
+          <div class="id-cell">
+            <h5>The Work</h5>
+            <p>Financial analysis, machine learning, and adjacent disciplines</p>
+          </div>
+          <div class="id-cell">
+            <h5>Focus Areas</h5>
+            <p>Functional analysis &middot; Process improvement</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chronicle">
+    <p class="section-label">The Professional Arc</p>
+    <h2 class="section-title">Experience &amp; <em>Education</em></h2>
+    <div class="center-rule"></div>
+
+    <div class="timeline">
+      <div class="entry">
+        <p class="entry-years">Now</p>
+        <h3>Business Analyst</h3>
+        <p class="note">Financial planning and machine learning converge in the current chapter &mdash; translating the patterns inside large bodies of data into decisions a company can act upon. The work draws on a long-held aptitude for turning complexity into legibility.</p>
+      </div>
+
+      <div class="entry">
+        <p class="entry-years">Earlier</p>
+        <h3>Data Analyst</h3>
+        <p class="note">The first years in industry &mdash; cutting his teeth on process improvement and financial analysis, and learning how data becomes a decision.</p>
+      </div>
+
+      <div class="entry ed">
+        <p class="entry-years">Graduate School</p>
+        <h3>Master of Science, Biomedical Engineering</h3>
+        <p class="note">Graduate study concentrating in <em>machine learning, deep learning, MRI, and statistical analytics</em> &mdash; the modern toolkit for turning medical imaging and biomedical data into something a machine can read.</p>
+      </div>
+
+      <div class="entry ed">
+        <p class="entry-years">College</p>
+        <h3>Bachelor of Science, Biology</h3>
+        <p class="note">Four years at a small liberal arts college where the life of the mind is still taken seriously &mdash; varsity swimming and tennis, and a <em>minor in music</em>, playing violin and piano &mdash; a quieter line on the transcript that said something about the breadth of him. The athlete's habit of showing up on time, every day, in all weather &mdash; a discipline that has since migrated into every other domain of his life.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="athletics">
+    <p class="section-label">The Long Miles</p>
+    <h2 class="section-title">Training for <em>Triathlon &amp; Ironman</em></h2>
+    <div class="center-rule"></div>
+
+    <div class="essay">
+      <p>Somewhere between the analyst's laptop and the family life he has assembled, he carves out the hours &mdash; in the pool, on the bike, and on the running miles that accumulate week after week through weather most people would regard as a reason to stay inside. The collegiate swimmer is still in there, but the project now is longer, lonelier, and in many respects harder: the triathlon, and beyond that, the full distance of an Ironman.</p>
+
+      <p>The arc, looking back, is a clean one. From the youth swim team as a boy, to the college pool as a young man, to the triathlons and, more than once, the full Ironman distance &mdash; he has proven, over and over, across decades and disciplines, that <em>he can do hard things, and do them well</em>. Every so often I go back through the old photographs and I see him &mdash; the child at the edge of the lane, the college athlete, the man at the finish line &mdash; and it is unmistakably the same person, the same steady temperament, only the scale of the undertaking has grown.</p>
+
+      <p>He was, by the time he started training seriously for triathlon, already an accomplished swimmer &mdash; the water was never going to be the question. What stood out to me, and still does, was the run. Running was the discipline that did not come freely. It had to be constructed, mile by patient mile, through the slow accrual of workouts that no one saw. He made himself into a better runner the same way he had made himself into a better student, a better engineer, a better athlete across every distance he took on &mdash; by attending to it, week after week, without fanfare. That, more than any finishing time, is the part I find myself most proud of.</p>
+
+      <p>It takes a particular cast of mind to train for something like this. The distances are not trivial &mdash; the Ironman's <em>2.4-mile swim, 112-mile bike, and 26.2-mile run</em> are, in aggregate, a small act of civil engineering performed by the body over the course of a single day. Most of the work happens months in advance, in the unglamorous stretches of the calendar when no one is watching: the threshold intervals on a February trainer, the brick workouts in July humidity, the Sunday long rides where the real question is not whether the legs will hold but whether the mind will.</p>
+
+      <div class="video-frame">
+        <video controls playsinline preload="metadata" poster="">
+          <source src="video/timothy-jr-video-01.mp4" type="video/mp4" />
+          Your browser does not support embedded video.
+        </video>
+      </div>
+      <p class="video-caption">Ironman &nbsp;&middot;&nbsp; on the run</p>
+    </div>
+  </section>
+
+  <div class="companion-link">
+    <span class="prefix">A Companion Chapter</span>
+    <a href="turks-and-caicos.html">Father &amp; Son on Grace Bay &nbsp;&rarr;</a>
+  </div>
+
+  <section class="essay-section">
+    <div class="essay-inner">
+      <p class="section-label">A Father's Reflection</p>
+      <h2 class="section-title">On the <em>Quiet Arc</em></h2>
+      <div class="center-rule"></div>
+
+      <div class="essay">
+        <p>He is our first son. He has been in our lives for half of ours now &mdash; a fact I find almost impossible to absorb when I stop long enough to hold it still. One moment he was the small boy at the edge of the pool, and the next he was a man with his own life, his own rhythms, his own long arcs quietly under construction.</p>
+
+        <div class="pull-quote">
+          <p>"He is a standout &mdash; and in a lot of ways, looking back at the old photographs, he is me."</p>
+        </div>
+
+        <p>He is a standout. I do not say that as a father performing the expected flourish; I say it because the evidence has accumulated, year after year, in the form of things done well and done quietly. And when I go back through the old photographs &mdash; the boyhood ones, the college ones, the ones from the races &mdash; I am struck, sometimes gently and sometimes not, by how much of him is me. The set of the jaw. The focus. The particular way of leaning into a hard thing until it yields.</p>
+
+        <p>He is a beautiful, sensitive, strong, intelligent man. He will make his mark &mdash; on his own timetable, in his own voice, and in a shape none of us can fully predict from here. That is the pleasure of it. That is the whole privilege of watching a son become himself.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="back-home">
+    <a href="index.html">&#8592; Portfolio Home</a>
+  </div>
+
+  <footer>
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien &nbsp;&middot;&nbsp; All photographs &amp; text &copy; Tim O'Brien</p>
+    <p style="margin-top:0.5rem; opacity:0.6;">Written with love</p>
+    <p style="margin-top:0.5rem; opacity:0.6; font-style:italic;">Written by me and Anthropic</p>
+  </footer>
+
+</body>
+</html>

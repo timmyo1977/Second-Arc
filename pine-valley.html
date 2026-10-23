@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pine Valley Golf Club — Tim's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+      --green-deep: #1a2e1a;
+      --green-mid:  #2d4a2d;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(14px, 0.6vw + 12px, 19px);
+      line-height: 1.75;
+    }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      background: var(--warm-dark);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .masthead::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      width: 60%;
+      margin: 0.6rem auto 0;
+      opacity: 0.4;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .site-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: 1.4rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--parchment);
+      border-bottom: 2px solid var(--rule);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    @media (max-width: 700px) {
+      nav { display: none; }
+    }
+    nav a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 92vh;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      gap: 5rem;
+      align-items: center;
+    }
+    .hero-photo-wrap {
+      position: relative;
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -12px -12px 12px 12px;
+      border: 2px solid var(--gold);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+    .hero-photo {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      filter: sepia(12%) contrast(1.04);
+    }
+    .caption-tag {
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-top: 1rem;
+    }
+    .hero-eyebrow {
+      font-size: 1.15rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sienna);
+      margin-bottom: 0.8rem;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.18;
+      color: var(--warm-dark);
+      margin-bottom: 1.2rem;
+    }
+    .divider {
+      width: 4rem;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.4rem 0;
+    }
+    .hero-text p {
+      font-size: 1.45rem;
+      color: #3a3028;
+      margin-bottom: 1rem;
+    }
+
+    /* ── HISTORY SECTION ── */
+    .history {
+      background: var(--green-deep);
+      padding: 6rem 2rem;
+      color: var(--parchment);
+    }
+    .history-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 1.05rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      opacity: 0.8;
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      text-align: center;
+      color: var(--parchment);
+      margin-bottom: 0.8rem;
+    }
+    .center-rule {
+      width: 5rem;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 3.5rem;
+    }
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 3rem 4rem;
+      margin-bottom: 4rem;
+    }
+    .history-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--gold-light);
+      margin-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(212,176,106,0.25);
+      padding-bottom: 0.4rem;
+    }
+    .history-block p {
+      font-size: 1.35rem;
+      color: #d8cfc4;
+      line-height: 1.8;
+    }
+    .essay p {
+      font-size: 1.45rem;
+      color: #cec6ba;
+      margin-bottom: 1.4rem;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .pull-quote {
+      border-left: 3px solid var(--gold);
+      padding: 0.8rem 2rem;
+      margin: 2.5rem auto 2.5rem;
+      max-width: 720px;
+    }
+    .pull-quote p {
+      font-style: italic;
+      font-size: 1.55rem !important;
+      color: var(--gold-light) !important;
+      line-height: 1.6;
+    }
+
+    /* ── BACK HOME ── */
+    .back-home {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .back-home a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-home a:hover { color: var(--sienna); border-color: var(--sienna); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--warm-dark);
+      color: var(--stone);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 1.1rem;
+      border-top: 2px solid var(--gold);
+    }
+    footer span { color: var(--gold-light); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="site-title">Dispatches from the Road</div>
+    <div class="site-subtitle">Golf &amp; Travel Journals &nbsp;&middot;&nbsp; Tim O'Brien</div>
+  </header>
+
+  <nav>
+    <a href="index.html">&#8592; Portfolio Home</a>
+  </nav>
+
+  <section id="top">
+    <div class="hero">
+      <div class="hero-photo-wrap">
+        <img class="hero-photo" src="images/pine-valley-img-01.jpg" alt="Tim O'Brien playing Pine Valley Golf Club, October 2013 — navigating the famous sandy waste areas near the green" />
+        <p class="caption-tag">Pine Valley Golf Club &nbsp;&middot;&nbsp; Pine Valley, New Jersey &nbsp;&middot;&nbsp; October 2013</p>
+      </div>
+      <div class="hero-text">
+        <p class="hero-eyebrow">New Jersey &nbsp;&middot;&nbsp; Pine Valley</p>
+        <h1 class="hero-headline">Trying to Find <em>the Short Grass</em></h1>
+        <div class="divider"></div>
+        <p>Some golf courses are merely difficult. Pine Valley is something else entirely — a cathedral of sand, scrub, and silence that has humbled the greatest players in the world since its first holes opened a century ago.</p>
+        <p>This photograph was taken in October 2013, in the sandy waste that defines Pine Valley's character. The ball is in exactly the place the course intends it to be for anyone who misses the green — a reminder that at Pine Valley, the fairway is a privilege, and the green a reprieve.</p>
+        <p>There is no rough at Pine Valley. There is only the short grass and everything else — and everything else is very much by design.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="history" id="history">
+    <div class="history-inner">
+      <p class="section-label">Context &amp; Chronicle</p>
+      <h2 class="section-title">Pine Valley &amp; <em>Its Deep Past</em></h2>
+      <div class="center-rule"></div>
+      <div class="history-grid">
+        <div class="history-block">
+          <h3>Origins &amp; George Crump</h3>
+          <p>Pine Valley was the obsessive vision of Philadelphia hotelier George Crump, who purchased 184 acres of scrubland in southern New Jersey in 1912. Convinced the barren, sandy terrain was ideal for a golf course unlike any other, Crump moved onto the property in a bungalow and spent the remaining years of his life building it — consulting with the era's greatest architects, including H.S. Colt, A.W. Tillinghast, and Hugh Wilson, before his death in 1918 left the course unfinished.</p>
+        </div>
+        <div class="history-block">
+          <h3>Completion &amp; Opening</h3>
+          <p>The first eleven holes opened in 1914 for informal play, but the full 18-hole course was not completed until 1919, the year after Crump's death. Hugh Wilson and his brother Alan finished the remaining holes faithfully to Crump's sketches and intent. The first formal competition was played that same year, and Pine Valley was immediately recognized as extraordinary.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Course's Radical Philosophy</h3>
+          <p>Pine Valley abandoned the conventions of its era. There is no rough — only island fairways of maintained grass surrounded by sandy waste areas, scrub oak, and native vegetation. Every hole demands a precise carry over sand or water to reach safety. Miss the target, and the course extracts its penalty without apology. It was, and remains, golf distilled to a binary choice: carry it or suffer.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Rankings</h3>
+          <p>Pine Valley has topped virtually every authoritative ranking of the world's greatest golf courses for decades. Golf Digest has ranked it first in the United States for more than 50 consecutive years. Golf Magazine consistently places it atop its World Top 100 list. Its reputation is not merely institutional — it is the consensus of everyone who has played it: there is simply nothing quite like Pine Valley.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Club &amp; Its Traditions</h3>
+          <p>Pine Valley is a private club — deeply so. Membership is by invitation only, and access for non-members requires a member host. The course has no tee times in the traditional sense; it operates on a relaxed schedule befitting a club that measures itself not by throughput but by experience. Women were not permitted as full playing members until 2014, when the club voted to admit them — a change a century in the making.</p>
+        </div>
+        <div class="history-block">
+          <h3>Notable Holes</h3>
+          <p>The par-3 5th hole — a 226-yard carry over a vast waste area to a plateau green — is one of the most feared short holes in golf. The par-4 13th demands a blind tee shot over sand to a fairway set in the pines. And the 18th, playing back toward the elegant clubhouse, invites the exhausted and elated player to reflect on what they have just survived. Every hole at Pine Valley has a personality; none are neutral.</p>
+        </div>
+      </div>
+      <div class="essay">
+        <div class="pull-quote">
+          <p>"Pine Valley is not a golf course that flatters you. It is a golf course that reveals you — your patience, your nerve, your honesty about your own game."</p>
+        </div>
+        <p>The photograph captures something essential about Pine Valley's design philosophy. The sandy waste surrounding every green is not a hazard in the traditional sense — it is not a sand trap with a defined edge and a raked bottom. It is simply the land as it was found, shaped and maintained to expose the golfer's every mistake. The grass tufts growing through the sand, the irregular lie, the absence of any forgiving surface: these are features, not accidents.</p>
+        <p>George Crump chose this site because it was considered worthless agricultural land — sandy, scrubby, difficult to traverse, uninhabitable by the standards of the early twentieth century. He saw something no one else did: that the very qualities that made the land useless for farming made it ideal for the particular kind of golf he wanted to create. The native sand was already there. The scrub oak and pine already defined natural corridors. All that was needed was the vision to see a golf course in the wasteland.</p>
+        <p>The result is a course that feels simultaneously inevitable and improbable. Every hole occupies the only position it could possibly occupy; every sand carry is exactly as long as it needs to be to separate the well-struck shot from the tentative one. This sense of rightness — of a course that could not have been designed differently — is the mark of true genius in golf architecture, and it is why Pine Valley has sat atop the rankings for a century without serious challenge.</p>
+        <p>To play Pine Valley is to understand, perhaps for the first time, what golf architecture can aspire to be. It is not a test of distance or strength. It is a test of precision, nerve, and the willingness to commit fully to every shot — because at Pine Valley, commitment is the only currency the course accepts.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="back-home">
+    <a href="index.html">&#8592; Portfolio Home</a>
+  </div>
+
+  <footer id="contact">
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien &nbsp;&middot;&nbsp; All photographs &amp; text &copy; Tim O'Brien</p>
+    <p style="margin-top:0.5rem; opacity:0.6;">Built with intention &nbsp;&middot;&nbsp; Pine Valley, New Jersey</p>
+  </footer>
+
+</body>
+</html>

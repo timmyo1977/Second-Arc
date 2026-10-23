@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pierce Stocking Drive — Sleeping Bear Dunes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(14px, 0.6vw + 12px, 19px);
+      line-height: 1.75;
+    }
+
+    /* MASTHEAD */
+    .masthead {
+      background: var(--warm-dark);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .masthead::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      width: 60%;
+      margin: 0.6rem auto 0;
+      opacity: 0.4;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .site-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: 1.4rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* NAV (hidden) */
+    nav {
+      display: none;
+    }
+    nav-original-styles {
+      background: var(--parchment);
+      border-bottom: 2px solid var(--rule);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    nav a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    /* HERO */
+    .hero {
+      display: block;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    @media (max-width: 900px) {
+      .hero { padding: 2rem 1.2rem; }
+    }
+    .hero-photo-wrap { position: relative; margin-bottom: 3rem; }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -10px -10px 10px 10px;
+      border: 2px solid var(--gold);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .hero-photo-wrap img {
+      width: 100%;
+      display: block;
+      max-height: 90vh;
+      object-fit: cover;
+      box-shadow: 6px 6px 32px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .caption-tag {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--stone);
+      margin-top: 0.9rem;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+    .hero-text {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .hero-text-left {}
+    .hero-text-right {}
+    @media (max-width: 700px) {
+      .hero-text { grid-template-columns: 1fr; }
+    }
+    .hero-eyebrow {
+      font-size: 1.15rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.2;
+      color: var(--warm-dark);
+      margin-bottom: 1.2rem;
+    }
+    .hero-headline em { font-style: italic; color: var(--sienna); }
+    .divider {
+      width: 64px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 1.4rem 0;
+    }
+    .hero-text p { color: #2a3a28; margin-bottom: 1.1rem; }
+
+    /* HISTORY / CONTENT */
+    .content {
+      background: var(--parchment);
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+      padding: 5rem 2rem;
+    }
+    .content-inner { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      font-size: 1.1rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      text-align: center;
+      color: var(--warm-dark);
+      margin-bottom: 0.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--sienna); }
+    .center-rule { width: 80px; height: 1px; background: var(--gold); margin: 1rem auto 2.4rem; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem 4rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 700px) { .info-grid { grid-template-columns: 1fr; } }
+    .info-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--sienna);
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .info-block p { font-size: 1.4rem; color: #2d3d2a; line-height: 1.8; }
+
+    /* ESSAY */
+    .essay { max-width: 960px; margin: 0 auto; }
+    .essay p {
+      font-size: 1.45rem;
+      color: #2d3d2a;
+      margin-bottom: 1.3rem;
+      line-height: 1.85;
+      text-align: justify;
+    }
+    .essay p:first-child::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 5.4rem;
+      float: left;
+      line-height: 0.78;
+      margin: 0.08em 0.1em 0 0;
+      color: var(--sienna);
+    }
+    .pull-quote {
+      border-left: 4px solid var(--gold);
+      margin: 2.5rem 0;
+      padding: 1rem 2rem;
+      background: rgba(106,158,62,0.07);
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.7rem;
+      color: var(--warm-dark);
+      text-align: left;
+      margin: 0;
+    }
+
+    /* ROUTE BOX */
+    .route-box {
+      background: var(--warm-dark);
+      color: #e8f5e0;
+      border-radius: 4px;
+      padding: 2.5rem 3rem;
+      margin: 3rem 0;
+      max-width: 960px;
+    }
+    .route-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: var(--gold-light);
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(143,192,90,0.3);
+      padding-bottom: 0.5rem;
+    }
+    .route-box ul {
+      list-style: none;
+      padding: 0;
+    }
+    .route-box ul li {
+      font-size: 1.35rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      gap: 1rem;
+    }
+    .route-box ul li::before {
+      content: '→';
+      color: var(--gold-light);
+      flex-shrink: 0;
+    }
+
+    /* AUDIO NARRATION */
+    .audio-block {
+      max-width: 760px;
+      margin: 0 auto 4rem;
+      padding: 2.2rem 2.4rem;
+      background: var(--parchment);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--gold);
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .audio-label {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .audio-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--warm-dark);
+      margin-bottom: 1.4rem;
+    }
+    .audio-block audio {
+      width: 100%;
+      max-width: 520px;
+      outline: none;
+    }
+    .audio-byline {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--stone);
+      margin-top: 1rem;
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 700px) {
+      .audio-block { padding: 1.6rem 1.2rem; margin: 0 1rem 3rem; }
+      .audio-title { font-size: 1.1rem; }
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--warm-dark);
+      color: var(--rule);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+    }
+    footer span { color: var(--gold-light); }
+    footer a { color: var(--gold-light); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="site-title">Dispatches from the Road</div>
+    <div class="site-subtitle">Notes from a life well traveled &nbsp;&middot;&nbsp; Tim O'Brien</div>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#ride">The Ride</a>
+    <a href="#dunes">The Dunes</a>
+    <a href="#voyagers">Wilderness Voyagers</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="ride">
+    <div class="hero">
+      <div class="hero-photo-wrap">
+        <img src="images/pierce-stocking-img-01.jpg" alt="Cycling Pierce Stocking Drive in the rain, Sleeping Bear Dunes" />
+        <p class="caption-tag">Pierce Stocking Scenic Drive &nbsp;&middot;&nbsp; Sleeping Bear Dunes National Lakeshore &nbsp;&middot;&nbsp; Michigan</p>
+      </div>
+      <div class="hero-text">
+          <div class="hero-text-left">
+            <p class="hero-eyebrow">Michigan &nbsp;&middot;&nbsp; Sleeping Bear Dunes &nbsp;&middot;&nbsp; Wilderness Voyagers</p>
+            <h1 class="hero-headline">Riding <em>Pierce Stocking Drive</em> in the Rain</h1>
+            <div class="divider"></div>
+            <p>The road is wet, the forest is electric green, and the cyclist is grinning. This is Pierce Stocking Scenic Drive — a 7.4-mile loop through one of America's most spectacular natural landscapes — ridden on a June morning with Wilderness Voyagers, the legendary Traverse City outfitter that has been putting people on bikes, boats, and skis in northern Michigan for decades.</p>
+          </div>
+          <div class="hero-text-right">
+            <p>The jersey reads <em>Upstate Cycling</em> — but the road underwheel is pure northern Michigan: a two-lane ribbon of fresh asphalt curving through cathedral hardwood forest, the canopy so dense overhead that even a steady rain feels filtered, softened, almost welcome.</p>
+            <p>Sleeping Bear Dunes National Lakeshore was voted "Most Beautiful Place in America" by viewers of Good Morning America in 2011. On a rainy June morning on a road bike, it is easy to understand why.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- AUDIO NARRATION -->
+  <div class="audio-block">
+    <p class="audio-label">Listen</p>
+    <p class="audio-title">A dispatch from Pierce Stocking Drive</p>
+    <audio controls preload="metadata">
+      <source src="audio/pierce-stocking-audio-02.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <p class="audio-byline">Read by the author</p>
+  </div>
+
+  <!-- CONTENT -->
+  <section class="content" id="dunes">
+    <div class="content-inner">
+      <p class="section-label">Place &amp; History</p>
+      <h2 class="section-title">Sleeping Bear <em>Dunes</em></h2>
+      <div class="center-rule"></div>
+
+      <div class="info-grid">
+        <div class="info-block">
+          <h3>The Legend of Sleeping Bear</h3>
+          <p>The Ojibwe people gave this place its name. According to their tradition, a mother bear and her two cubs swam across Lake Michigan fleeing a great fire in Wisconsin. The exhausted cubs fell behind and drowned; the Great Spirit Manitou raised them from the lake as North and South Manitou Islands. The mother bear, waiting on the shore, was gradually covered by sand and became the great dune that still watches over the lake — the Sleeping Bear.</p>
+        </div>
+        <div class="info-block">
+          <h3>The National Lakeshore</h3>
+          <p>Sleeping Bear Dunes National Lakeshore was established by Congress in 1970, protecting 35 miles of Lake Michigan shoreline along the Leelanau and Benzie peninsulas. The park encompasses more than 71,000 acres of dunes, forests, lakes, rivers, and two offshore islands. It is managed by the National Park Service and draws roughly 1.5 million visitors each year, making it one of the most visited national parks in the Midwest.</p>
+        </div>
+        <div class="info-block">
+          <h3>The Geology of the Dunes</h3>
+          <p>The dunes of Sleeping Bear are perched dunes — a rarity worldwide — formed atop glacial moraines left by the retreat of the Laurentide Ice Sheet some 10,000 to 12,000 years ago. Wind-driven sand from exposed Lake Michigan beaches has accumulated on the high ground behind, creating dunes that rise up to 460 feet above the lake surface. The largest, the Sleeping Bear Plateau, is one of the tallest freshwater coastal dunes on earth.</p>
+        </div>
+        <div class="info-block">
+          <h3>Pierce Stocking Scenic Drive</h3>
+          <p>Pierce Stocking was a lumberman who fell in love with the dunes landscape and built the original scenic drive in 1967, opening it to the public so others could experience what he considered the most beautiful place he had ever known. After his death, the National Park Service acquired and extended the route. The 7.4-mile one-way loop includes 12 numbered stops, dramatic Lake Michigan overlooks from the dune crests, and a descent through the beech-maple forest that feels — on a bicycle — like flying.</p>
+        </div>
+        <div class="info-block">
+          <h3>The Forest You Ride Through</h3>
+          <p>The dense, luminous canopy visible in this photograph is characteristic northern Michigan beech-maple climax forest — the mature, stable forest type that develops in the Great Lakes region when land is left undisturbed for centuries. The American beech and sugar maple create an almost tropical density of leaf cover in June, turning the road into a green tunnel. In October, the same forest becomes a tunnel of copper, gold, and flame.</p>
+        </div>
+        <div class="info-block">
+          <h3>Cycling the Lakeshore</h3>
+          <p>Pierce Stocking Drive is closed to motor vehicles during certain hours and seasons, making it a premier cycling destination in the Upper Midwest. The route is demanding — the climbs are genuine, and the descents from the dune crests are exhilarating — but the rewards at the overlooks are extraordinary: sweeping views across Lake Michigan to the Manitou Islands, with the blue water stretching to the horizon like a freshwater sea.</p>
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        <p>"The road curves into the forest and disappears. You follow it anyway. That is, perhaps, the whole point of cycling — and of travel."</p>
+      </div>
+
+      <div class="essay">
+        <p>Pierce Stocking Drive on a wet June morning is not what most people picture when they think of Sleeping Bear Dunes. The postcard image is of blazing July sun, dazzling white sand, and the impossibly blue expanse of Lake Michigan at the overlooks. But the rain version has its own argument to make. The forest is greener than green — that electric, almost implausible viridian that only comes when the canopy is heavy with water and the light filters through ten thousand layers of wet leaf. The road surface darkens and reflects. The air smells of lake and earth and something older than both.</p>
+        <p>To ride a road bike through this landscape is to experience it at exactly the right speed: fast enough to feel the terrain — the climbs that tighten the legs, the descents that pull at the handlebars — but slow enough to watch the forest change around you. The beech-maple canopy gives way briefly to open dune scrub near the overlooks, then closes again as the road descends back into the valley. Each transition is its own small revelation.</p>
+        <p>The Ojibwe name for this region was <em>Mishi-Mikinaak</em>, the great snapping turtle — a reference to the shape of the Leelanau Peninsula seen from above. Before European settlement, the forests of northern Michigan were among the greatest temperate hardwood forests on earth, stretching for hundreds of unbroken miles. The lumbermen of the 19th century — men like Pierce Stocking himself, in his earlier life — took most of it. What remains in Sleeping Bear Dunes National Lakeshore is a precious remnant, protected just in time, now reasserting itself with the quiet confidence of a forest that knows it has outlasted everything that tried to remove it.</p>
+        <p>Riding through it in the rain, grinning at the camera, is a form of gratitude.</p>
+      </div>
+
+      <!-- WILDERNESS VOYAGERS -->
+      <div id="voyagers" style="margin-top: 4rem;">
+        <p class="section-label" style="text-align:left; margin-bottom:0.5rem;">The Outfitter</p>
+        <h3 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,3vw,2.8rem); color:var(--warm-dark); margin-bottom:2rem;">Wilderness <em style="color:var(--sienna);">Voyagers</em></h3>
+
+        <div class="info-grid">
+          <div class="info-block">
+            <h3>Who They Are</h3>
+            <p>Wilderness Voyagers is a premier outdoor outfitter based in Traverse City, Michigan, specialising in guided and self-guided cycling tours, kayak and canoe rentals, cross-country ski adventures, and snowshoe excursions throughout the Sleeping Bear Dunes region and the broader Traverse City area. They have been introducing visitors to northern Michigan's extraordinary outdoor landscape for over three decades.</p>
+          </div>
+          <div class="info-block">
+            <h3>The Cycling Experience</h3>
+            <p>Wilderness Voyagers offers fully supported cycling tours throughout the Leelanau Peninsula and the Sleeping Bear Dunes National Lakeshore, including routes along Pierce Stocking Drive, the TART Trail network, and the back roads of one of Michigan's most scenic wine regions. Bikes, helmets, route maps, and vehicle support are all provided — making it straightforward to explore the landscape at your own pace without logistical worry.</p>
+          </div>
+          <div class="info-block">
+            <h3>The Broader Region</h3>
+            <p>Traverse City and the Leelanau Peninsula form one of the Midwest's great outdoor destinations — a place where the Great Lakes meet glacially carved hills, hardwood forests, and some of the most productive cherry and wine-grape country in America. Wilderness Voyagers operates within this landscape with deep local knowledge, connecting visitors to places and routes that most people driving through would never find on their own.</p>
+          </div>
+          <div class="info-block">
+            <h3>Why This Matters</h3>
+            <p>The best travel outfitters don't just get you from point A to point B — they reframe a landscape so you understand what you're moving through. Wilderness Voyagers does this for northern Michigan: a place that rewards slow travel, that reveals itself incrementally, and that is most fully experienced from the seat of a bicycle on a wet June morning, climbing through the beech-maple forest toward an overlook that will make you stop pedalling and simply stare.</p>
+          </div>
+        </div>
+
+        <div class="route-box">
+          <h3>Pierce Stocking Drive — Ride Highlights</h3>
+          <ul>
+            <li>7.4-mile one-way loop through Sleeping Bear Dunes National Lakeshore</li>
+            <li>12 numbered interpretive stops covering geology, ecology, and Ojibwe history</li>
+            <li>Lake Michigan Overlook — views from 450 feet above the lake surface</li>
+            <li>Dune Climb visible from the road — the classic Sleeping Bear experience</li>
+            <li>Old Indian Trail trailhead — access to backcountry hiking routes</li>
+            <li>North Bar Lake Overlook — a secluded inland lake surrounded by dunes</li>
+            <li>Continuous beech-maple forest canopy through the valley sections</li>
+            <li>Managed by the National Park Service; entry fee required (America the Beautiful Pass accepted)</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien</p>
+    <p style="margin-top:0.6rem;"><a href="index.html">&larr; Back to Home</a></p>
+    <p style="margin-top:0.5rem; opacity:0.6;">All photographs &amp; text &copy; Tim O'Brien</p>
+  </footer>
+
+</body>
+</html>

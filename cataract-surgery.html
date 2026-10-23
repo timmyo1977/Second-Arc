@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cataract Surgery — Tim O'Brien</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(16px, 1.2vw + 12px, 27px);
+      line-height: 1.75;
+    }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      background: var(--warm-dark);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .masthead::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      width: 60%;
+      margin: 0.6rem auto 0;
+      opacity: 0.4;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(3.2rem, 8vw, 5.6rem);
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .site-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: 2rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--parchment);
+      border-bottom: 2px solid var(--rule);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    nav a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .hero-photo-wrap {
+      position: relative;
+      width: 100%;
+    }
+    .hero-photo-wrap::before {
+      display: none;
+    }
+    .hero-photo-wrap img {
+      width: 100%;
+      display: block;
+      max-height: 88vh;
+      object-fit: cover;
+      object-position: center top;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.3);
+    }
+    .caption-tag {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.7rem;
+      color: var(--stone);
+      padding: 0.8rem 2rem;
+      text-align: center;
+      letter-spacing: 0.06em;
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-text {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 2rem 3rem;
+    }
+    .hero-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 7vw, 6.4rem);
+      line-height: 1.2;
+      color: var(--warm-dark);
+      margin-bottom: 1.2rem;
+    }
+    .hero-headline em { font-style: italic; color: var(--sienna); }
+    .divider {
+      width: 64px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 1.4rem 0;
+    }
+    .hero-text p { color: #3a302a; margin-bottom: 1.1rem; font-size: 2.1rem; }
+
+    /* ── HISTORY ── */
+    .history {
+      background: var(--parchment);
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+      padding: 5rem 2rem;
+    }
+    .history-inner { max-width: 860px; margin: 0 auto; }
+    .section-label {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.56rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.4rem, 6vw, 5.2rem);
+      text-align: center;
+      color: var(--warm-dark);
+      margin-bottom: 0.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--sienna); }
+    .center-rule {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1rem auto 2.5rem;
+    }
+    .history-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.4rem 3rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 700px) {
+      .history-grid { grid-template-columns: 1fr; }
+    }
+    .history-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      color: var(--sienna);
+      margin-bottom: 0.5rem;
+    }
+    .history-block p { font-size: 1.9rem; color: #3a302a; }
+    .essay { border-top: 1px solid var(--rule); padding-top: 2.5rem; }
+    .essay p { font-size: 2rem; color: #3a302a; margin-bottom: 1.2rem; }
+    .pull-quote {
+      border-left: 3px solid var(--gold);
+      padding: 0.6rem 0 0.6rem 1.8rem;
+      margin: 0 0 2rem 0;
+    }
+    .pull-quote p {
+      font-style: italic !important;
+      font-size: 2.2rem !important;
+      color: var(--warm-dark) !important;
+      line-height: 1.55;
+    }
+
+    /* ── BACK HOME ── */
+    .back-home {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .back-home a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-home a:hover { color: var(--sienna); border-color: var(--sienna); }
+
+    /* ── AUDIO NARRATION ── */
+    .audio-block {
+      max-width: 760px;
+      margin: 0 auto 4rem;
+      padding: 2.4rem 2.6rem;
+      background: var(--parchment);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--gold);
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .audio-label {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .audio-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--warm-dark);
+      margin-bottom: 1.5rem;
+    }
+    .audio-block audio {
+      width: 100%;
+      max-width: 520px;
+      outline: none;
+    }
+    .audio-byline {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--stone);
+      margin-top: 1rem;
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 700px) {
+      .audio-block { padding: 1.6rem 1.2rem; margin: 0 1rem 3rem; }
+      .audio-title { font-size: 1.15rem; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--warm-dark);
+      color: var(--stone);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 1.5rem;
+      border-top: 2px solid var(--gold);
+    }
+    footer span { color: var(--gold-light); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 700px) {
+      body { font-size: 17px; line-height: 1.7; }
+      nav { display: none; }
+      .masthead { padding: 1.8rem 1rem 1.4rem; }
+      .site-title { font-size: 2.4rem; letter-spacing: 0.06em; }
+      .site-subtitle { font-size: 1rem; letter-spacing: 0.1em; }
+
+      .hero-photo-wrap img { max-height: 60vh; }
+      .caption-tag { font-size: 0.95rem; padding: 0.7rem 1rem; }
+      .hero-text { padding: 2.5rem 1.4rem 2rem; }
+      .hero-eyebrow { font-size: 0.85rem; letter-spacing: 0.18em; }
+      .hero-headline { font-size: 2.4rem; line-height: 1.2; margin-bottom: 1rem; }
+      .hero-text p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem; }
+
+      .history { padding: 2.8rem 1.3rem; }
+      .section-label { font-size: 0.85rem; letter-spacing: 0.2em; }
+      .section-title { font-size: 2rem; line-height: 1.2; }
+      .center-rule { margin: 0.8rem auto 1.8rem; }
+      .history-grid { gap: 1.6rem; margin-bottom: 2rem; }
+      .history-block h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
+      .history-block p { font-size: 1.02rem; line-height: 1.65; }
+      .essay { padding-top: 1.8rem; }
+      .essay p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem; }
+      .pull-quote { padding: 0.4rem 0 0.4rem 1.1rem; margin: 0 0 1.4rem 0; }
+      .pull-quote p { font-size: 1.15rem !important; line-height: 1.5; }
+
+      .back-home { padding: 2rem 1rem; }
+      .back-home a { font-size: 1rem; }
+      footer { padding: 1.8rem 1rem; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="site-title">Dispatches from the Road</div>
+    <div class="site-subtitle">Travel Journals &nbsp;&middot;&nbsp; Tim O'Brien</div>
+  </header>
+
+  <nav>
+    <a href="index.html">&#8592; Portfolio Home</a>
+  </nav>
+
+  <section id="top">
+    <div class="hero">
+      <div class="hero-photo-wrap">
+        <img src="images/cataract-surgery-img-01.jpg" alt="Tim O'Brien performing cataract surgery at the operating microscope" />
+        <p class="caption-tag">At the Surgical Microscope &nbsp;&middot;&nbsp; Cataract Surgery</p>
+      </div>
+      <div class="hero-text">
+        <p class="hero-eyebrow">Ophthalmology &nbsp;&middot;&nbsp; The Operating Room</p>
+        <h1 class="hero-headline">The Center of a <em>Professional Life</em></h1>
+        <div class="divider"></div>
+        <p>Not all journeys are measured in miles. Some are measured in the distance between blindness and sight — a distance that, in a cataract operation, spans about the length of a human eye, roughly twenty-three millimetres, and takes perhaps fifteen minutes to cross.</p>
+        <p>This photograph shows what the operating room looks like from the outside: the surgeon bent to the eyepieces of the surgical microscope, instruments moving in a field too small to see without magnification, a scrub technician standing by. It is an image of concentration, of trained hands doing a thing they have done thousands of times and still approach with full attention.</p>
+        <p>Cataract surgery is the most commonly performed surgical procedure in the world. It is also, by almost any measure, one of the most effective — restoring functional vision to people who had lost it, often within hours. For the surgeon, it is the center of a professional life. For the patient, it is something closer to a miracle.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AUDIO NARRATION ── -->
+  <div class="audio-block">
+    <p class="audio-label">Listen</p>
+    <p class="audio-title">A dispatch on cataract surgery</p>
+    <audio controls preload="metadata">
+      <source src="cataract-narration.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <p class="audio-byline">Read by the author</p>
+  </div>
+
+  <section class="history" id="history">
+    <div class="history-inner">
+      <p class="section-label">The Procedure &amp; Its History</p>
+      <h2 class="section-title">Cataract Surgery &nbsp;&mdash;&nbsp; <em>An Ancient Art</em></h2>
+      <div class="center-rule"></div>
+      <div class="history-grid">
+        <div class="history-block">
+          <h3>What a Cataract Is</h3>
+          <p>A cataract is a clouding of the eye's natural lens — the transparent disc that sits just behind the iris and focuses light onto the retina. As proteins within the lens break down over time, they clump together and scatter incoming light, progressively dimming and distorting vision. Left untreated, a mature cataract produces near-total blindness. Worldwide, cataracts remain the leading cause of vision loss.</p>
+        </div>
+        <div class="history-block">
+          <h3>Ancient Origins</h3>
+          <p>The earliest known treatment for cataracts was couching — a technique practiced in India as early as 600 BCE by the physician Sushruta, and independently developed across the ancient world. A needle or blunt instrument was used to displace the clouded lens downward into the vitreous cavity, out of the visual axis. The result was crude at best: uncorrected vision, risk of infection, and eventual blindness from the displaced lens. But it worked often enough to persist for two thousand years.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Extracapsular Era</h3>
+          <p>The first extracapsular cataract extraction — physically removing the clouded lens from the eye — is credited to the French surgeon Jacques Daviel in 1747. Daviel made a large incision at the corneal margin, opened the lens capsule, and expressed the lens material manually. Recovery was prolonged, results inconsistent, and the procedure performed without anesthesia. It was nonetheless a leap forward: the lens was gone, and with thick corrective glasses, some vision could be restored.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Intraocular Lens Revolution</h3>
+          <p>The modern era of cataract surgery began on November 29, 1949, when British ophthalmologist Sir Harold Ridley implanted the first artificial intraocular lens (IOL) at St. Thomas' Hospital, London. Ridley had observed that Royal Air Force pilots whose eyes were penetrated by fragments of Perspex cockpit canopy during World War II showed no inflammatory reaction — prompting his insight that a plastic lens could safely remain inside the eye. The IOL transformed cataract surgery from a procedure that restored dim, distorted vision to one that could achieve near-perfect sight.</p>
+        </div>
+        <div class="history-block">
+          <h3>Phacoemulsification</h3>
+          <p>The technique used in the photograph — phacoemulsification — was developed by American ophthalmologist Charles Kelman in 1967, inspired, by his own account, by a visit to his dentist. Kelman observed that an ultrasonic dental cleaning tool could break up calcified deposits and wondered whether the same principle might dissolve a cataract. After years of development, phacoemulsification — using ultrasonic vibration delivered through a hollow needle to emulsify and aspirate the lens — made it possible to remove a cataract through an incision of less than three millimetres, requiring no sutures and allowing same-day discharge.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Operating Microscope</h3>
+          <p>The surgical microscope visible in this photograph represents one of the most consequential instruments in modern medicine. First applied to ophthalmic surgery in the 1950s, the operating microscope provided the magnification and coaxial illumination necessary to work safely inside the anterior chamber of the eye. Without it, the precision required for modern cataract surgery would be impossible. The microscope does not perform the operation — but it makes the operation visible to the hands that do.</p>
+        </div>
+      </div>
+      <div class="essay">
+        <div class="pull-quote">
+          <p>"The eye is the window to the world, and the surgeon who restores its clarity does something that no amount of medication or therapy can fully replicate: they give back the world itself."</p>
+        </div>
+        <p>There is a quality of attention that experienced surgeons develop that is difficult to describe from the outside. It is not the same as concentration in the ordinary sense — it is something quieter, more total. The field of view through the operating microscope is small: a few millimetres of tissue, brilliantly illuminated, magnified many times. Everything outside that field ceases to exist. The surgeon's world, for the duration of the procedure, is exactly as large as one human eye.</p>
+        <p>Cataract surgery takes place in the anterior chamber — the space between the cornea and the iris — and within the lens capsule itself, a membrane thinner than a sheet of paper. The phacoemulsification handpiece vibrates at approximately 40,000 cycles per second. The incisions are measured in tenths of a millimetre. There is no room for hesitation or imprecision. The work demands a kind of bodily intelligence — a knowledge built into the hands — that accumulates only through thousands of repetitions.</p>
+        <p>And yet for all its technical demands, cataract surgery is ultimately about something very simple. A person who could not see clearly — who had watched the world dim and blur over months or years, who had given up driving, or reading, or recognizing faces — walks out of the operating suite, removes the eye patch the following morning, and sees. The world is sharp again. Colours have returned. The faces of people they love are legible once more.</p>
+        <p>For the surgeon, the procedure is routine. For the patient, it is the day they got their world back. That asymmetry — between the ordinary and the extraordinary, between what the surgeon experiences and what the patient receives — is the hidden architecture of a professional life spent at the microscope.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="back-home">
+    <a href="index.html">&#8592; Portfolio Home</a>
+  </div>
+
+  <footer id="contact">
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien &nbsp;&middot;&nbsp; All photographs &amp; text &copy; Tim O'Brien</p>
+    <p style="margin-top:0.5rem; opacity:0.6;">Built with intention &nbsp;&middot;&nbsp; The Operating Room</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playa del Carmen — Tim's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1410;
+      --warm-dark:  #2c2318;
+      --parchment:  #f5f0e8;
+      --cream:      #faf7f2;
+      --gold:       #b8963e;
+      --gold-light: #d4b06a;
+      --sienna:     #8b3a2a;
+      --stone:      #9e9080;
+      --rule:       #c9b99a;
+      --sea-dark:   #0d2b3e;
+      --sea-mid:    #1a4a5e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(16px, 1.2vw + 12px, 27px);
+      line-height: 1.75;
+    }
+
+    .masthead {
+      background: var(--warm-dark);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .masthead::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      width: 60%;
+      margin: 0.6rem auto 0;
+      opacity: 0.4;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(3.2rem, 8vw, 5.6rem);
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .site-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--rule);
+      font-size: 2rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.12em;
+    }
+
+    nav {
+      background: var(--parchment);
+      border-bottom: 2px solid var(--rule);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    nav a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 92vh;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      gap: 5rem;
+      align-items: center;
+    }
+    .hero-photo-wrap {
+      position: relative;
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -12px -12px 12px 12px;
+      border: 2px solid var(--gold);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+    .hero-photo {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      filter: contrast(1.04) saturate(1.05);
+    }
+    .caption-tag {
+      font-size: 1.3rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-top: 1rem;
+    }
+    .hero-eyebrow {
+      font-size: 1.3rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sienna);
+      margin-bottom: 0.8rem;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1.18;
+      color: var(--warm-dark);
+      margin-bottom: 1.2rem;
+    }
+    .divider {
+      width: 4rem;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.4rem 0;
+    }
+    .hero-text p {
+      font-size: 1.5rem;
+      color: #3a3028;
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .history {
+      background: var(--sea-dark);
+      padding: 6rem 2rem;
+      color: var(--parchment);
+    }
+    .history-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 1.3rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      opacity: 0.8;
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      text-align: center;
+      color: var(--parchment);
+      margin-bottom: 0.8rem;
+    }
+    .center-rule {
+      width: 5rem;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 3.5rem;
+    }
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 3rem 4rem;
+      margin-bottom: 4rem;
+    }
+    .history-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--gold-light);
+      margin-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(212,176,106,0.25);
+      padding-bottom: 0.4rem;
+    }
+    .history-block p {
+      font-size: 1.4rem;
+      color: #d8cfc4;
+      line-height: 1.6;
+    }
+    .essay p {
+      font-size: 1.5rem;
+      color: #cec6ba;
+      margin-bottom: 1.4rem;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .pull-quote {
+      border-left: 3px solid var(--gold);
+      padding: 0.8rem 2rem;
+      margin: 2.5rem auto 2.5rem;
+      max-width: 720px;
+    }
+    .pull-quote p {
+      font-style: italic;
+      font-size: 1.6rem !important;
+      color: var(--gold-light) !important;
+      line-height: 1.6;
+    }
+
+    .back-home {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .back-home a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-home a:hover { color: var(--sienna); border-color: var(--sienna); }
+
+    footer {
+      background: var(--warm-dark);
+      color: var(--stone);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 1.3rem;
+      border-top: 2px solid var(--gold);
+    }
+    footer span { color: var(--gold-light); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="site-title">Dispatches from the Road</div>
+    <div class="site-subtitle">Travel Journals &nbsp;&middot;&nbsp; Tim O'Brien</div>
+  </header>
+
+  <nav>
+    <a href="index.html">&#8592; Portfolio Home</a>
+    <a href="anna-christine-today.html">Anna Christine Today &rarr;</a>
+  </nav>
+
+  <section id="top">
+    <div class="hero">
+      <div class="hero-photo-wrap">
+        <img class="hero-photo"
+             src="images/playa-del-carmen-img-01.jpg"
+             alt="Tim walking the shoreline with Anna Christine, Playa del Carmen, Mexico" />
+        <p class="caption-tag">Playa del Carmen &nbsp;&middot;&nbsp; Quintana Roo, Mexico &nbsp;&middot;&nbsp; 2005</p>
+      </div>
+      <div class="hero-text">
+        <p class="hero-eyebrow">Mexico &nbsp;&middot;&nbsp; Quintana Roo</p>
+        <h1 class="hero-headline">Footprints in the Sand with <em><a href="anna-christine-today.html" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--gold);">Anna Christine</a></em></h1>
+        <div class="divider"></div>
+        <p>There is a particular quality of light on the Caribbean coast of the Yucatán — blue beyond what seems reasonable, laid over water so shallow and white-bottomed that the sea glows from within. It is the kind of light that makes every moment feel slightly more permanent than it is.</p>
+        <p>This photograph was taken in 2005 on the beach at Playa del Carmen, walking the shoreline with Anna Christine. The waves are gentle, the sand is white as chalk, and the footprints trailing behind them belong to a morning that will not come again — which is precisely why it was worth photographing.</p>
+        <p>Some journeys are about the destination. Some are about who you take with you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="history" id="history">
+    <div class="history-inner">
+      <p class="section-label">Context &amp; Chronicle</p>
+      <h2 class="section-title">The Riviera Maya &amp; <em>Its Ancient Shore</em></h2>
+      <div class="center-rule"></div>
+      <div class="history-grid">
+        <div class="history-block">
+          <h3>The Maya Coast</h3>
+          <p>Long before the resort hotels and the ferry to Cozumel, this stretch of Caribbean coastline was Maya territory — and active, prosperous Maya territory at that. The ancient city of Xaman-Ha occupied the site of what is now Playa del Carmen, functioning as a staging point for ceremonial canoe voyages to the island of Cozumel, which was one of the most important pilgrimage sites in the Maya world. Women from across the Yucatán made the crossing to visit the shrine of Ix Chel, the goddess of the moon, medicine, and weaving.</p>
+        </div>
+        <div class="history-block">
+          <h3>Spanish Arrival &amp; the Conquest</h3>
+          <p>The Spanish first encountered this coastline in 1517, when Francisco Hernández de Córdoba sailed north from Cuba and landed on Cozumel — naming it Santa Cruz de la Isla. Juan de Grijalva followed in 1518, and Hernán Cortés stopped here in 1519 on his way to the mainland conquest that would bring down the Aztec empire. The Yucatán Peninsula itself proved far more difficult to subdue than central Mexico; the Maya resisted for nearly two decades, and the Yucatán was not fully under Spanish control until 1546.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Rise of Playa del Carmen</h3>
+          <p>For most of the colonial and post-independence period, the site of Playa del Carmen was a minor fishing village and ferry landing — a place people passed through on their way to Cozumel, not a destination in its own right. It was not until the Mexican government began developing the Cancún resort corridor in the 1970s that the Riviera Maya began its transformation. Playa itself remained a small backpacker outpost through the 1980s; its rapid growth into a significant resort town came largely in the 1990s, accelerating dramatically after the opening of the Barceló Maya complex and the extension of Highway 307.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Cenotes &amp; the Underworld</h3>
+          <p>Beneath the flat limestone shelf of the Yucatán lies one of the largest underwater cave systems on Earth — a vast network of flooded passages and chambers connected to the sea and to the surface through openings called cenotes. For the ancient Maya, the cenotes were sacred entrances to Xibalba, the underworld, and offerings — including, at some sites, human sacrifices — were cast into them. Today the same passages are explored by cave divers; the Sistema Sac Actun and Sistema Ox Bel Ha near Playa del Carmen are among the longest mapped underwater cave systems ever discovered.</p>
+        </div>
+        <div class="history-block">
+          <h3>The Coral Reef</h3>
+          <p>The water colour visible in this photograph — that improbable turquoise, almost tropical-fish-tank in its intensity — is a product of the Mesoamerican Barrier Reef, the second longest coral reef system in the world after Australia's Great Barrier Reef. Stretching more than 1,000 kilometres from the tip of the Yucatán to the Bay Islands of Honduras, the reef creates the shallow, protected lagoon conditions that produce the Caribbean's characteristic colour. Cozumel, visible on clear days from the beach at Playa, sits within the reef system and is considered one of the premier dive destinations on Earth.</p>
+        </div>
+        <div class="history-block">
+          <h3>Quinta Avenida &amp; Modern Playa</h3>
+          <p>The pedestrianised Fifth Avenue — Quinta Avenida — running parallel to the beach is the commercial and social spine of modern Playa del Carmen: taquerías alongside designer boutiques, mezcalerías next to souvenir shops, rooftop bars above cenote swimming holes. It is a street that has grown organically from backpacker hostel town to upscale international resort over the span of a single generation. In 2005, when this photograph was taken, that transformation was well underway but not yet complete — Playa was still a place where you could find a quiet stretch of beach in the morning, footprints and all.</p>
+        </div>
+      </div>
+      <div class="essay">
+        <div class="pull-quote">
+          <p>"The Caribbean has a way of making the present tense feel extremely present — the water too blue, the sand too white, the light too clear for anything other than full attention."</p>
+        </div>
+        <p>The beach at Playa del Carmen runs almost perfectly north-south, which means the morning light comes in from the east across the water — flat, warm, and almost horizontal in the early hours, throwing long shadows across the sand and lighting the underside of every breaking wave. The footprints in this photograph were made in that light, in those first unhurried hours of a morning that, twenty years on, is still entirely visible.</p>
+        <p>The colour of the water is worth a small digression. The Caribbean's extraordinary blue-green palette is not simply a matter of tropical sunshine. The Yucatán's shallow, reef-sheltered coastal shelf means that sunlight reaches the white limestone seafloor and reflects back upward through the water column, producing a luminosity that is genuinely different from what you see in deeper, darker seas. The Ancient Maya would not have had the physics of light scattering to explain it, but they clearly understood that this coastline was something apart — which is why they built their pilgrimage shrines here, and why the priests of Ix Chel chose Cozumel as her sacred island.</p>
+        <p>There is a version of travel that is about accumulation — stamps in a passport, photographs of monuments, lists of restaurants visited. And then there is this version: a father and a small girl, hand in hand, walking at the edge of the sea. The monument is the morning itself. The photograph is just evidence that it happened.</p>
+        <p style="text-align:center; margin-top:3rem; font-style:italic;">
+          <a href="anna-christine-today.html" style="color:var(--gold-light); border-bottom:1px solid var(--gold); padding-bottom:2px; text-decoration:none;">See Anna Christine today &rarr;</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="back-home">
+    <a href="index.html">&#8592; Portfolio Home</a>
+  </div>
+
+  <footer id="contact">
+    <p><span>Dispatches from the Road</span> &nbsp;&middot;&nbsp; Tim O'Brien &nbsp;&middot;&nbsp; All photographs &amp; text &copy; Tim O'Brien</p>
+    <p style="margin-top:0.5rem; opacity:0.6;">Built with intention &nbsp;&middot;&nbsp; Playa del Carmen, Mexico</p>
+  </footer>
+
+</body>
+</html>
